@@ -32,6 +32,9 @@ migrate_working_dir/
 .pub/
 /build/
 
+# Web related
+lib/generated_plugin_registrant.dart
+
 # Symbolication related
 app.*.symbols
 
@@ -42,3 +45,17 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+ios/build/
+
+lib/generated/
+lib/generated/intl
+lib/generated/intl/messages_all.dart
+lib/generated/intl/messages_en.dart
+lib/generated/l10n.dart
+
+#vscode related
+.vscode/
+
+#fvm related
+.fvm/
