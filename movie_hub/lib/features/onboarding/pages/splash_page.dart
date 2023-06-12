@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
-class NextPage extends StatelessWidget {
-  const NextPage({super.key});
+class SplashPage extends StatelessWidget {
+  static const route = 'splash_page';
+  const SplashPage({super.key});
 
   @override
   Widget build(BuildContext context) {
