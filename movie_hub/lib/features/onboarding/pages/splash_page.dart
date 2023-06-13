@@ -6,6 +6,7 @@ class SplashPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // final bool isDarkMode = context.isDarkMode;
     return const Placeholder();
   }
 }

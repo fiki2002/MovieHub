@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:movie_hub/cores/navigator/error_route.dart';
 import 'package:movie_hub/features/onboarding/pages/splash_Page.dart';
