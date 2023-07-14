@@ -4,14 +4,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:movie_hub/cores/navigator/error_route.dart';
+import 'package:movie_hub/features/onboarding/splash/pages/splash_page.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     final Object? args = settings.arguments;
 
     switch (settings.name) {
-      // case SplashPage.route:
-      //   return pageRoute(const SplashPage());
+      case SplashPage.route:
+        return pageRoute(const SplashPage());
       default:
         return errorRoute();
     }
