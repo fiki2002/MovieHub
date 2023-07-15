@@ -6,6 +6,10 @@ class SplashPage extends StatelessWidget {
   static const route = 'splash_page';
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      body: Column(
+        children: const [],
+      ),
+    );
   }
 }
