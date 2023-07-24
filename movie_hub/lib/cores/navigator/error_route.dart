@@ -9,7 +9,7 @@ Route<dynamic> errorRoute() {
         ),
         //TODO: Replace to  custom text widget
         body: const Center(
-          child: Text('ERROR: Route not found'),
+          child: Text('ERROR! Page not found'),
         ),
       );
     },
