@@ -31,7 +31,6 @@ class TextWidget extends StatelessWidget {
     return Text(
       text,
       style: TextStyle(
-        // style: TextStyle(
         fontSize: fontSize,
         color: textColor,
         fontWeight: fontWeight,
@@ -42,7 +41,6 @@ class TextWidget extends StatelessWidget {
       overflow: overflow,
       softWrap: true,
       maxLines: maxLines,
-      textScaleFactor: 0.8,
     );
   }
 }
