@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:movie_hub/cores/components/text_widget.dart';
 
 Route<dynamic> errorRoute() {
   return MaterialPageRoute(
     builder: (_) {
       return Scaffold(
         appBar: AppBar(
-          title: const Text('Page Not Found'),
+          title: const TextWidget('Page Not Found'),
         ),
-        //TODO: Replace to  custom text widget
         body: const Center(
-          child: Text('ERROR! Page not found'),
+          child: TextWidget('ERROR! Page not found'),
         ),
       );
     },

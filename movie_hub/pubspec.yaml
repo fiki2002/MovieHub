@@ -13,6 +13,8 @@ dependencies:
     sdk: flutter
   cupertino_icons: ^1.0.2
   flutter_screenutil: ^5.7.0
+  flutter_svg: ^2.0.5
+  cached_network_image: ^3.2.3
 
 dev_dependencies:
   flutter_test:

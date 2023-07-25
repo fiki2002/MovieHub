@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movie_hub/cores/components/app_bar_widget.dart';
+import 'package:movie_hub/cores/components/buttons.dart';
 
 class SplashPage extends StatelessWidget {
   const SplashPage({super.key});
@@ -10,13 +10,7 @@ class SplashPage extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: Column(
-          children: const [
-            AppBarWidget(
-              title: 'Fuck ooff',
-              showBackButton: false,
-              useSpacer: true,
-            ),
-          ],
+          children: const [],
         ),
       ),
     );

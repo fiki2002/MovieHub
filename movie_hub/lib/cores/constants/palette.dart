@@ -15,10 +15,11 @@ const Color kcWhite = Color(0xFFFFFFFF);
 const Color kcSuccessColor = Color(0xff15DC71);
 const Color kcErrorColor = Color(0xffFF0202);
 final Color kcSoftTextColor = const Color(0xff2C2C2C).withOpacity(0.6);
+const Color kcBackground = Color.fromARGB(255, 255, 255, 255);
 
 class ThemeClass {
   static ThemeData lightTheme = ThemeData(
-    scaffoldBackgroundColor: kcBackgroundColor ,
+    scaffoldBackgroundColor: kcBackgroundColor,
     primaryColor: kcPrimaryColor,
     useMaterial3: true,
     colorScheme: const ColorScheme.light(primary: kcPrimaryColor)

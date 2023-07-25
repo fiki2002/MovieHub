@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movie_hub/cores/constants/font_size.dart';
-import 'package:movie_hub/cores/constants/theme.dart';
+import 'package:movie_hub/cores/constants/palette.dart';
 
 class TextWidget extends StatelessWidget {
   const TextWidget(
