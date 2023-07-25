@@ -12,7 +12,7 @@ class ScaffoldWidget extends StatelessWidget {
     this.floatingActionButton,
     required this.body,
     this.appBar,
-    required this.usePadding,
+     this.usePadding = true,
     required this.useSingleScroll,
     this.bg,
     this.scaffoldKey,

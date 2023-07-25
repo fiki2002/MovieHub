@@ -11,9 +11,17 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+
+    # For ios icons
   cupertino_icons: ^1.0.2
+
+  # For the responsiveness of the sizes given
   flutter_screenutil: ^5.7.0
+
+  # To build svg data
   flutter_svg: ^2.0.5
+
+  # To cache data of images to boost app performance
   cached_network_image: ^3.2.3
 
 dev_dependencies:
@@ -26,10 +34,9 @@ flutter:
 
   uses-material-design: true
 
-  # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
-  #   - images/a_dot_ham.jpeg
+  assets:
+    - assets/images/
+    - assets/icons/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
