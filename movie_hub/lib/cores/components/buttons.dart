@@ -173,7 +173,7 @@ class Button extends StatelessWidget {
           height: sp(21),
           width: sp(21),
           child: const LoadingWidget(
-            color: kcWhite,
+            color: kcWhiteColor,
             backGroundColor: kcPrimaryColor,
           ),
         );
