@@ -34,7 +34,7 @@ class ImageWidget extends StatelessWidget {
       return Container(
         height: height,
         width: width,
-        color: color ?? kcGrey200,
+        color: color ?? kcWhiteColor,
         child: Center(
           child: Icon(
             imageTypes == ImageTypes.profile
@@ -56,7 +56,7 @@ class ImageWidget extends StatelessWidget {
                   imageUrl!,
                   fit: fit,
                   errorBuilder: (_, __, ___) => Container(
-                    color: kcGrey200,
+                    color: kcWhiteColor,
                     child: const Center(
                       child: Icon(Icons.error_outline_rounded),
                     ),
@@ -67,7 +67,7 @@ class ImageWidget extends StatelessWidget {
                   imageUrl: imageUrl!,
                   fit: fit,
                   errorWidget: (_, __, ___) => Container(
-                    color: kcGrey200,
+                    color: kcWhiteColor,
                     child: const Center(
                       child: Icon(Icons.error),
                     ),
@@ -85,7 +85,7 @@ class ImageWidget extends StatelessWidget {
             fit: fit,
             color: color,
             errorBuilder: (_, __, ___) => Container(
-              color: kcGrey200,
+              color: kcWhiteColor,
               child: const Center(
                 child: Icon(Icons.error),
               ),
@@ -103,7 +103,7 @@ class ImageWidget extends StatelessWidget {
             errorBuilder: (_, e, s) {
               AppLogger.log(e, s);
               return Container(
-                color: kcGrey200,
+                color: kcWhiteColor,
                 child: const Center(
                   child: Icon(Icons.error),
                 ),
@@ -127,7 +127,7 @@ class ImageWidget extends StatelessWidget {
           fit: fit,
           color: color,
           errorWidget: (_, __, ___) => Container(
-            color: kcGrey200,
+            color: kcWhiteColor,
             child: const Center(child: Icon(Icons.person)),
           ),
           placeholder: (_, __) => const Center(

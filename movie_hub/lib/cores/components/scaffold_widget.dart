@@ -12,7 +12,7 @@ class ScaffoldWidget extends StatelessWidget {
     this.floatingActionButton,
     required this.body,
     this.appBar,
-     this.usePadding = true,
+    this.usePadding = true,
     required this.useSingleScroll,
     this.bg,
     this.scaffoldKey,
@@ -58,6 +58,7 @@ class ScaffoldWidget extends StatelessWidget {
                   child: Padding(
                     padding: EdgeInsets.symmetric(
                       horizontal: usePadding ? sp(kGlobalPadding) : 0,
+                      vertical: usePadding ? sp(kXtremeLarge) : 0,
                     ),
                     child: body,
                   ),

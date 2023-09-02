@@ -19,8 +19,8 @@ class LoadingWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return CircularProgressIndicator(
       strokeWidth: strokeWidth ?? 2.0,
-      backgroundColor: backGroundColor ?? kcGreyLight,
-      color: color ?? kcGrey400,
+      backgroundColor: backGroundColor ?? kcWhiteColor,
+      color: color ?? kcWhiteColor,
       value: value,
     );
   }

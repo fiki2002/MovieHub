@@ -138,7 +138,7 @@ class Button extends StatelessWidget {
     if (circular) {
       shape = MaterialStateProperty.all<RoundedRectangleBorder>(
         RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(sp(100.0)),
+          borderRadius: BorderRadius.circular(sp(16.0)),
           side: BorderSide(color: borderColor ?? Colors.transparent),
         ),
       );
@@ -155,13 +155,15 @@ class Button extends StatelessWidget {
     if (busy) {
       backgroundColor = MaterialStateProperty.all(kcPrimaryColor);
     } else if (active == false) {
-      backgroundColor = MaterialStateProperty.all(kcGrey400);
+      backgroundColor = MaterialStateProperty.all(kcWhiteColor);
     } else {
       backgroundColor = MaterialStateProperty.all(color ?? kcPrimaryColor);
     }
 
     return ButtonStyle(
       shape: shape,
+      overlayColor:
+          MaterialStateColor.resolveWith((states) => Colors.transparent),
       backgroundColor: backgroundColor,
     );
   }

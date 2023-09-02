@@ -7,13 +7,14 @@ class TextWidget extends StatelessWidget {
     this.text, {
     Key? key,
     this.fontSize = kfsMedium,
-    this.textColor = kcTextColor,
+    this.textColor = kcWhiteColor,
     this.fontWeight = FontWeight.w400,
     this.textAlign = TextAlign.justify,
     this.maxLines,
     this.overflow,
     this.decoration,
-    this.height, this.fontFamily,
+    this.height,
+    this.fontFamily,
   }) : super(key: key);
 
   final String text;
@@ -33,7 +34,7 @@ class TextWidget extends StatelessWidget {
       text,
       style: TextStyle(
         fontSize: fontSize,
-        fontFamily: fontFamily,
+        fontFamily: fontFamily ?? 'Montserrat',
         color: textColor,
         fontWeight: fontWeight,
         decoration: decoration,
@@ -54,8 +55,8 @@ class RichTextWidget extends StatelessWidget {
     Key? key,
     this.fontSize = kfsMedium,
     this.fontSize2 = kfsMedium,
-    this.textColor = kcTextColor,
-    this.textColor2 = kcTextColor,
+    this.textColor = kcWhiteColor,
+    this.textColor2 = kcWhiteColor,
     this.fontWeight = FontWeight.w400,
     this.fontWeight2 = FontWeight.w400,
     this.textAlign = TextAlign.justify,

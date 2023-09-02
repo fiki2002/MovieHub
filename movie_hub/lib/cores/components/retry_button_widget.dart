@@ -14,7 +14,7 @@ class RetryButtonWidget extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 5.0),
         decoration: BoxDecoration(
-          border: Border.all(color: kcGrey400),
+          border: Border.all(color: kcWhiteColor),
           borderRadius: BorderRadius.circular(5.0),
         ),
         child: const TextWidget(
