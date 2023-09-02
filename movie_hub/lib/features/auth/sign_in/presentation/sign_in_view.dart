@@ -13,11 +13,10 @@ import '../../../../cores/constants/font_size.dart';
 import '../../../../cores/constants/palette.dart';
 import '../../../../cores/navigator/app_router.dart';
 import '../../../movie_dashboard/home/presentation/home_view.dart';
-import '../../sign_in/presentation/sign_in_view.dart';
 
-class SignUpView extends StatelessWidget {
-  const SignUpView({super.key});
-  static const route = 'sign_up';
+class SignInView extends StatelessWidget {
+  const SignInView({super.key});
+  static const route = 'sign_in';
 
   @override
   Widget build(BuildContext context) {
@@ -27,26 +26,15 @@ class SignUpView extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           TextWidget(
-            'Lights, Camera, Sign Up!',
+            'Lights, Camera, Sign In!',
             fontSize: kfsExtraLarge.sp,
             fontWeight: FontWeight.w600,
           ),
           kfsVeryTiny.sH,
           TextWidget(
-            'Your Movie Journey Begins Here.',
+            'Your Movie Journey Continues.',
             fontSize: kfsTiny.sp,
             fontWeight: FontWeight.w300,
-          ),
-          kGlobalPadding.sH,
-          CustomTextField(
-            title: 'User Name',
-            hintText: 'Input your user name',
-            keyboardType: TextInputType.name,
-            prefixIcon: SvgPicture.asset(
-              personIcon,
-              fit: BoxFit.scaleDown,
-              color: kcWhiteColor.withOpacity(0.8),
-            ),
           ),
           kGlobalPadding.sH,
           CustomTextField(
@@ -72,17 +60,17 @@ class SignUpView extends StatelessWidget {
           ),
           70.sH,
           Button(
-            text: 'Let\'s Go!',
+            text: 'Let\'s Continue!',
             circular: true,
             onTap: () => AppRouter.instance.navigateTo(HomeView.route),
           ),
           kfsSuperLarge.sH,
           Center(
             child: RichTextWidget(
-              'Already have an account?  ',
-              'Sign in',
+              'Don\'t have an account?  ',
+              'Sign up',
               onTap: TapGestureRecognizer()
-                ..onTap = () => AppRouter.instance.navigateTo(SignInView.route),
+                ..onTap = () => AppRouter.instance.navigateTo(HomeView.route),
               decoration: TextDecoration.underline,
             ),
           )

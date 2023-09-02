@@ -4,9 +4,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:movie_hub/cores/navigator/error_route.dart';
+import 'package:movie_hub/features/auth/sign_in/presentation/sign_in_view.dart';
 import 'package:movie_hub/features/auth/sign_up/presentation/sign_up_view.dart';
 import 'package:movie_hub/features/movie_dashboard/home/presentation/home_view.dart';
-import 'package:movie_hub/features/splash/pages/splash_page.dart';
+import 'package:movie_hub/features/splash/splash_page.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -19,6 +20,8 @@ class RouteGenerator {
         return pageRoute(const SignUpView());
       case HomeView.route:
         return pageRoute(const HomeView());
+      case SignInView.route:
+        return pageRoute(const SignInView());
       default:
         return errorRoute();
     }

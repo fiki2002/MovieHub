@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:movie_hub/cores/constants/font_size.dart';
 import 'package:movie_hub/cores/constants/palette.dart';
@@ -63,6 +64,8 @@ class RichTextWidget extends StatelessWidget {
     this.maxLines,
     this.overflow,
     this.decoration,
+    this.fontFamily,
+    this.onTap,
   }) : super(key: key);
 
   final String text;
@@ -70,6 +73,8 @@ class RichTextWidget extends StatelessWidget {
   final double? fontSize;
   final double? fontSize2;
   final Color? textColor;
+  final String? fontFamily;
+
   final Color? textColor2;
   final FontWeight? fontWeight;
   final FontWeight? fontWeight2;
@@ -77,6 +82,7 @@ class RichTextWidget extends StatelessWidget {
   final int? maxLines;
   final TextOverflow? overflow;
   final TextDecoration? decoration;
+  final GestureRecognizer? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -87,14 +93,16 @@ class RichTextWidget extends StatelessWidget {
           fontSize: fontSize,
           color: textColor,
           fontWeight: fontWeight,
-          decoration: decoration,
+          fontFamily: fontFamily ?? 'Montserrat',
         ),
         children: <InlineSpan>[
           TextSpan(
             text: text2,
+            recognizer: onTap,
             style: TextStyle(
               fontSize: fontSize2,
               color: textColor2,
+              fontFamily: fontFamily ?? 'Montserrat',
               fontWeight: fontWeight2,
               decoration: decoration,
             ),

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movie_hub/cores/constants/palette.dart';
 import 'package:movie_hub/cores/navigator/app_router.dart';
-import 'package:movie_hub/features/splash/pages/splash_page.dart';
+import 'package:movie_hub/features/splash/splash_page.dart';
 import 'package:movie_hub/cores/navigator/route_generator.dart';
 
 class MyApp extends StatelessWidget {
