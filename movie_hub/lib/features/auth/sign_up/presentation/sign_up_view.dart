@@ -40,7 +40,7 @@ class SignUpView extends StatelessWidget {
           kGlobalPadding.sH,
           CustomTextField(
             title: 'User Name',
-            hintText: 'Input your user name',
+            hintText: 'John Doe',
             keyboardType: TextInputType.name,
             prefixIcon: SvgPicture.asset(
               personIcon,
@@ -51,7 +51,7 @@ class SignUpView extends StatelessWidget {
           kGlobalPadding.sH,
           CustomTextField(
             title: 'Email',
-            hintText: 'Input your email',
+            hintText: 'johndoe@gmail.com',
             keyboardType: TextInputType.emailAddress,
             prefixIcon: SvgPicture.asset(
               mailIcon,
@@ -62,7 +62,7 @@ class SignUpView extends StatelessWidget {
           kGlobalPadding.sH,
           CustomTextField(
             title: 'Password',
-            hintText: 'Input your desired password',
+            hintText: '..........',
             isPassword: true,
             prefixIcon: SvgPicture.asset(
               lockIcon,

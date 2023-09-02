@@ -16,6 +16,7 @@ class TextWidget extends StatelessWidget {
     this.decoration,
     this.height,
     this.fontFamily,
+    this.onTap,
   }) : super(key: key);
 
   final String text;
@@ -28,23 +29,27 @@ class TextWidget extends StatelessWidget {
   final TextDecoration? decoration;
   final double? height;
   final String? fontFamily;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      text,
-      style: TextStyle(
-        fontSize: fontSize,
-        fontFamily: fontFamily ?? 'Montserrat',
-        color: textColor,
-        fontWeight: fontWeight,
-        decoration: decoration,
-        height: height,
+    return GestureDetector(
+      onTap: onTap,
+      child: Text(
+        text,
+        style: TextStyle(
+          fontSize: fontSize,
+          fontFamily: fontFamily ?? 'Montserrat',
+          color: textColor,
+          fontWeight: fontWeight,
+          decoration: decoration,
+          height: height,
+        ),
+        textAlign: textAlign,
+        overflow: overflow,
+        softWrap: true,
+        maxLines: maxLines,
       ),
-      textAlign: textAlign,
-      overflow: overflow,
-      softWrap: true,
-      maxLines: maxLines,
     );
   }
 }
