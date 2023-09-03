@@ -18,7 +18,8 @@ extension SizedBoxExtension on num {
 /// extension for SVG
 ///
 extension SvgExtension on String {
-  Widget get svg => SvgPicture.asset(
+  /// SVG with color
+  SvgPicture get svg => SvgPicture.asset(
         this,
         fit: BoxFit.scaleDown,
         color: kcWhiteColor.withOpacity(0.8),

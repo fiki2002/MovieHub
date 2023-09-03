@@ -5,7 +5,7 @@ publish_to: 'none'
 version: 1.0.0+1
 
 environment:
-  sdk: '>=2.19.0 <3.0.0'
+  sdk: '>=3.0.0 <4.0.0'
 
 dependencies:
   flutter:
@@ -22,6 +22,12 @@ dependencies:
 
   # To cache data of images to boost app performance
   cached_network_image: ^3.2.3
+
+  # For State Management
+  provider: ^6.0.5
+
+  # For Dependency Injection
+  get_it: ^7.6.2
 
 dev_dependencies:
   flutter_test:

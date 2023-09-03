@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movie_hub/cores/utils/extension.dart';
+import 'package:movie_hub/features/movie_dashboard/nav_bar/presentation/nav_bar_view.dart';
 
 import '../../../../cores/components/buttons.dart';
 import '../../../../cores/components/scaffold_widget.dart';
@@ -61,7 +62,7 @@ class SignUpView extends StatelessWidget {
             text: 'Let\'s Go!',
             circular: true,
             onTap: () =>
-                AppRouter.instance.navigateToAndReplace(HomeView.route),
+                AppRouter.instance.navigateToAndReplace(NavBarView.route),
           ),
           kfsSuperLarge.sH,
           Center(

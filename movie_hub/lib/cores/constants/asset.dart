@@ -7,3 +7,6 @@ const lockIcon = '$_baseIcons/lock.svg';
 const eyeIcon = '$_baseIcons/eye.svg';
 const eyeCloseIcon = '$_baseIcons/eye_close.svg';
 const searchIcon = '$_baseIcons/search.svg';
+const homeIcon = '$_baseIcons/home.svg';
+const userIcon = '$_baseIcons/user.svg';
+const listIcon = '$_baseIcons/watch_list.svg';

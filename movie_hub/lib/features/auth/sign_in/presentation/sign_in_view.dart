@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movie_hub/cores/utils/extension.dart';
 import 'package:movie_hub/features/auth/forgot_password/presentation/forgot_password.dart';
 import 'package:movie_hub/features/auth/sign_up/presentation/sign_up_view.dart';
+import 'package:movie_hub/features/movie_dashboard/nav_bar/presentation/nav_bar_view.dart';
 
 import '../../../../cores/components/buttons.dart';
 import '../../../../cores/components/scaffold_widget.dart';
@@ -12,7 +13,6 @@ import '../../../../cores/components/textfield_widget.dart';
 import '../../../../cores/constants/asset.dart';
 import '../../../../cores/constants/font_size.dart';
 import '../../../../cores/navigator/app_router.dart';
-import '../../../movie_dashboard/home/presentation/home_view.dart';
 
 class SignInView extends StatelessWidget {
   const SignInView({super.key});
@@ -66,7 +66,7 @@ class SignInView extends StatelessWidget {
             text: 'Let\'s Continue!',
             circular: true,
             onTap: () =>
-                AppRouter.instance.navigateToAndReplace(HomeView.route),
+                AppRouter.instance.navigateToAndReplace(NavBarView.route),
           ),
           kfsSuperLarge.sH,
           Center(

@@ -8,6 +8,7 @@ import 'package:movie_hub/features/auth/forgot_password/presentation/forgot_pass
 import 'package:movie_hub/features/auth/sign_in/presentation/sign_in_view.dart';
 import 'package:movie_hub/features/auth/sign_up/presentation/sign_up_view.dart';
 import 'package:movie_hub/features/movie_dashboard/home/presentation/home_view.dart';
+import 'package:movie_hub/features/movie_dashboard/nav_bar/presentation/nav_bar_view.dart';
 import 'package:movie_hub/features/splash/splash_page.dart';
 
 class RouteGenerator {
@@ -25,6 +26,8 @@ class RouteGenerator {
         return pageRoute(const SignInView());
       case ForgotPasswordView.route:
         return pageRoute(const ForgotPasswordView());
+      case NavBarView.route:
+        return pageRoute(NavBarView());
       default:
         return errorRoute();
     }
