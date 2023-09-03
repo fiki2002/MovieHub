@@ -6,3 +6,4 @@ const mailIcon = '$_baseIcons/mail.svg';
 const lockIcon = '$_baseIcons/lock.svg';
 const eyeIcon = '$_baseIcons/eye.svg';
 const eyeCloseIcon = '$_baseIcons/eye_close.svg';
+const searchIcon = '$_baseIcons/search.svg';

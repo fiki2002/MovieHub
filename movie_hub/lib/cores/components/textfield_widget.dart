@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:movie_hub/cores/components/text_widget.dart';
 import 'package:movie_hub/cores/constants/asset.dart';
 import 'package:movie_hub/cores/constants/font_size.dart';
@@ -17,6 +16,7 @@ class CustomTextField extends StatefulWidget {
     this.suffixIcon,
     this.isPassword = false,
     this.keyboardType,
+    this.fillColor,
   });
   final String? title;
   final String? hintText;
@@ -25,6 +25,7 @@ class CustomTextField extends StatefulWidget {
   final Widget? suffixIcon;
   final bool isPassword;
   final TextInputType? keyboardType;
+  final Color? fillColor;
 
   @override
   State<CustomTextField> createState() => _CustomTextFieldState();
@@ -59,6 +60,8 @@ class _CustomTextFieldState extends State<CustomTextField> {
                 controller: widget.controller,
                 obscureText: value && widget.isPassword,
                 decoration: InputDecoration(
+                  fillColor: widget.fillColor,
+                  filled: widget.fillColor == null ? false : true,
                   hintText: widget.hintText,
                   hintStyle: TextStyle(
                     color: kcWhiteColor.withOpacity(0.4),
@@ -99,21 +102,12 @@ class _CustomTextFieldState extends State<CustomTextField> {
   Widget suffixWidget(bool value) {
     if (value) {
       return GestureDetector(
-        onTap: () => obscureText.value = !obscureText.value,
-        child: SvgPicture.asset(
-          eyeIcon,
-          fit: BoxFit.scaleDown,
-          color: kcWhiteColor.withOpacity(0.8),
-        ),
-      );
+          onTap: () => obscureText.value = !obscureText.value,
+          child: eyeIcon.svg);
     } else {
       return GestureDetector(
         onTap: () => obscureText.value = !obscureText.value,
-        child: SvgPicture.asset(
-          eyeCloseIcon,
-          fit: BoxFit.scaleDown,
-          color: kcWhiteColor.withOpacity(0.8),
-        ),
+        child: eyeCloseIcon.svg,
       );
     }
   }

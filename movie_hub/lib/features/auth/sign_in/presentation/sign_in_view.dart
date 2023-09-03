@@ -1,7 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:movie_hub/cores/utils/extension.dart';
 import 'package:movie_hub/features/auth/forgot_password/presentation/forgot_password.dart';
 import 'package:movie_hub/features/auth/sign_up/presentation/sign_up_view.dart';
@@ -12,7 +11,6 @@ import '../../../../cores/components/text_widget.dart';
 import '../../../../cores/components/textfield_widget.dart';
 import '../../../../cores/constants/asset.dart';
 import '../../../../cores/constants/font_size.dart';
-import '../../../../cores/constants/palette.dart';
 import '../../../../cores/navigator/app_router.dart';
 import '../../../movie_dashboard/home/presentation/home_view.dart';
 
@@ -43,22 +41,14 @@ class SignInView extends StatelessWidget {
             title: 'Email',
             hintText: 'johndoe@gmail.com',
             keyboardType: TextInputType.emailAddress,
-            prefixIcon: SvgPicture.asset(
-              mailIcon,
-              fit: BoxFit.scaleDown,
-              color: kcWhiteColor.withOpacity(0.8),
-            ),
+            prefixIcon: mailIcon.svg,
           ),
           kGlobalPadding.sH,
           CustomTextField(
             title: 'Password',
             hintText: '..........',
             isPassword: true,
-            prefixIcon: SvgPicture.asset(
-              lockIcon,
-              fit: BoxFit.scaleDown,
-              color: kcWhiteColor.withOpacity(0.8),
-            ),
+            prefixIcon: lockIcon.svg,
           ),
           kMinute.sH,
           Align(
@@ -75,7 +65,8 @@ class SignInView extends StatelessWidget {
           Button(
             text: 'Let\'s Continue!',
             circular: true,
-            onTap: () => AppRouter.instance.navigateTo(HomeView.route),
+            onTap: () =>
+                AppRouter.instance.navigateToAndReplace(HomeView.route),
           ),
           kfsSuperLarge.sH,
           Center(
