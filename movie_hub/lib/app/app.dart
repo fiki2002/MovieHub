@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:movie_hub/app/locator.dart';
 import 'package:movie_hub/cores/constants/palette.dart';
 import 'package:movie_hub/cores/navigator/app_router.dart';
 import 'package:movie_hub/features/movie_dashboard/nav_bar/change_notifier/nav_bar_notifier.dart';
@@ -38,5 +37,5 @@ class MyApp extends StatelessWidget {
 }
 
 List<SingleChildWidget> _providers = [
-  ChangeNotifierProvider.value(value: SetUpLocators.getIt<NavBarNotifier>()),
+  ChangeNotifierProvider.value(value: NavBarNotifier()),
 ];

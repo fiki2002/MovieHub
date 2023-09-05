@@ -29,6 +29,12 @@ dependencies:
   # For Dependency Injection
   get_it: ^7.6.2
 
+  #Functional Programming
+  dartz: ^0.10.1
+
+  #To enable comparison of objects without having to override ==
+  equatable: ^2.0.5
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

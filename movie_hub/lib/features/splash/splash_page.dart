@@ -80,7 +80,7 @@ class _SplashPageState extends State<SplashPage>
   void timerForSplashScreen() {
     Timer(
       const Duration(seconds: 3),
-      () => AppRouter.instance.navigateTo(SignUpView.route),
+      () => AppRouter.instance.navigateToAndReplace(SignUpView.route),
     );
   }
 
