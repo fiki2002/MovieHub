@@ -46,8 +46,7 @@ class SignInView extends StatelessWidget {
             child: TextWidget(
               'Forgot your Password?',
               fontSize: sp(kfsVeryTiny),
-              onTap: () =>
-                  AppRouter.instance.navigateTo(ForgotPasswordView.route),
+              onTap: () => goTo(ForgotPasswordView.route),
               fontWeight: FontWeight.w300,
             ),
           ),
@@ -55,8 +54,7 @@ class SignInView extends StatelessWidget {
           Button(
             text: 'Let\'s Continue!',
             circular: true,
-            onTap: () =>
-                AppRouter.instance.navigateToAndReplace(NavBarView.route),
+            onTap: () => goReplace(NavBarView.route),
           ),
           vSpace(kfsSuperLarge),
           Center(
@@ -64,7 +62,7 @@ class SignInView extends StatelessWidget {
               'Don\'t have an account?  ',
               'Sign up',
               onTap: TapGestureRecognizer()
-                ..onTap = () => AppRouter.instance.navigateTo(SignUpView.route),
+                ..onTap = () => goTo(SignUpView.route),
               decoration: TextDecoration.underline,
             ),
           ),

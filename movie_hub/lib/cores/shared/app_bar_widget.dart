@@ -23,7 +23,7 @@ class AppBarWidget extends StatelessWidget {
       children: <Widget>[
         if (showBackButton)
           GestureDetector(
-            onTap: AppRouter.instance.goBack,
+            onTap: goBack,
             child: Padding(
               padding: EdgeInsets.only(
                 right: sp(showBackButton ? 20.0 : 40),

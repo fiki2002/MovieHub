@@ -1,11 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:movie_hub/cores/shared/text_widget.dart';
-import 'package:movie_hub/cores/constants/palette.dart';
-import 'package:movie_hub/cores/navigator/app_router.dart';
-import 'package:movie_hub/features/auth/sign_up/presentation/sign_up_view.dart';
+import 'package:movie_hub/cores/cores.dart';
+import 'package:movie_hub/features/auth/auth.dart';
+
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -46,7 +44,7 @@ class _SplashPageState extends State<SplashPage>
                   'Flick',
                   fontFamily: 'Sacramento',
                   textColor: kcWhiteColor,
-                  fontSize: 90.w,
+                  fontSize: w(kfs90),
                 ),
               );
             },
@@ -80,7 +78,7 @@ class _SplashPageState extends State<SplashPage>
   void timerForSplashScreen() {
     Timer(
       const Duration(seconds: 3),
-      () => AppRouter.instance.navigateToAndReplace(SignUpView.route),
+      () => goReplace(SignUpView.route),
     );
   }
 

@@ -4,7 +4,6 @@ import 'package:movie_hub/cores/cores.dart';
 import 'package:movie_hub/features/auth/auth.dart';
 import 'package:movie_hub/features/movie_dashboard/movie_dashboard.dart';
 
-
 class SignUpView extends StatelessWidget {
   const SignUpView({super.key});
   static const route = 'sign_up';
@@ -52,8 +51,7 @@ class SignUpView extends StatelessWidget {
           Button(
             text: 'Let\'s Go!',
             circular: true,
-            onTap: () =>
-                AppRouter.instance.navigateToAndReplace(NavBarView.route),
+            onTap: () => goReplace(NavBarView.route),
           ),
           vSpace(kfsSuperLarge),
           Center(
@@ -61,7 +59,7 @@ class SignUpView extends StatelessWidget {
               'Already have an account?  ',
               'Sign in',
               onTap: TapGestureRecognizer()
-                ..onTap = () => AppRouter.instance.navigateTo(SignInView.route),
+                ..onTap = () => goTo(SignInView.route),
               decoration: TextDecoration.underline,
             ),
           )

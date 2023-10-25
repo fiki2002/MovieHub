@@ -4,7 +4,6 @@ import 'package:movie_hub/cores/cores.dart';
 import 'package:movie_hub/features/splash/splash.dart';
 import 'package:provider/provider.dart';
 
-
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -25,11 +24,10 @@ class MyApp extends StatelessWidget {
               scaffoldBackgroundColor: kcBackground,
             ),
             onGenerateRoute: RouteGenerator.generateRoute,
-            navigatorKey: AppRouter.instance.navigatorKey,
+            navigatorKey: navigatorKey,
           ),
         );
       },
     );
   }
 }
-

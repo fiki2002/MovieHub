@@ -44,7 +44,7 @@ class ForgotPasswordView extends StatelessWidget {
               'Don\'t have an account?  ',
               'Sign up',
               onTap: TapGestureRecognizer()
-                ..onTap = () => AppRouter.instance.navigateTo(SignUpView.route),
+                ..onTap = () => goTo(SignUpView.route),
               decoration: TextDecoration.underline,
             ),
           )
