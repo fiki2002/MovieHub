@@ -1,5 +1,6 @@
 const _baseImage = 'assets/images';
 const _baseIcons = 'assets/icons';
+const _tbd = 'assets/tbd';
 
 const personIcon = '$_baseIcons/person.svg';
 const mailIcon = '$_baseIcons/mail.svg';
@@ -10,3 +11,7 @@ const searchIcon = '$_baseIcons/search.svg';
 const homeIcon = '$_baseIcons/home.svg';
 const userIcon = '$_baseIcons/user.svg';
 const listIcon = '$_baseIcons/watch_list.svg';
+
+//! TODO: TBDs
+
+const String tbd1 = '$_tbd/tbd_1.jpeg';

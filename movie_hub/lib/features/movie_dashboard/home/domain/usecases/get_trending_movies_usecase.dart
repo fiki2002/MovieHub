@@ -5,7 +5,7 @@ import 'package:dartz/dartz.dart';
 import '../../../../../cores/errors/failures.dart';
 import '../../../../../cores/usecase_interface/base_usecase.dart';
 import '../entities/trending_movies_entity.dart';
-import '../repository/trending_movies_repository.dart';
+import '../repository/home_repository.dart';
 
 class GetTrendingMoviesUsecase
     implements UseCaseFuture<Failure, List<TrendingMovieEntity>, NoParams> {

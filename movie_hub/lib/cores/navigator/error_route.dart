@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movie_hub/cores/components/text_widget.dart';
+import 'package:movie_hub/cores/shared/text_widget.dart';
 import 'package:movie_hub/cores/constants/palette.dart';
 
 Route<dynamic> errorRoute() {

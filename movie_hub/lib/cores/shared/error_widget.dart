@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:movie_hub/cores/components/image_widget.dart';
-import 'package:movie_hub/cores/components/retry_button_widget.dart';
-import 'package:movie_hub/cores/components/text_widget.dart';
+import 'package:movie_hub/cores/shared/image_widget.dart';
+import 'package:movie_hub/cores/shared/retry_button_widget.dart';
+import 'package:movie_hub/cores/shared/text_widget.dart';
 import 'package:movie_hub/cores/utils/sizer.dart';
 
 class CustomErrorWidget extends StatelessWidget {

@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:movie_hub/app/locator.dart';
-import 'package:movie_hub/cores/constants/palette.dart';
-import 'package:movie_hub/features/movie_dashboard/nav_bar/change_notifier/nav_bar_notifier.dart';
+import 'package:movie_hub/app/app.dart';
+import 'package:movie_hub/cores/cores.dart';
+import 'package:movie_hub/features/movie_dashboard/movie_dashboard.dart';
 import 'package:provider/provider.dart';
 
 class NavBarView extends StatefulWidget {
-  static const route = 'nav_bar';
+  static const String route = '/nav_bar';
 
   const NavBarView({super.key});
 

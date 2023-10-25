@@ -1,16 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:movie_hub/cores/components/buttons.dart';
-import 'package:movie_hub/cores/utils/extension.dart';
-
-import '../../../../cores/components/scaffold_widget.dart';
-import '../../../../cores/components/text_widget.dart';
-import '../../../../cores/components/textfield_widget.dart';
-import '../../../../cores/constants/asset.dart';
-import '../../../../cores/constants/font_size.dart';
-import '../../../../cores/navigator/app_router.dart';
-import '../../sign_up/presentation/sign_up_view.dart';
+import 'package:movie_hub/cores/cores.dart';
+import 'package:movie_hub/features/auth/auth.dart';
 
 class ForgotPasswordView extends StatelessWidget {
   const ForgotPasswordView({super.key});
@@ -23,31 +14,31 @@ class ForgotPasswordView extends StatelessWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          TextWidget(
+          const TextWidget(
             'Oops! Need a New Password?',
-            fontSize: kfsExtraLarge.sp,
+            fontSize: kfsExtraLarge,
             fontWeight: FontWeight.w600,
           ),
-          kfsVeryTiny.sH,
+          vSpace(kfsVeryTiny),
           TextWidget(
             'Let\'s Get You Back On Track.',
-            fontSize: kfsTiny.sp,
+            fontSize: sp(kfsTiny),
             fontWeight: FontWeight.w300,
           ),
-          kGlobalPadding.sH,
+          vSpace(kGlobalPadding),
           CustomTextField(
             title: 'Email',
             hintText: 'Input your email',
             keyboardType: TextInputType.emailAddress,
             prefixIcon: mailIcon.svg,
           ),
-          kXtremeLarge.sH,
+          vSpace(kXtremeLarge),
           Button(
             circular: true,
             text: 'Continue',
             onTap: () {},
           ),
-          kfsSuperLarge.sH,
+          vSpace(kfsSuperLarge),
           Center(
             child: RichTextWidget(
               'Don\'t have an account?  ',

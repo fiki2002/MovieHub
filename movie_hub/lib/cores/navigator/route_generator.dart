@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:movie_hub/cores/navigator/error_route.dart';
-import 'package:movie_hub/features/auth/forgot_password/presentation/forgot_password.dart';
+import 'package:movie_hub/features/auth/forgot_password/presentation/forgot_password_view.dart';
 import 'package:movie_hub/features/auth/sign_in/presentation/sign_in_view.dart';
 import 'package:movie_hub/features/auth/sign_up/presentation/sign_up_view.dart';
 import 'package:movie_hub/features/movie_dashboard/home/presentation/home_view.dart';
@@ -13,7 +13,7 @@ import 'package:movie_hub/features/splash/splash_page.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
-    final Object? args = settings.arguments;
+    // final Object? args = settings.arguments;
 
     switch (settings.name) {
       case SplashPage.route:
@@ -27,7 +27,7 @@ class RouteGenerator {
       case ForgotPasswordView.route:
         return pageRoute(const ForgotPasswordView());
       case NavBarView.route:
-        return pageRoute(NavBarView());
+        return pageRoute(const NavBarView());
       default:
         return errorRoute();
     }

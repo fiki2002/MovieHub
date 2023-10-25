@@ -1,10 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:movie_hub/cores/components/text_widget.dart';
-import 'package:movie_hub/cores/constants/asset.dart';
-import 'package:movie_hub/cores/constants/font_size.dart';
-import 'package:movie_hub/cores/constants/palette.dart';
-import 'package:movie_hub/cores/utils/extension.dart';
+import 'package:movie_hub/cores/cores.dart';
 
 class CustomTextField extends StatefulWidget {
   const CustomTextField({
@@ -45,16 +40,16 @@ class _CustomTextFieldState extends State<CustomTextField> {
               if (widget.title != null)
                 TextWidget(
                   widget.title!,
-                  fontSize: kfsTiny.sp,
+                  fontSize: sp(kfsTiny),
                   fontWeight: FontWeight.w300,
                 ),
-              kMinute.sH,
+              vSpace(kMinute),
               TextFormField(
                 cursorColor: kcWhiteColor.withOpacity(0.8),
                 style: TextStyle(
                   color: kcWhiteColor.withOpacity(0.8),
                   fontWeight: FontWeight.w400,
-                  fontSize: kfsTiny.sp,
+                  fontSize: sp(kfsTiny),
                 ),
                 keyboardType: widget.keyboardType,
                 controller: widget.controller,
@@ -66,7 +61,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
                   hintStyle: TextStyle(
                     color: kcWhiteColor.withOpacity(0.4),
                     fontWeight: FontWeight.w400,
-                    fontSize: kfsTiny.sp,
+                    fontSize: sp(kfsTiny),
                   ),
                   prefixIcon: widget.prefixIcon,
                   suffixIcon: widget.isPassword == true

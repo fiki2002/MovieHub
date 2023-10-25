@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:movie_hub/cores/components/loading_widget.dart';
-import 'package:movie_hub/cores/components/text_widget.dart';
+import 'package:movie_hub/cores/shared/loading_widget.dart';
+import 'package:movie_hub/cores/shared/text_widget.dart';
 import 'package:movie_hub/cores/constants/font_size.dart';
 import 'package:movie_hub/cores/constants/palette.dart';
 import 'package:movie_hub/cores/utils/sizer.dart';

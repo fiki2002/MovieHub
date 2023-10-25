@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:movie_hub/cores/components/buttons.dart';
-import 'package:movie_hub/cores/components/image_widget.dart';
-import 'package:movie_hub/cores/components/scaffold_widget.dart';
-import 'package:movie_hub/cores/components/text_widget.dart';
+import 'package:movie_hub/cores/shared/buttons.dart';
+import 'package:movie_hub/cores/shared/image_widget.dart';
+import 'package:movie_hub/cores/shared/scaffold_widget.dart';
+import 'package:movie_hub/cores/shared/text_widget.dart';
 import 'package:movie_hub/cores/constants/palette.dart';
 import 'package:movie_hub/cores/utils/sizer.dart';
 

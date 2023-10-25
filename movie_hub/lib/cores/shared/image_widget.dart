@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:movie_hub/cores/components/loading_widget.dart';
+import 'package:movie_hub/cores/shared/loading_widget.dart';
 import 'dart:io' as io;
 
 import 'package:movie_hub/cores/constants/palette.dart';

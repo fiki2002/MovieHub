@@ -35,6 +35,9 @@ dependencies:
   #To enable comparison of objects without having to override ==
   equatable: ^2.0.5
 
+  # For Network Calls 
+  http: ^1.1.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -48,6 +51,7 @@ flutter:
   assets:
     - assets/images/
     - assets/icons/
+    - assets/tbd/
 
   fonts:
     - family: Sacramento

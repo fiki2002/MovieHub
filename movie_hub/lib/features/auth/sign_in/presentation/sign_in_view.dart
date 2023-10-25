@@ -1,18 +1,8 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:movie_hub/cores/utils/extension.dart';
-import 'package:movie_hub/features/auth/forgot_password/presentation/forgot_password.dart';
-import 'package:movie_hub/features/auth/sign_up/presentation/sign_up_view.dart';
-import 'package:movie_hub/features/movie_dashboard/nav_bar/presentation/nav_bar_view.dart';
-
-import '../../../../cores/components/buttons.dart';
-import '../../../../cores/components/scaffold_widget.dart';
-import '../../../../cores/components/text_widget.dart';
-import '../../../../cores/components/textfield_widget.dart';
-import '../../../../cores/constants/asset.dart';
-import '../../../../cores/constants/font_size.dart';
-import '../../../../cores/navigator/app_router.dart';
+import 'package:movie_hub/cores/cores.dart';
+import 'package:movie_hub/features/auth/auth.dart';
+import 'package:movie_hub/features/movie_dashboard/movie_dashboard.dart';
 
 class SignInView extends StatelessWidget {
   const SignInView({super.key});
@@ -27,48 +17,48 @@ class SignInView extends StatelessWidget {
         children: [
           TextWidget(
             'Lights, Camera, Sign In!',
-            fontSize: kfsExtraLarge.sp,
+            fontSize: sp(kfsExtraLarge),
             fontWeight: FontWeight.w600,
           ),
-          kfsVeryTiny.sH,
+          vSpace(kfsVeryTiny),
           TextWidget(
             'Your Movie Journey Continues.',
-            fontSize: kfsTiny.sp,
+            fontSize: sp(kfsTiny),
             fontWeight: FontWeight.w300,
           ),
-          kGlobalPadding.sH,
+          vSpace(kGlobalPadding),
           CustomTextField(
             title: 'Email',
             hintText: 'johndoe@gmail.com',
             keyboardType: TextInputType.emailAddress,
             prefixIcon: mailIcon.svg,
           ),
-          kGlobalPadding.sH,
+          vSpace(kGlobalPadding),
           CustomTextField(
             title: 'Password',
             hintText: '..........',
             isPassword: true,
             prefixIcon: lockIcon.svg,
           ),
-          kMinute.sH,
+          vSpace(kMinute),
           Align(
             alignment: Alignment.topRight,
             child: TextWidget(
               'Forgot your Password?',
-              fontSize: kfsVeryTiny.sp,
+              fontSize: sp(kfsVeryTiny),
               onTap: () =>
                   AppRouter.instance.navigateTo(ForgotPasswordView.route),
               fontWeight: FontWeight.w300,
             ),
           ),
-          70.sH,
+          vSpace(kfs70),
           Button(
             text: 'Let\'s Continue!',
             circular: true,
             onTap: () =>
                 AppRouter.instance.navigateToAndReplace(NavBarView.route),
           ),
-          kfsSuperLarge.sH,
+          vSpace(kfsSuperLarge),
           Center(
             child: RichTextWidget(
               'Don\'t have an account?  ',

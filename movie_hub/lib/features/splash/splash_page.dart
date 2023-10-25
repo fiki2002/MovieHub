@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:movie_hub/cores/components/text_widget.dart';
+import 'package:movie_hub/cores/shared/text_widget.dart';
 import 'package:movie_hub/cores/constants/palette.dart';
 import 'package:movie_hub/cores/navigator/app_router.dart';
 import 'package:movie_hub/features/auth/sign_up/presentation/sign_up_view.dart';
