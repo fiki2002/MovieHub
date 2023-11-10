@@ -1,3 +1,5 @@
+const double kSize5 = 5.0;
+
 /// very tiny text font size
 const double kfsVeryTiny = 12.0;
 
@@ -24,6 +26,4 @@ const double kXtremeLarge = 40.0;
 
 const double kfs70 = 70.0;
 
-const double kfs90 =90.0;
-
-
+const double kfs90 = 90.0;

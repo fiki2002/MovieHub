@@ -115,7 +115,7 @@ class Button extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const double defaultHeight = 45.0;
-    final double defaultWidth = MediaQuery.of(context).size.width * 0.95;
+    final double defaultWidth = screenWidth * 0.95;
 
     return SizedBox(
       height: sp(height ?? defaultHeight),
