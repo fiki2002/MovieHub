@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:movie_hub/cores/cores.dart';
+import 'package:movie_hub/features/movies/movie_dashboard.dart';
 
 class GenreCardWidget extends StatelessWidget {
-  const GenreCardWidget({super.key, required this.title});
+  const GenreCardWidget({
+    super.key,
+    required this.title,
+    required this.movies,
+  });
   final String title;
+  final List<MovieResultsEntity>? movies;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -17,9 +23,14 @@ class GenreCardWidget extends StatelessWidget {
             height: screenHeight * .15,
             child: ListView.separated(
               scrollDirection: Axis.horizontal,
-              itemBuilder: (context, index) => const _MovieCardTile(),
+              itemBuilder: (context, index) {
+                final imageUrl = movies?[index].posterPath ?? '';
+                return _MovieCardTile(
+                  imageUrl: imageUrl,
+                );
+              },
               separatorBuilder: (context, index) => hSpace(kMinute),
-              itemCount: 10,
+              itemCount: movies?.length ?? 0,
             ),
           ),
         ],
@@ -29,8 +40,8 @@ class GenreCardWidget extends StatelessWidget {
 }
 
 class _MovieCardTile extends StatelessWidget {
-  const _MovieCardTile();
-
+  const _MovieCardTile({required this.imageUrl});
+  final String imageUrl;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -39,6 +50,15 @@ class _MovieCardTile extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(kfsTiny),
         color: kcGrey.withOpacity(.3),
+      ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(kfsTiny),
+        child: ImageWidget(
+          imageTypes: ImageTypes.network,
+          imageUrl: imageUrl,
+          fit: BoxFit.cover,
+          loader: const ShimmerWidget(),
+        ),
       ),
     );
   }

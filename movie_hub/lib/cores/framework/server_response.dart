@@ -1,4 +1,4 @@
-
+import 'package:movie_hub/cores/cores.dart';
 import 'package:movie_hub/cores/framework/frame_work.dart';
 
 class ServiceResponse<T> {
@@ -53,7 +53,9 @@ Future<ServiceResponse<T>> serveFuture<T>({
     return serveData(data: response, message: message);
   } on ServeException catch (e) {
     return serveError(errorMessage: e.message);
-  } catch (e) {
+  } catch (e, s) {
+    e.log();
+    s.log();
     String error = handleError == null ? e.toString() : handleError(e);
     return serveError(errorMessage: error);
   }

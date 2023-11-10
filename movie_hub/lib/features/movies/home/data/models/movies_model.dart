@@ -1,21 +1,20 @@
 import 'package:movie_hub/cores/cores.dart';
 import 'package:movie_hub/features/movies/home/home.dart';
 
-class TrendingMoviesModel extends TrendingMovieEntity {
-  const TrendingMoviesModel({
+class MoviesModel extends MovieEntity {
+  const MoviesModel({
     required super.page,
     required super.results,
     required super.totalPages,
     required super.totalResults,
   });
 
-  factory TrendingMoviesModel.fromJson(Mapped json) {
-    return TrendingMoviesModel(
+  factory MoviesModel.fromJson(Mapped json) {
+    return MoviesModel(
       page: json['page'],
       results: json['results'] != null
           ? (json['results'] as List<dynamic>)
-              .map((e) =>
-                  TrendingMoviesResultModel.fromJson(e as Map<String, dynamic>))
+              .map((e) => MoviesResultModel.fromJson(e as Map<String, dynamic>))
               .toList()
           : [],
       totalPages: json['total_pages'],
@@ -33,8 +32,8 @@ class TrendingMoviesModel extends TrendingMovieEntity {
   }
 }
 
-class TrendingMoviesResultModel extends TrendingMovieResultsEntity {
-  const TrendingMoviesResultModel({
+class MoviesResultModel extends MovieResultsEntity {
+  const MoviesResultModel({
     required super.adult,
     required super.backdropPath,
     required super.id,
@@ -52,8 +51,8 @@ class TrendingMoviesResultModel extends TrendingMovieResultsEntity {
     required super.originCountry,
   });
 
-  factory TrendingMoviesResultModel.fromJson(Mapped json) {
-    return TrendingMoviesResultModel(
+  factory MoviesResultModel.fromJson(Mapped json) {
+    return MoviesResultModel(
       adult: json['adult'],
       backdropPath: json['backdrop_path'],
       id: json['id'],

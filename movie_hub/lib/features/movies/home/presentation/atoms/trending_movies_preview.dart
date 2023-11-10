@@ -13,7 +13,7 @@ class TrendingMoviesPreview extends StatelessWidget {
     final trendingMoviesNotifier = context.watch<TrendingMoviesNotifier>();
 
     return trendingMoviesNotifier.state.when(
-      done: (trendingMovies) {
+      done: (MoviesModel trendingMovies) {
         return Stack(
           children: [
             SizedBox(

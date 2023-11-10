@@ -27,7 +27,6 @@ class HttpHelper {
           url += '&$key=$value';
         });
       }
-      url.log();
       http.Response response = await http
           .get(
             Uri.parse(url),
@@ -36,16 +35,15 @@ class HttpHelper {
           .timeout(
             const Duration(seconds: 30),
           );
-      response.body.log();
+
       final Mapped result = jsonDecode(response.body);
+
       if (response.statusCode >= 200 && response.statusCode < 300) {
         return result;
       } else {
         throw result['message'];
       }
-    } on FormatException catch (e, s) {
-      e.log(s);
-
+    } on FormatException {
       if (kDebugMode) {
         throw 'Unable To Format Data!';
       }

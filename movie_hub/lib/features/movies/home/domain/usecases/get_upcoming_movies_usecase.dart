@@ -3,14 +3,14 @@ import 'dart:async';
 import 'package:movie_hub/cores/cores.dart';
 import 'package:movie_hub/features/movies/movie_dashboard.dart';
 
-class TrendingMoviesUseCase {
+class GetUpcomingMoviesUseCase {
   final HomeRepository homeRepository;
 
-  TrendingMoviesUseCase({
+  GetUpcomingMoviesUseCase({
     required this.homeRepository,
   });
 
-  Future<NotifierState<MoviesModel>> execute(String timeWindow) async {
-    return await homeRepository.getTrendingMovies(timeWindow);
+  Future<NotifierState<MoviesModel>> execute() async {
+    return await homeRepository.getUpcomingMovies();
   }
 }

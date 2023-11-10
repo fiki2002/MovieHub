@@ -1,7 +1,7 @@
 import 'package:movie_hub/cores/cores.dart';
 import 'package:movie_hub/features/movies/movie_dashboard.dart';
 
-class TrendingMoviesNotifier extends BaseNotifier<TrendingMoviesModel> {
+class TrendingMoviesNotifier extends BaseNotifier<MoviesModel> {
   final TrendingMoviesUseCase trendingMovieUsecase;
 
   TrendingMoviesNotifier({

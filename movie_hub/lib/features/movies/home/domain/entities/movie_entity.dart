@@ -1,15 +1,15 @@
 import 'package:equatable/equatable.dart';
 
-class TrendingMovieEntity extends Equatable {
+class MovieEntity extends Equatable {
   final int? page;
-  final List<TrendingMovieResultsEntity>? results;
+  final List<MovieResultsEntity>? results;
   final int? totalPages;
   final int? totalResults;
-  const TrendingMovieEntity({
-    required this.page,
-    required this.results,
-    required this.totalPages,
-    required this.totalResults,
+  const MovieEntity({
+    this.page,
+    this.results,
+    this.totalPages,
+    this.totalResults,
   });
 
   @override
@@ -21,7 +21,7 @@ class TrendingMovieEntity extends Equatable {
       ];
 }
 
-class TrendingMovieResultsEntity extends Equatable {
+class MovieResultsEntity extends Equatable {
   final bool? adult;
   final String? backdropPath;
   final int? id;
@@ -34,11 +34,13 @@ class TrendingMovieResultsEntity extends Equatable {
   final List<int>? genreIds;
   final double? popularity;
   final String? firstAirDate;
+  final String? releaseDate;
   final double? voteAverage;
   final int? voteCount;
   final List<String>? originCountry;
-  const TrendingMovieResultsEntity({
+  const MovieResultsEntity({
     this.adult,
+    this.releaseDate,
     this.backdropPath,
     this.id,
     this.name,
