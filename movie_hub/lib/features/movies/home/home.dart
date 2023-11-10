@@ -1,0 +1,10 @@
+export 'presentation/views/home_view.dart';
+export 'domain/entities/trending_movies_entity.dart';
+export 'domain/repository/home_repository.dart';
+export 'domain/usecases/get_trending_movies_usecase.dart';
+export 'data/models/trending_movies_model.dart';
+export 'data/datasource/remote/home_remote_data_source.dart';
+export 'presentation/atoms/trending_movies_preview.dart';
+export 'presentation/notifier/trending_movies_notifier.dart';
+export 'data/repository_impls/home_repository_impl.dart';
+export 'home_locator.dart';

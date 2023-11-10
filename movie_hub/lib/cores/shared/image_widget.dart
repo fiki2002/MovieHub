@@ -2,11 +2,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:movie_hub/cores/shared/loading_widget.dart';
+import 'package:movie_hub/cores/cores.dart';
 import 'dart:io' as io;
-
-import 'package:movie_hub/cores/constants/palette.dart';
-import 'package:movie_hub/cores/utils/logger.dart';
 
 class ImageWidget extends StatelessWidget {
   const ImageWidget({
@@ -18,6 +15,7 @@ class ImageWidget extends StatelessWidget {
     this.height,
     this.width,
     this.color,
+    this.loader,
   }) : super(key: key);
 
   final String? imageUrl;
@@ -27,6 +25,7 @@ class ImageWidget extends StatelessWidget {
   final double? height;
   final double? width;
   final Color? color;
+  final Widget? loader;
 
   @override
   Widget build(BuildContext context) {
@@ -64,15 +63,16 @@ class ImageWidget extends StatelessWidget {
                   loadingBuilder: (_, __, ___) => const LoadingWidget(),
                 )
               : CachedNetworkImage(
-                  imageUrl: imageUrl!,
+                  imageUrl: '$baseNetworkImage$imageUrl',
                   fit: fit,
+                  fadeOutCurve: Curves.easeInCirc,
                   errorWidget: (_, __, ___) => Container(
                     color: kcWhiteColor,
                     child: const Center(
                       child: Icon(Icons.error),
                     ),
                   ),
-                  placeholder: (_, __) => const LoadingWidget(),
+                  placeholder: (_, __) => loader ?? const LoadingWidget(),
                 ),
         );
 

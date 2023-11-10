@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movie_hub/cores/cores.dart';
-import 'package:movie_hub/features/movie_dashboard/movie_dashboard.dart';
+import 'package:movie_hub/features/movies/movie_dashboard.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -25,28 +25,7 @@ class HomeView extends StatelessWidget {
   }
 
   Widget get _trendingMoviesPreview {
-    return SizedBox(
-      height: screenHeight * .5,
-      child: Stack(
-        fit: StackFit.expand,
-        children: [
-          ImageWidget(
-            imageTypes: ImageTypes.asset,
-            imageUrl: tbd1,
-            width: screenWidth,
-          ),
-          Container(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [Colors.transparent, Colors.black.withOpacity(.9)],
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
+    return const TrendingMoviesPreview();
   }
 
   Widget get _popularMovies {

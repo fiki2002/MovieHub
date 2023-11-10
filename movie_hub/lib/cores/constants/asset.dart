@@ -1,6 +1,7 @@
 const _baseImage = 'assets/images';
 const _baseIcons = 'assets/icons';
 const _tbd = 'assets/tbd';
+const baseNetworkImage = 'https://image.tmdb.org/t/p/original';
 
 const personIcon = '$_baseIcons/person.svg';
 const mailIcon = '$_baseIcons/mail.svg';

@@ -2,7 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:movie_hub/cores/cores.dart';
 import 'package:movie_hub/features/auth/auth.dart';
-import 'package:movie_hub/features/movie_dashboard/movie_dashboard.dart';
+import 'package:movie_hub/features/movies/movie_dashboard.dart';
 
 class SignUpView extends StatelessWidget {
   const SignUpView({super.key});

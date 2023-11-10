@@ -1,6 +1,6 @@
-import 'package:movie_hub/features/movie_dashboard/home/domain/entities/trending_movies_entity.dart';
+import 'package:movie_hub/cores/cores.dart';
+import 'package:movie_hub/features/movies/home/home.dart';
 
-import '../../../../../cores/utils/type_defs.dart';
 
 class TrendingMoviesModel extends TrendingMovieEntity {
   const TrendingMoviesModel({

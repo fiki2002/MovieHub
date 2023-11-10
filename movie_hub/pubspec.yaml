@@ -29,14 +29,18 @@ dependencies:
   # For Dependency Injection
   get_it: ^7.6.2
 
-  #Functional Programming
-  dartz: ^0.10.1
-
   #To enable comparison of objects without having to override ==
   equatable: ^2.0.5
 
   # For Network Calls 
   http: ^1.1.0
+
+  # For beautiful loading effects
+  shimmer: ^3.0.0
+
+  # For the slider
+  carousel_slider: ^4.2.1
+  
 
 dev_dependencies:
   flutter_test:

@@ -17,13 +17,11 @@ extension SvgExtension on String {
 }
 
 /// extension for logging objects
-///
-extension LogExtension on String {
+extension LogExtension<T> on T {
   void log([s = '']) {
     if (kDebugMode == false) return;
     dev.log(
-      toString(),
-      stackTrace: s,
+      '$this $s',
     );
   }
 }

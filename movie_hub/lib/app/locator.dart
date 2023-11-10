@@ -1,5 +1,5 @@
 import 'package:get_it/get_it.dart';
-import 'package:movie_hub/features/movie_dashboard/movie_dashboard.dart';
+import 'package:movie_hub/features/movies/movie_dashboard.dart';
 
 class SetUpLocators {
   static const SetUpLocators _instance = SetUpLocators._();
@@ -12,5 +12,8 @@ class SetUpLocators {
   static void init() {
     //! ****** NavBar Locator ****** !//
     setUpNavBarLocator();
+
+    //! ****** Home Locator ****** !//
+    setUpHomeLocator();
   }
 }

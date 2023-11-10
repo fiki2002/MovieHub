@@ -49,6 +49,7 @@ class ScaffoldWidget extends StatelessWidget {
       appBar: appBar,
       backgroundColor: bg ?? kcBackground,
       body: SafeArea(
+        top: false,
         child: SizedBox(
           height: sh(98),
           child: useSingleScroll

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movie_hub/features/movie_dashboard/movie_dashboard.dart';
+import 'package:movie_hub/features/movies/movie_dashboard.dart';
 
 class NavBarNotifier extends ChangeNotifier {
   int _currentIndex = 0;
