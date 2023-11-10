@@ -12,7 +12,7 @@ const searchIcon = '$_baseIcons/search.svg';
 const homeIcon = '$_baseIcons/home.svg';
 const userIcon = '$_baseIcons/user.svg';
 const listIcon = '$_baseIcons/watch_list.svg';
-
+const playFair = 'Playfair';
 //! TODO: TBDs
 
 const String tbd1 = '$_tbd/tbd_1.jpeg';

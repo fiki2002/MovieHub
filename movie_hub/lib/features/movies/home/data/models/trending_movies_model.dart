@@ -1,7 +1,6 @@
 import 'package:movie_hub/cores/cores.dart';
 import 'package:movie_hub/features/movies/home/home.dart';
 
-
 class TrendingMoviesModel extends TrendingMovieEntity {
   const TrendingMoviesModel({
     required super.page,
@@ -63,14 +62,14 @@ class TrendingMoviesResultModel extends TrendingMovieResultsEntity {
           ? (json['genre_ids'] as List<dynamic>).map((e) => e as int).toList()
           : [],
       mediaType: json['media_type'],
-      name: json['name'],
+      name: json['title'],
       originCountry: json['origin_country'] != null
           ? (json['origin_country'] as List<dynamic>)
               .map((e) => e as String)
               .toList()
           : [],
       originalLanguage: json['original_language'],
-      originalName: json['original_name'],
+      originalName: json['original_title'],
       overview: json['overview'],
       popularity: json['popularity'],
       posterPath: json['poster_path'],

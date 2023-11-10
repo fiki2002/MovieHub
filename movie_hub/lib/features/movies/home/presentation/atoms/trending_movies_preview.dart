@@ -1,6 +1,6 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:movie_hub/cores/cores.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:movie_hub/features/movies/home/home.dart';
 import 'package:provider/provider.dart';
 import 'package:shimmer/shimmer.dart';
@@ -14,45 +14,38 @@ class TrendingMoviesPreview extends StatelessWidget {
 
     return trendingMoviesNotifier.state.when(
       done: (trendingMovies) {
-        return SizedBox(
-          height: screenHeight * .5,
-          child: Stack(
-            fit: StackFit.expand,
-            children: [
-              CarouselSlider.builder(
-                itemCount: 10,
-                options: CarouselOptions(
-                  enlargeCenterPage: true,
-                  height: screenHeight * .5,
-                  autoPlay: true,
-                  viewportFraction: 1,
-                  enlargeFactor: .7,
-                  autoPlayInterval: Duration(seconds: kMinute.toInt()),
-                ),
-                itemBuilder: (context, index, realIndex) {
-                  final String url =
-                      trendingMovies.results?[index].backdropPath ?? '';
+        return Stack(
+          children: [
+            SizedBox(
+              height: screenHeight * .5,
+              child: Stack(
+                children: [
+                  CarouselSlider.builder(
+                    itemCount: 10,
+                    options: CarouselOptions(
+                      enlargeCenterPage: true,
+                      height: screenHeight * .5,
+                      autoPlay: true,
+                      viewportFraction: 1,
+                      enlargeFactor: .7,
+                      autoPlayInterval: Duration(seconds: kMinute.toInt()),
+                    ),
+                    itemBuilder: (context, index, realIndex) {
+                      final String url =
+                          trendingMovies.results?[index].backdropPath ?? '';
+                      final String title =
+                          trendingMovies.results?[index].originalName ?? '';
 
-                  return ImageWidget(
-                    imageTypes: ImageTypes.network,
-                    imageUrl: url,
-                    width: screenWidth,
-                    fit: BoxFit.cover,
-                    loader: _buildShimmer(),
-                  );
-                },
-              ),
-              Container(
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [Colors.transparent, Colors.black.withOpacity(.9)],
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
+                      return _buildImagePreview(
+                        url: url,
+                        title: title,
+                      );
+                    },
                   ),
-                ),
+                ],
               ),
-            ],
-          ),
+            ),
+          ],
         );
       },
       error: (message) => Container(
@@ -71,6 +64,55 @@ class TrendingMoviesPreview extends StatelessWidget {
       child: Container(
         height: screenHeight * .5,
       ),
+    );
+  }
+
+  Widget _buildImagePreview({required String url, required String title}) {
+    return Stack(
+      children: [
+        SizedBox(
+          height: screenHeight * .5,
+          child: ImageWidget(
+            imageTypes: ImageTypes.network,
+            imageUrl: url,
+            width: screenWidth,
+            fit: BoxFit.cover,
+            loader: _buildShimmer(),
+          ),
+        ),
+        Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                Colors.transparent,
+                Colors.black.withOpacity(.9),
+              ],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+            ),
+          ),
+        ),
+        Positioned(
+          bottom: screenHeight * .04,
+          left: screenWidth * .2,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              SizedBox(
+                width: screenWidth * .6,
+                child: TextWidget(
+                  title,
+                  textAlign: TextAlign.center,
+                  textColor: kcWhiteColor,
+                  fontSize: kfs30,
+                  fontFamily: playFair,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 }

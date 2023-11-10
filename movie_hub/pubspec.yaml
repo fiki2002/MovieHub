@@ -68,7 +68,11 @@ flutter:
         - asset: assets/fonts/Montserrat-Bold.ttf        
         - asset: assets/fonts/Montserrat-Light.ttf        
         - asset: assets/fonts/Montserrat-Medium.ttf        
-        - asset: assets/fonts/Montserrat-SemiBold.ttf        
+        - asset: assets/fonts/Montserrat-SemiBold.ttf
+        
+    - family: Playfair    
+      fonts:          
+        - asset: assets/fonts/PlayfairDisplaySC-BoldItalic.ttf        
 
  
 
