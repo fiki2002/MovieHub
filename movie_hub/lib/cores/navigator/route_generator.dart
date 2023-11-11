@@ -8,7 +8,6 @@ import 'package:movie_hub/features/auth/auth.dart';
 import 'package:movie_hub/features/movies/movie_dashboard.dart';
 import 'package:movie_hub/features/splash/splash.dart';
 
-
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     // final Object? args = settings.arguments;
@@ -26,6 +25,9 @@ class RouteGenerator {
         return pageRoute(const ForgotPasswordView());
       case NavBarView.route:
         return pageRoute(const NavBarView());
+      case MovieDetailsScreen.route:
+        return pageRoute(const MovieDetailsScreen());
+
       default:
         return errorRoute();
     }

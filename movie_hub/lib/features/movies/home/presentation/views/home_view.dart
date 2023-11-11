@@ -23,8 +23,10 @@ class _HomeViewState extends State<HomeView> {
         children: [
           _trendingMoviesPreview,
           _popularMovies,
+          _trendingMoviesForTheDay,
           _topRated,
           _upcomingMovies,
+          _trendingMoviesForTheWeek,
         ],
       ),
       useSingleScroll: true,
@@ -42,6 +44,9 @@ class _HomeViewState extends State<HomeView> {
       done: (MoviesModel popularMovies) => GenreCardWidget(
         title: 'POPULAR MOVIES',
         movies: popularMovies.results,
+        onTap: () => goTo(
+          MovieDetailsScreen.route,
+        ),
       ),
       error: (message) => Text(message.toString()),
       loading: () => const SizedBox.shrink(),
@@ -55,6 +60,42 @@ class _HomeViewState extends State<HomeView> {
       done: (topRatedMovies) => GenreCardWidget(
         title: 'TOP RATED',
         movies: topRatedMovies.results,
+        onTap: () => goTo(
+          MovieDetailsScreen.route,
+        ),
+      ),
+      error: (message) => Text(message.toString()),
+      loading: () => const SizedBox.shrink(),
+    );
+  }
+
+  Widget get _trendingMoviesForTheDay {
+    final trendingMoviesNotifier = context.watch<TrendingMoviesNotifier>();
+
+    return trendingMoviesNotifier.state.when(
+      done: (trendingMovies) => GenreCardWidget(
+        title: 'TRENDING FOR THE DAY',
+        movies: trendingMovies.results,
+        onTap: () => goTo(
+          MovieDetailsScreen.route,
+        ),
+      ),
+      error: (message) => Text(message.toString()),
+      loading: () => const SizedBox.shrink(),
+    );
+  }
+
+  Widget get _trendingMoviesForTheWeek {
+    final trendingMoviesForTheWeekNotifier =
+        context.watch<TrendingForTheWeekNotifier>();
+
+    return trendingMoviesForTheWeekNotifier.state.when(
+      done: (trendingMovies) => GenreCardWidget(
+        title: 'TRENDING FOR THE WEEK',
+        movies: trendingMovies.results,
+        onTap: () => goTo(
+          MovieDetailsScreen.route,
+        ),
       ),
       error: (message) => Text(message.toString()),
       loading: () => const SizedBox.shrink(),
@@ -68,6 +109,9 @@ class _HomeViewState extends State<HomeView> {
       done: (upcomingMovies) => GenreCardWidget(
         title: 'UPCOMING MOVIES',
         movies: upcomingMovies.results,
+        onTap: () => goTo(
+          MovieDetailsScreen.route,
+        ),
       ),
       error: (message) => Text(message.toString()),
       loading: () => const SizedBox.shrink(),

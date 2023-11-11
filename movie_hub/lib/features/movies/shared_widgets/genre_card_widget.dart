@@ -7,9 +7,11 @@ class GenreCardWidget extends StatelessWidget {
     super.key,
     required this.title,
     required this.movies,
+    required this.onTap,
   });
   final String title;
   final List<MovieResultsEntity>? movies;
+  final VoidCallback onTap;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -19,18 +21,21 @@ class GenreCardWidget extends StatelessWidget {
         children: [
           _GenreTitle(genreTitle: title),
           vSpace(kMinute),
-          SizedBox(
-            height: screenHeight * .15,
-            child: ListView.separated(
-              scrollDirection: Axis.horizontal,
-              itemBuilder: (context, index) {
-                final imageUrl = movies?[index].posterPath ?? '';
-                return _MovieCardTile(
-                  imageUrl: imageUrl,
-                );
-              },
-              separatorBuilder: (context, index) => hSpace(kMinute),
-              itemCount: movies?.length ?? 0,
+          GestureDetector(
+            onTap: onTap,
+            child: SizedBox(
+              height: screenHeight * .15,
+              child: ListView.separated(
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (context, index) {
+                  final imageUrl = movies?[index].posterPath ?? '';
+                  return _MovieCardTile(
+                    imageUrl: imageUrl,
+                  );
+                },
+                separatorBuilder: (context, index) => hSpace(kMinute),
+                itemCount: movies?.length ?? 0,
+              ),
             ),
           ),
         ],

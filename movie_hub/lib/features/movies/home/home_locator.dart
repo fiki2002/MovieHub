@@ -36,7 +36,7 @@ void setUpHomeLocator() {
     ),
   );
 
-    getIt.registerLazySingleton<GetUpcomingMoviesUseCase>(
+  getIt.registerLazySingleton<GetUpcomingMoviesUseCase>(
     () => GetUpcomingMoviesUseCase(
       homeRepository: getIt<HomeRepository>(),
     ),
@@ -58,9 +58,15 @@ void setUpHomeLocator() {
       topRatedMoviesUseCase: getIt<TopRatedMoviesUseCase>(),
     ),
   );
-    getIt.registerLazySingleton<UpcomingMoviesNotifier>(
+  getIt.registerLazySingleton<UpcomingMoviesNotifier>(
     () => UpcomingMoviesNotifier(
       upcomingMoviesNotifier: getIt<GetUpcomingMoviesUseCase>(),
+    ),
+  );
+
+  getIt.registerLazySingleton<TrendingForTheWeekNotifier>(
+    () => TrendingForTheWeekNotifier(
+      trendingMovieUsecase: getIt<TrendingMoviesUseCase>(),
     ),
   );
 }
