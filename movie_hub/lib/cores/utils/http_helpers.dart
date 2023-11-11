@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
+import 'package:http/http.dart';
 import 'package:movie_hub/cores/cores.dart';
 
 final Map<String, String> headers = {
@@ -43,6 +44,8 @@ class HttpHelper {
       } else {
         throw result['message'];
       }
+    } on ClientException {
+      throw 'Failed to fetch data. Please check your internet connection.';
     } on FormatException {
       if (kDebugMode) {
         throw 'Unable To Format Data!';

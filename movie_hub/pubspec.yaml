@@ -72,7 +72,10 @@ flutter:
         
     - family: Playfair    
       fonts:          
-        - asset: assets/fonts/PlayfairDisplaySC-BoldItalic.ttf        
+        - asset: assets/fonts/PlayfairDisplaySC-BoldItalic.ttf
+          style: italic
+          weight: 700        
+              
 
  
 

@@ -106,6 +106,8 @@ class TrendingMoviesPreview extends StatelessWidget {
                   textAlign: TextAlign.center,
                   textColor: kcWhiteColor,
                   fontSize: kfs30,
+                  fontStyle: FontStyle.italic,
+                  fontWeight: FontWeight.w700,
                   fontFamily: playFair,
                 ),
               ),

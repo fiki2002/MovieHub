@@ -10,7 +10,7 @@ import 'package:movie_hub/features/splash/splash.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
-    // final Object? args = settings.arguments;
+    final Object? args = settings.arguments;
 
     switch (settings.name) {
       case SplashPage.route:
@@ -26,7 +26,11 @@ class RouteGenerator {
       case NavBarView.route:
         return pageRoute(const NavBarView());
       case MovieDetailsScreen.route:
-        return pageRoute(const MovieDetailsScreen());
+        return pageRoute(
+          MovieDetailsScreen(
+            movies: args as MovieDetailsParams,
+          ),
+        );
 
       default:
         return errorRoute();

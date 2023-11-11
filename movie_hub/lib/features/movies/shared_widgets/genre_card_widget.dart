@@ -7,11 +7,9 @@ class GenreCardWidget extends StatelessWidget {
     super.key,
     required this.title,
     required this.movies,
-    required this.onTap,
   });
   final String title;
   final List<MovieResultsEntity>? movies;
-  final VoidCallback onTap;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -21,49 +19,32 @@ class GenreCardWidget extends StatelessWidget {
         children: [
           _GenreTitle(genreTitle: title),
           vSpace(kMinute),
-          GestureDetector(
-            onTap: onTap,
-            child: SizedBox(
-              height: screenHeight * .15,
-              child: ListView.separated(
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index) {
-                  final imageUrl = movies?[index].posterPath ?? '';
-                  return _MovieCardTile(
+          SizedBox(
+            height: screenHeight * .15,
+            child: ListView.separated(
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (context, index) {
+                final imageUrl = movies?[index].posterPath ?? '';
+                final id = '$title${movies?[index].name}${movies?[index].id}';
+                return Hero(
+                  tag: id,
+                  child: MovieCardTile(
                     imageUrl: imageUrl,
-                  );
-                },
-                separatorBuilder: (context, index) => hSpace(kMinute),
-                itemCount: movies?.length ?? 0,
-              ),
+                    onTap: () => goTo(
+                      MovieDetailsScreen.route,
+                      arguments: MovieDetailsParams(
+                        genreTitle: title,
+                        movieResults: movies?[index],
+                      ),
+                    ),
+                  ),
+                );
+              },
+              separatorBuilder: (context, index) => hSpace(kMinute),
+              itemCount: movies?.length ?? 0,
             ),
           ),
         ],
-      ),
-    );
-  }
-}
-
-class _MovieCardTile extends StatelessWidget {
-  const _MovieCardTile({required this.imageUrl});
-  final String imageUrl;
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: kXtremeLarge,
-      width: 100,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(kfsTiny),
-        color: kcGrey.withOpacity(.3),
-      ),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(kfsTiny),
-        child: ImageWidget(
-          imageTypes: ImageTypes.network,
-          imageUrl: imageUrl,
-          fit: BoxFit.cover,
-          loader: const ShimmerWidget(),
-        ),
       ),
     );
   }
@@ -82,4 +63,13 @@ class _GenreTitle extends StatelessWidget {
       fontWeight: FontWeight.w500,
     );
   }
+}
+
+class MovieDetailsParams {
+  final MovieResultsEntity? movieResults;
+  final String genreTitle;
+  MovieDetailsParams({
+    required this.movieResults,
+    required this.genreTitle,
+  });
 }

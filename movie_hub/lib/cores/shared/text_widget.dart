@@ -17,6 +17,7 @@ class TextWidget extends StatelessWidget {
     this.height,
     this.fontFamily,
     this.onTap,
+    this.fontStyle,
   }) : super(key: key);
 
   final String text;
@@ -26,6 +27,7 @@ class TextWidget extends StatelessWidget {
   final TextAlign? textAlign;
   final int? maxLines;
   final TextOverflow? overflow;
+  final FontStyle? fontStyle;
   final TextDecoration? decoration;
   final double? height;
   final String? fontFamily;
@@ -42,6 +44,7 @@ class TextWidget extends StatelessWidget {
           fontFamily: fontFamily ?? 'Montserrat',
           color: textColor,
           fontWeight: fontWeight,
+          fontStyle: fontStyle,
           decoration: decoration,
           height: height,
         ),
@@ -92,6 +95,8 @@ class RichTextWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text.rich(
+      textAlign: TextAlign.justify,
+      maxLines: maxLines,
       TextSpan(
         text: text,
         style: TextStyle(
@@ -99,6 +104,7 @@ class RichTextWidget extends StatelessWidget {
           color: textColor,
           fontWeight: fontWeight,
           fontFamily: fontFamily ?? 'Montserrat',
+          overflow: overflow,
         ),
         children: <InlineSpan>[
           TextSpan(

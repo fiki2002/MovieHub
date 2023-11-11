@@ -17,7 +17,7 @@ class ScaffoldWidget extends StatelessWidget {
     this.bg,
     this.scaffoldKey,
     this.controller,
-    this.scrollPhysics,
+    this.scrollPhysics, this.safeAreaTop,
   });
 
   final Widget? drawer;
@@ -31,6 +31,7 @@ class ScaffoldWidget extends StatelessWidget {
   final GlobalKey<ScaffoldState>? scaffoldKey;
   final ScrollController? controller;
   final ScrollPhysics? scrollPhysics;
+  final bool? safeAreaTop;
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +50,7 @@ class ScaffoldWidget extends StatelessWidget {
       appBar: appBar,
       backgroundColor: bg ?? kcBackground,
       body: SafeArea(
-        top: false,
+        top: safeAreaTop??true,
         child: SizedBox(
           height: sh(98),
           child: useSingleScroll

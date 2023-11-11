@@ -11,16 +11,11 @@ class TrendingMoviesNotifier extends BaseNotifier<MoviesModel> {
   @override
   void onInit() {
     getTrendingMoviesForTheDay();
-    getTrendingMoviesForTheWeek();
     super.onInit();
   }
 
   Future<void> getTrendingMoviesForTheDay() async {
     await _getTrendingMovies('day');
-  }
-
-  Future<void> getTrendingMoviesForTheWeek() async {
-    await _getTrendingMovies('week');
   }
 
   Future<void> _getTrendingMovies(String timeWindow) async {
