@@ -26,8 +26,6 @@ class MovieDetailRemoteDataSourceImpl extends MovieDetailsRemoteDataSource {
       function: (dynamic Function(String) fail) async {
         final String url = '$baseUrl/movie/$movieId/images';
         final result = await HttpHelper.get(url);
-        result.log();
-
         final ImageModel images = ImageModel.fromJson(result);
         return images;
       },

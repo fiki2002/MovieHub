@@ -4,6 +4,7 @@ import 'package:get_it/get_it.dart';
 import 'package:movie_hub/app/app.dart';
 import 'package:movie_hub/cores/cores.dart';
 import 'package:movie_hub/features/movies/movie_dashboard.dart';
+import 'package:movie_hub/features/movies/movie_details/presentation/components/image_preview_page.dart';
 import 'package:movie_hub/features/movies/movie_details/presentation/notifier/image_notifier.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -212,12 +213,10 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen>
                 children: [
                   _grid(
                     list: images.backdrops ?? [],
-                    onTap: () {},
                   ),
-                  _grid(
-                    list: images.posters ?? [],
-                    onTap: () {},
-                  ),
+                  // _grid(
+                  //   list: images.posters ?? [],
+                  // ),
                 ],
               );
             },
@@ -241,18 +240,21 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen>
 
   Widget _grid({
     required List<BackdropEntity> list,
-    required VoidCallback onTap,
   }) {
     return SizedBox(
-      height: screenHeight * .35,
+      height: screenHeight * 1,
       child: GridView.builder(
-        itemCount: 6,
+        itemCount: list.length,
+        shrinkWrap: true,
         padding: EdgeInsets.zero,
         physics: const NeverScrollableScrollPhysics(),
         itemBuilder: (context, int index) {
           return MovieCardTile(
             imageUrl: list[index].filePath ?? '',
-            onTap: onTap,
+            onTap: () => goTo(
+              ImagePreview.route,
+              arguments: list[index].filePath,
+            ),
           );
         },
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
