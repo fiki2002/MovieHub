@@ -7,17 +7,24 @@ class GenreCardWidget extends StatelessWidget {
     super.key,
     required this.title,
     required this.movies,
+    this.padding,
+    this.fontWeight,
   });
   final String title;
   final List<MovieResultsEntity>? movies;
+  final EdgeInsets? padding;
+  final FontWeight? fontWeight;
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(kfsMedium),
+      padding: padding ?? const EdgeInsets.all(kfsMedium),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _GenreTitle(genreTitle: title),
+          _GenreTitle(
+            genreTitle: title,
+            fontWeight: fontWeight,
+          ),
           vSpace(kMinute),
           SizedBox(
             height: screenHeight * .15,
@@ -53,14 +60,16 @@ class GenreCardWidget extends StatelessWidget {
 class _GenreTitle extends StatelessWidget {
   const _GenreTitle({
     required this.genreTitle,
+    this.fontWeight,
   });
   final String genreTitle;
+  final FontWeight? fontWeight;
   @override
   Widget build(BuildContext context) {
     return TextWidget(
       genreTitle,
       fontSize: sp(kfsTiny),
-      fontWeight: FontWeight.w500,
+      fontWeight: fontWeight ?? FontWeight.w500,
     );
   }
 }

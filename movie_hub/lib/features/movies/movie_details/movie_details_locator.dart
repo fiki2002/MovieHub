@@ -29,4 +29,10 @@ void setUpMovieLocator() {
       movieDetailRepo: getIt<MovieDetailRepository>(),
     ),
   );
+
+  getIt.registerLazySingleton<SimilarMovieUsecase>(
+    () => SimilarMovieUsecase(
+      movieDetailRepo: getIt<MovieDetailRepository>(),
+    ),
+  );
 }

@@ -4,8 +4,7 @@ import 'package:get_it/get_it.dart';
 import 'package:movie_hub/app/app.dart';
 import 'package:movie_hub/cores/cores.dart';
 import 'package:movie_hub/features/movies/movie_dashboard.dart';
-import 'package:movie_hub/features/movies/movie_details/presentation/components/image_preview_page.dart';
-import 'package:movie_hub/features/movies/movie_details/presentation/notifier/image_notifier.dart';
+import 'package:movie_hub/features/movies/movie_details/presentation/notifier/similar_movies_notifier.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -189,6 +188,8 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen>
               ),
             ],
             vSpace(kfsTiny),
+            _similarMovies,
+            vSpace(kfsTiny),
             _images(),
           ],
         ),
@@ -210,13 +211,17 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen>
           return imageNotifier.state.when(
             done: (images) {
               return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  _grid(
+                  if (images.backdrops != [] || images.backdrops != null)
+                    const TextWidget(
+                      'Images',
+                      fontWeight: FontWeight.w700,
+                    ),
+                  vSpace(kfsTiny),
+                  GridViewWidget(
                     list: images.backdrops ?? [],
                   ),
-                  // _grid(
-                  //   list: images.posters ?? [],
-                  // ),
                 ],
               );
             },
@@ -238,30 +243,28 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen>
     }
   }
 
-  Widget _grid({
-    required List<BackdropEntity> list,
-  }) {
-    return SizedBox(
-      height: screenHeight * 1,
-      child: GridView.builder(
-        itemCount: list.length,
-        shrinkWrap: true,
-        padding: EdgeInsets.zero,
-        physics: const NeverScrollableScrollPhysics(),
-        itemBuilder: (context, int index) {
-          return MovieCardTile(
-            imageUrl: list[index].filePath ?? '',
-            onTap: () => goTo(
-              ImagePreview.route,
-              arguments: list[index].filePath,
+  Widget get _similarMovies {
+    return ChangeNotifierProvider(
+      create: (context) {
+        final s = getIt<SimilarMovieUsecase>();
+        return SimilarMoviesNotifier(
+          similarMovieUsecase: s,
+          movieId: widget.movies.movieResults?.id.toString() ?? '',
+        );
+      },
+      child: Consumer<SimilarMoviesNotifier>(
+        builder: (context, similarMovieNotifier, _) {
+          return similarMovieNotifier.state.when(
+            done: (similarMovies) => GenreCardWidget(
+              padding: EdgeInsets.zero,
+              title: 'Similar Movies',
+              movies: similarMovies.results,
+              fontWeight: FontWeight.w700,
             ),
+            error: (e) => Text(e ?? ""),
+            loading: () => const CircularProgressIndicator.adaptive(),
           );
         },
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 3,
-          mainAxisSpacing: kMinute,
-          crossAxisSpacing: kMinute,
-        ),
       ),
     );
   }

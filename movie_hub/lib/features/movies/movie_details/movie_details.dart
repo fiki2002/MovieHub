@@ -11,3 +11,7 @@ export 'movie_details_locator.dart';
 export 'domain/entities/image_entity.dart';
 export 'data/model/image_model.dart';
 export 'domain/usecase/get_images_usecase.dart';
+export 'presentation/components/image_preview_page.dart';
+export 'presentation/atoms/grid_view.dart';
+export 'presentation/notifier/image_notifier.dart';
+export 'domain/usecase/get_similar_movies_usecase.dart';
