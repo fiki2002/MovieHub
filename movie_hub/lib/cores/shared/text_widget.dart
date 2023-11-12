@@ -73,7 +73,7 @@ class RichTextWidget extends StatelessWidget {
     this.overflow,
     this.decoration,
     this.fontFamily,
-    this.onTap,
+    this.onTap, this.onTap1,
   }) : super(key: key);
 
   final String text;
@@ -91,6 +91,7 @@ class RichTextWidget extends StatelessWidget {
   final TextOverflow? overflow;
   final TextDecoration? decoration;
   final GestureRecognizer? onTap;
+  final GestureRecognizer? onTap1;
 
   @override
   Widget build(BuildContext context) {
@@ -99,12 +100,14 @@ class RichTextWidget extends StatelessWidget {
       maxLines: maxLines,
       TextSpan(
         text: text,
+        recognizer: onTap1,
         style: TextStyle(
           fontSize: fontSize,
           color: textColor,
           fontWeight: fontWeight,
           fontFamily: fontFamily ?? 'Montserrat',
           overflow: overflow,
+          
         ),
         children: <InlineSpan>[
           TextSpan(

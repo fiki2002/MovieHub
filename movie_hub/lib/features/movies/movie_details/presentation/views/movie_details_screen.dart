@@ -1,6 +1,12 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
+import 'package:movie_hub/app/app.dart';
 import 'package:movie_hub/cores/cores.dart';
 import 'package:movie_hub/features/movies/movie_dashboard.dart';
+import 'package:movie_hub/features/movies/movie_details/presentation/notifier/image_notifier.dart';
+import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class MovieDetailsScreen extends StatefulWidget {
   static const String route = '/movie_details';
@@ -14,9 +20,10 @@ class MovieDetailsScreen extends StatefulWidget {
 
 class _MovieDetailsScreenState extends State<MovieDetailsScreen>
     with SingleTickerProviderStateMixin {
-
   late AnimationController _animationController;
   late Animation<Offset> _offsetAnimation;
+
+  final GetIt getIt = SetUpLocators.getIt;
 
   @override
   void initState() {
@@ -57,6 +64,35 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen>
   }
 
   Widget _movieTitle() {
+    return ChangeNotifierProvider(
+      create: (context) {
+        final s = getIt<MovieDetailUsecase>();
+        return MovieDetailsNotifier(
+          movieDetailsUsecase: s,
+          movieId: widget.movies.movieResults?.id.toString() ?? '',
+        );
+      },
+      child: Consumer<MovieDetailsNotifier>(
+        builder: (context, movieDetailsNotifier, _) {
+          return movieDetailsNotifier.state.when(
+            done: (MovieDetailModel movieDetails) {
+              return _body(movieDetails);
+            },
+            error: (_) => const Text(''),
+            loading: () => const CircularProgressIndicator.adaptive(),
+          );
+        },
+      ),
+    );
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
+  }
+
+  Widget _body(MovieDetailModel movieDetails) {
     return SlideTransition(
       position: _offsetAnimation,
       child: Padding(
@@ -72,6 +108,19 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen>
               fontSize: sp(kfsExtraLarge),
             ),
             vSpace(kMinute),
+            if (movieDetails.homepage != null) ...[
+              RichTextWidget(
+                'Visit Webpage',
+                '',
+                onTap1: TapGestureRecognizer()
+                  ..onTap = () async =>
+                      await _launchURLInBrowser('${movieDetails.homepage}'),
+                fontWeight: FontWeight.w600,
+                textColor: Colors.blue.withOpacity(.7),
+                fontWeight2: FontWeight.w400,
+              ),
+              vSpace(kSize5),
+            ],
             TextWidget(
               '${widget.movies.movieResults?.overview}',
             ),
@@ -80,20 +129,138 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen>
               RichTextWidget(
                 'Media Type:  ',
                 '${widget.movies.movieResults?.mediaType}'.capitalize(),
-                fontWeight: FontWeight.w500,
+                fontWeight: FontWeight.w600,
                 fontWeight2: FontWeight.w400,
               ),
               vSpace(kSize5),
             ],
+            if (movieDetails.genres != null) ...[
+              RichTextWidget(
+                'Genre:  ',
+                '${movieDetails.genres?.map((genre) => genre.name?.capitalize()).join(', ')}',
+                fontWeight: FontWeight.w600,
+                fontWeight2: FontWeight.w400,
+              ),
+              vSpace(kSize5),
+            ],
+            if (movieDetails.tagline != null) ...[
+              RichTextWidget(
+                'Tagline:   ',
+                '${movieDetails.tagline}',
+                fontWeight: FontWeight.w600,
+                fontWeight2: FontWeight.w400,
+              ),
+              vSpace(kSize5),
+            ],
+            if (movieDetails.releaseDate != null) ...[
+              RichTextWidget(
+                'Release Date:   ',
+                movieDetails.releaseDate!.parse(),
+                fontWeight: FontWeight.w600,
+                fontWeight2: FontWeight.w400,
+              ),
+              vSpace(kSize5),
+            ],
+            if (movieDetails.productionCompanies != null) ...[
+              RichTextWidget(
+                'Production Country:  ',
+                '${movieDetails.productionCountries?.map((c) => c.name?.capitalize()).join(', ')}',
+                fontWeight: FontWeight.w600,
+                fontWeight2: FontWeight.w400,
+              ),
+              vSpace(kSize5),
+            ],
+            if (movieDetails.productionCompanies != null) ...[
+              RichTextWidget(
+                'Companies:  ',
+                '${movieDetails.productionCompanies?.map((c) => c.name?.capitalize()).join(', ')}',
+                fontWeight: FontWeight.w600,
+                fontWeight2: FontWeight.w400,
+              ),
+              vSpace(kSize5),
+            ],
+            if (movieDetails.spokenLanguages != null) ...[
+              RichTextWidget(
+                'Languages:  ',
+                '${movieDetails.spokenLanguages?.map((c) => c.name?.capitalize()).join(', ')}',
+                fontWeight: FontWeight.w600,
+                fontWeight2: FontWeight.w400,
+              ),
+            ],
+            vSpace(kfsTiny),
+            _images(),
           ],
         ),
       ),
     );
   }
 
-  @override
-  void dispose() {
-    _animationController.dispose();
-    super.dispose();
+  Widget _images() {
+    return ChangeNotifierProvider(
+      create: (context) {
+        final s = getIt<ImagesUsecase>();
+        return ImageNotifier(
+          imageUsecase: s,
+          movieId: widget.movies.movieResults?.id.toString() ?? '',
+        );
+      },
+      child: Consumer<ImageNotifier>(
+        builder: (context, imageNotifier, _) {
+          return imageNotifier.state.when(
+            done: (images) {
+              return Column(
+                children: [
+                  _grid(
+                    list: images.backdrops ?? [],
+                    onTap: () {},
+                  ),
+                  _grid(
+                    list: images.posters ?? [],
+                    onTap: () {},
+                  ),
+                ],
+              );
+            },
+            error: (e) => Text(e ?? ''),
+            loading: CircularProgressIndicator.adaptive,
+          );
+        },
+      ),
+    );
+  }
+
+  /// To launch the page in web
+  Future<void> _launchURLInBrowser(final String path) async {
+    Uri url = Uri.parse(path);
+    if (await canLaunchUrl(url)) {
+      await launchUrl(url);
+    } else {
+      'Could not launch $url'.log();
+    }
+  }
+
+  Widget _grid({
+    required List<BackdropEntity> list,
+    required VoidCallback onTap,
+  }) {
+    return SizedBox(
+      height: screenHeight * .35,
+      child: GridView.builder(
+        itemCount: 6,
+        padding: EdgeInsets.zero,
+        physics: const NeverScrollableScrollPhysics(),
+        itemBuilder: (context, int index) {
+          return MovieCardTile(
+            imageUrl: list[index].filePath ?? '',
+            onTap: onTap,
+          );
+        },
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 3,
+          mainAxisSpacing: kMinute,
+          crossAxisSpacing: kMinute,
+        ),
+      ),
+    );
   }
 }

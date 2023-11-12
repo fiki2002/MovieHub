@@ -14,3 +14,6 @@ class TrendingMoviesUseCase {
     return await homeRepository.getTrendingMovies(timeWindow);
   }
 }
+
+
+// RemoteDS *-> Repo *-> Use

@@ -40,6 +40,12 @@ dependencies:
 
   # For the slider
   carousel_slider: ^4.2.1
+
+  # For Date Formatting
+  intl: ^0.18.1
+
+  # For loading urls
+  url_launcher: ^6.2.1
   
 
 dev_dependencies:
@@ -53,9 +59,7 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/images/
     - assets/icons/
-    - assets/tbd/
 
   fonts:
     - family: Sacramento

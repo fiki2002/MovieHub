@@ -24,10 +24,9 @@ void setUpMovieLocator() {
     ),
   );
 
-  ///Notifier
-  getIt.registerLazySingleton<MovieDetailsNotifier>(
-    () => MovieDetailsNotifier(
-      movieDetailsUsecase: getIt<MovieDetailUsecase>(),
+  getIt.registerLazySingleton<ImagesUsecase>(
+    () => ImagesUsecase(
+      movieDetailRepo: getIt<MovieDetailRepository>(),
     ),
   );
 }

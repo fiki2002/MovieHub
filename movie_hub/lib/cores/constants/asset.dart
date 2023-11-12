@@ -1,6 +1,4 @@
-const _baseImage = 'assets/images';
 const _baseIcons = 'assets/icons';
-const _tbd = 'assets/tbd';
 const baseNetworkImage = 'https://image.tmdb.org/t/p/original';
 
 const personIcon = '$_baseIcons/person.svg';
@@ -13,6 +11,4 @@ const homeIcon = '$_baseIcons/home.svg';
 const userIcon = '$_baseIcons/user.svg';
 const listIcon = '$_baseIcons/watch_list.svg';
 const playFair = 'Playfair';
-//! TODO: TBDs
 
-const String tbd1 = '$_tbd/tbd_1.jpeg';

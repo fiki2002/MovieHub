@@ -59,7 +59,9 @@ class MovieDetailModel extends MovieDetailEntity {
               .map((e) => ProductionCountryModel.fromJson(e as Mapped))
               .toList()
           : [],
-      releaseDate: json['release_date'],
+      releaseDate: json['release_date'] != null
+          ? DateTime.parse(json['release_date'])
+          : null,
       revenue: json['revenue'],
       runtime: json['runtime'],
       spokenLanguages: json['spoken_languages'] != null
@@ -92,11 +94,12 @@ class GenreModel extends GenreEntity {
 }
 
 class ProductionCompanyModel extends ProductionCompanyEntity {
-  const ProductionCompanyModel(
-      {required super.id,
-      required super.logoPath,
-      required super.name,
-      required super.originCountry});
+  const ProductionCompanyModel({
+    required super.id,
+    required super.logoPath,
+    required super.name,
+    required super.originCountry,
+  });
 
   factory ProductionCompanyModel.fromJson(Mapped json) {
     return ProductionCompanyModel(
@@ -131,8 +134,9 @@ class SpokenLanguageModel extends SpokenLanguageEntity {
 
   factory SpokenLanguageModel.fromJson(Mapped json) {
     return SpokenLanguageModel(
-        englishName: json['english_name'],
-        iso6391: json['iso_639_1'],
-        name: json['name']);
+      englishName: json['english_name'],
+      iso6391: json['iso_639_1'],
+      name: json['name'],
+    );
   }
 }

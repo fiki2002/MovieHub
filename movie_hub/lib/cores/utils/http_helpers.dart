@@ -50,7 +50,6 @@ class HttpHelper {
       if (kDebugMode) {
         throw 'Unable To Format Data!';
       }
-
       throw 'Something went wrong, please try again';
     } on SocketException catch (e, s) {
       e.log(s);

@@ -14,7 +14,6 @@ List<SingleChildWidget> _providers = [
   ChangeNotifierProvider.value(value: getIt<TopRatedMoviesNotifier>()),
   ChangeNotifierProvider.value(value: getIt<UpcomingMoviesNotifier>()),
   ChangeNotifierProvider.value(value: getIt<TrendingForTheWeekNotifier>()),
-  ChangeNotifierProvider.value(value: getIt<MovieDetailsNotifier>()),
 ];
 
 List<SingleChildWidget> get providers => _providers;
