@@ -45,7 +45,6 @@ Future<ServiceResponse<MoviesModel>> _getMovies(String tag) {
     function: (dynamic Function(String) fail) async {
       final String url = '$baseUrl$tag';
       final result = await HttpHelper.get(url);
-
       final MoviesModel popularMovies = MoviesModel.fromJson(result);
       return popularMovies;
     },

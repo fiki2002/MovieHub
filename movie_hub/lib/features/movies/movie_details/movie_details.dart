@@ -1,2 +1,10 @@
-export 'presentation/movie_details_screen.dart';
+export 'presentation/views/movie_details_screen.dart';
 export 'presentation/atoms/movie_details_header.dart';
+export 'domain/entities/movie_details_entity.dart';
+export 'domain/repo/movie_detail_repo.dart';
+export 'data/repo-impl/movie_detail_repo_impl.dart';
+export 'data/datasource/remote_data_source.dart';
+export 'data/model/movie_details_model.dart';
+export 'domain/usecase/movie_detail_usecase.dart';
+export 'presentation/notifier/movie_details_notifier.dart';
+export 'movie_details_locator.dart';
