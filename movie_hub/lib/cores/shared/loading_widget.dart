@@ -17,11 +17,13 @@ class LoadingWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CircularProgressIndicator(
-      strokeWidth: strokeWidth ?? 2.0,
-      backgroundColor: backGroundColor ?? kcWhiteColor,
-      color: color ?? kcWhiteColor,
-      value: value,
+    return Center(
+      child: CircularProgressIndicator(
+        strokeWidth: strokeWidth ?? 2.0,
+        backgroundColor: backGroundColor ?? kcWhiteColor,
+        color: color ?? kcWhiteColor,
+        value: value,
+      ),
     );
   }
 }

@@ -29,6 +29,9 @@ extension LogExtension<T> on T {
 
 extension StringExtension on String {
   String capitalize() {
+    if (isEmpty) {
+      return this;
+    }
     return "${this[0].toUpperCase()}${substring(1).toLowerCase()}";
   }
 }
@@ -37,5 +40,4 @@ extension DateTimeExtension on DateTime {
   String parse() {
     return DateFormat.yMMMd().format(this);
   }
-
 }

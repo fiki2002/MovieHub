@@ -1,4 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:movie_hub/cores/cores.dart';
 import 'package:movie_hub/features/movies/home/home.dart';
@@ -53,7 +54,9 @@ class TrendingMoviesPreview extends StatelessWidget {
         color: Colors.red,
         child: Text('$message'),
       ),
-      loading: () => const CircularProgressIndicator.adaptive(),
+      loading: () => const Center(
+        child: CupertinoActivityIndicator(),
+      ),
     );
   }
 

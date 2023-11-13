@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
@@ -31,7 +32,7 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen>
 
     _animationController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 1000),
+      duration: const Duration(milliseconds: 1500),
     );
 
     _offsetAnimation = Tween<Offset>(
@@ -79,7 +80,9 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen>
               return _body(movieDetails);
             },
             error: (_) => const Text(''),
-            loading: () => const CircularProgressIndicator.adaptive(),
+            loading: () => const Center(
+              child: CupertinoActivityIndicator(),
+            ),
           );
         },
       ),
@@ -226,7 +229,9 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen>
               );
             },
             error: (e) => Text(e ?? ''),
-            loading: CircularProgressIndicator.adaptive,
+            loading: () => const Center(
+              child: CupertinoActivityIndicator(),
+            ),
           );
         },
       ),
@@ -262,7 +267,9 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen>
               fontWeight: FontWeight.w700,
             ),
             error: (e) => Text(e ?? ""),
-            loading: () => const CircularProgressIndicator.adaptive(),
+            loading: () => const Center(
+              child: CupertinoActivityIndicator(),
+            ),
           );
         },
       ),
