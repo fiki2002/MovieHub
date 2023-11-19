@@ -18,8 +18,5 @@ class SetUpLocators {
 
     //! ****** Movie Details Locator ****** !//
     setUpMovieLocator();
-
-    //! ****** Watch Movies Locator ****** !//
-    setUpWatchMoviesLocator();
   }
 }

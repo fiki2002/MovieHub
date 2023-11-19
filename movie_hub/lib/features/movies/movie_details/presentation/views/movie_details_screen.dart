@@ -12,7 +12,10 @@ import 'package:url_launcher/url_launcher.dart';
 class MovieDetailsScreen extends StatefulWidget {
   static const String route = '/movie_details';
 
-  const MovieDetailsScreen({super.key, required this.movies});
+  const MovieDetailsScreen({
+    super.key,
+    required this.movies,
+  });
   final MovieDetailsParams movies;
 
   @override
