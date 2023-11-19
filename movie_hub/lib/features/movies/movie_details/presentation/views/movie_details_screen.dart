@@ -191,11 +191,24 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen>
               ),
             ],
             vSpace(kfsTiny),
+            _watchMovies(),
+            vSpace(kfsTiny),
             _similarMovies,
             vSpace(kfsTiny),
             _images(),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _watchMovies() {
+    return Button(
+      text: 'Watch',
+      circular: true,
+      onTap: () => goTo(
+        WatchMoviesView.route,
+        arguments: widget.movies.movieResults?.id.toString() ?? '',
       ),
     );
   }

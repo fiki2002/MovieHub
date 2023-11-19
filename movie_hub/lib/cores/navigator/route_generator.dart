@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:movie_hub/cores/cores.dart';
 import 'package:movie_hub/features/auth/auth.dart';
 import 'package:movie_hub/features/movies/movie_dashboard.dart';
-import 'package:movie_hub/features/movies/movie_details/presentation/components/image_preview_page.dart';
 import 'package:movie_hub/features/splash/splash.dart';
 
 class RouteGenerator {
@@ -32,11 +31,16 @@ class RouteGenerator {
             movies: args as MovieDetailsParams,
           ),
         );
-
       case ImagePreview.route:
         return pageRoute(
           ImagePreview(
             imageUrl: args as String,
+          ),
+        );
+      case WatchMoviesView.route:
+        return pageRoute(
+          WatchMoviesView(
+            movieID: args as String,
           ),
         );
 

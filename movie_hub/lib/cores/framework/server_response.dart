@@ -1,5 +1,4 @@
 import 'package:movie_hub/cores/cores.dart';
-import 'package:movie_hub/cores/framework/frame_work.dart';
 
 class ServiceResponse<T> {
   String? message;

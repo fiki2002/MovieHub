@@ -67,13 +67,13 @@ class ImageWidget extends StatelessWidget {
                   imageUrl: '$baseNetworkImage$imageUrl',
                   fit: fit,
                   fadeOutCurve: Curves.easeInCirc,
+                  httpHeaders: const {'timeout': '30'},
                   errorWidget: (_, __, ___) => Container(
                     color: kcWhiteColor,
                     child: const Center(
                       child: Icon(Icons.error),
                     ),
-                  ),
-                  placeholder: (_, __) => loader ?? const LoadingWidget(),
+                  ),                  placeholder: (_, __) => loader ?? const LoadingWidget(),
                 ),
         );
 

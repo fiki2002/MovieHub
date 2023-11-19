@@ -46,6 +46,10 @@ dependencies:
 
   # For loading urls
   url_launcher: ^6.2.1
+
+  # For loading movie page
+  webview_flutter: ^4.4.2
+
   
 
 dev_dependencies:

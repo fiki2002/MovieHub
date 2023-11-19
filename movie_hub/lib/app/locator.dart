@@ -16,7 +16,10 @@ class SetUpLocators {
     //! ****** Home Locator ****** !//
     setUpHomeLocator();
 
-    //! ****** Movie Detail Locator ****** !//
+    //! ****** Movie Details Locator ****** !//
     setUpMovieLocator();
+
+    //! ****** Watch Movies Locator ****** !//
+    setUpWatchMoviesLocator();
   }
 }

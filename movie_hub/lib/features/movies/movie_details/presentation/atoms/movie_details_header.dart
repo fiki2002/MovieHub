@@ -1,17 +1,50 @@
+// ignore_for_file: use_build_context_synchronously
+
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:movie_hub/cores/cores.dart';
 import 'package:movie_hub/features/movies/movie_dashboard.dart';
 
-class MovieDetailsHeader extends StatelessWidget {
+class MovieDetailsHeader extends StatefulWidget {
   const MovieDetailsHeader({super.key, required this.movies});
 
   final MovieDetailsParams movies;
 
   @override
+  State<MovieDetailsHeader> createState() => _MovieDetailsHeaderState();
+}
+
+class _MovieDetailsHeaderState extends State<MovieDetailsHeader> {
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    loadImages();
+  }
+
+  Future<void> loadImages() async {
+    try {
+      final String backDrop = widget.movies.movieResults?.backdropPath ?? '';
+      final String posterPath = widget.movies.movieResults?.posterPath ?? '';
+      await precacheImage(
+        CachedNetworkImageProvider('$baseNetworkImage$backDrop'),
+        context,
+      );
+      await precacheImage(
+        CachedNetworkImageProvider('$baseNetworkImage$posterPath'),
+        context,
+      );
+      'image cached successfully!!'.log();
+    } catch (e) {
+      e.log();
+      'Failed to cache image!!'.log();
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Hero(
       tag:
-          '${movies.genreTitle}${movies.movieResults?.name}${movies.movieResults?.id}',
+          '${widget.movies.genreTitle}${widget.movies.movieResults?.name}${widget.movies.movieResults?.id}',
       placeholderBuilder: (context, heroSize, child) {
         return Opacity(
           opacity: 0.6,
@@ -41,7 +74,7 @@ class MovieDetailsHeader extends StatelessWidget {
                 imageTypes: ImageTypes.network,
                 fit: BoxFit.cover,
                 width: screenWidth,
-                imageUrl: movies.movieResults?.backdropPath ?? '',
+                imageUrl: widget.movies.movieResults?.backdropPath ?? '',
                 loader: const ShimmerWidget(),
               ),
             ),
@@ -49,7 +82,7 @@ class MovieDetailsHeader extends StatelessWidget {
               bottom: 25,
               left: 20,
               child: MovieCardTile(
-                imageUrl: movies.movieResults?.posterPath ?? '',
+                imageUrl: widget.movies.movieResults?.posterPath ?? '',
                 onTap: () {},
                 height: 130,
               ),

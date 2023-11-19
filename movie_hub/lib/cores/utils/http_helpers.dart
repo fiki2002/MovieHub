@@ -61,4 +61,34 @@ class HttpHelper {
       throw e.toString();
     }
   }
+
+  static Future<String> getString(String url) async {
+    try {
+      http.Response response = await http
+          .get(
+            Uri.parse(url),
+          )
+          .timeout(
+            const Duration(seconds: 30),
+          );
+
+      final String result = response.body;
+      return result;
+    } on ClientException {
+      throw 'Failed to fetch data. Please check your internet connection.';
+    } on FormatException {
+      if (kDebugMode) {
+        throw 'Unable To Format Data!';
+      }
+      throw 'Something went wrong, please try again';
+    } on SocketException catch (e, s) {
+      e.log(s);
+      throw 'Unable to connect to server please check your network and try again!';
+    } on TimeoutException catch (e, s) {
+      e.log(s);
+      throw 'Request Timeout, Unable to connect to server please check your network and try again!';
+    } catch (e) {
+      throw e.toString();
+    }
+  }
 }
