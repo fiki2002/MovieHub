@@ -29,3 +29,5 @@ const double kfs70 = 70.0;
 const double kfs30 = 30.0;
 
 const double kfs90 = 90.0;
+
+const double kfs50 = 50.0;

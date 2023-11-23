@@ -1,10 +1,10 @@
 import 'package:equatable/equatable.dart';
 
 class MovieEntity extends Equatable {
-  final int? page;
+  final num? page;
   final List<MovieResultsEntity>? results;
-  final int? totalPages;
-  final int? totalResults;
+  final num? totalPages;
+  final num? totalResults;
   const MovieEntity({
     this.page,
     this.results,
@@ -24,19 +24,19 @@ class MovieEntity extends Equatable {
 class MovieResultsEntity extends Equatable {
   final bool? adult;
   final String? backdropPath;
-  final int? id;
+  final num? id;
   final String? name;
   final String? originalLanguage;
   final String? originalName;
   final String? overview;
   final String? posterPath;
   final String? mediaType;
-  final List<int>? genreIds;
-  final double? popularity;
+  final List<num>? genreIds;
+  final num? popularity;
   final String? firstAirDate;
   final String? releaseDate;
-  final double? voteAverage;
-  final int? voteCount;
+  final num? voteAverage;
+  final num? voteCount;
   final List<String>? originCountry;
   const MovieResultsEntity({
     this.adult,

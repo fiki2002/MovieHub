@@ -1,1 +1,11 @@
 export 'presentation/views/search_view.dart';
+export 'data/datasource/remote_data_source.dart';
+export 'data/repo_impl/search_movies_repository_impl.dart';
+export 'domain/repository/search_movies_repository.dart';
+export 'domain/usecase/discover_movies_usecase.dart';
+export 'domain/usecase/search_movies_usecase.dart';
+export 'presentation/components/header.dart';
+export 'presentation/notifier/discover_movies_notifier.dart';
+export 'presentation/atoms/discover_movies_grid.dart';
+export 'presentation/components/discover_movies_grid.dart';
+export 'search_locator.dart';

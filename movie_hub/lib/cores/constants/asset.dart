@@ -10,5 +10,7 @@ const searchIcon = '$_baseIcons/search.svg';
 const homeIcon = '$_baseIcons/home.svg';
 const userIcon = '$_baseIcons/user.svg';
 const listIcon = '$_baseIcons/watch_list.svg';
-const playFair = 'Playfair';
+const arrowLeftIcon = '$_baseIcons/arrow.svg';
 
+
+const playFair = 'Playfair';

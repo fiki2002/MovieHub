@@ -17,7 +17,8 @@ class ScaffoldWidget extends StatelessWidget {
     this.bg,
     this.scaffoldKey,
     this.controller,
-    this.scrollPhysics, this.safeAreaTop,
+    this.scrollPhysics,
+    this.safeAreaTop,
   });
 
   final Widget? drawer;
@@ -38,7 +39,7 @@ class ScaffoldWidget extends StatelessWidget {
     SystemChrome.setSystemUIOverlayStyle(
       SystemUiOverlayStyle.dark.copyWith(
         systemNavigationBarIconBrightness: Brightness.dark,
-        systemNavigationBarColor: Colors.white,
+        systemNavigationBarColor: kcWhiteColor,
         statusBarIconBrightness: Brightness.light,
         statusBarColor: Colors.black,
       ),
@@ -50,7 +51,7 @@ class ScaffoldWidget extends StatelessWidget {
       appBar: appBar,
       backgroundColor: bg ?? kcBackground,
       body: SafeArea(
-        top: safeAreaTop??true,
+        top: safeAreaTop ?? true,
         child: SizedBox(
           height: sh(98),
           child: useSingleScroll

@@ -18,5 +18,8 @@ class SetUpLocators {
 
     //! ****** Movie Details Locator ****** !//
     setUpMovieLocator();
+
+   //! ****** Search Movies Locator ****** !//
+    setUpSearchLocator();
   }
 }

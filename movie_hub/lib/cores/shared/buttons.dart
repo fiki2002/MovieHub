@@ -182,14 +182,14 @@ class Button extends StatelessWidget {
       } else {
         return Icon(
           iconData,
-          color: iconColor ?? Colors.white,
+          color: iconColor ?? kcWhiteColor,
           size: iconSize ?? 20.0,
         );
       }
     } else {
       return TextWidget(
         text ?? 'no text',
-        textColor: textColor ?? Colors.white,
+        textColor: textColor ?? kcWhiteColor,
         fontSize: sp(15),
         fontWeight: textFontWeight,
       );

@@ -1,6 +1,5 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:movie_hub/cores/cores.dart';
 import 'package:movie_hub/cores/utils/precache_images.dart';
@@ -24,7 +23,6 @@ class _MovieDetailsHeaderState extends State<MovieDetailsHeader> {
       backDrop: widget.movies.movieResults?.backdropPath ?? '',
       posterPath: widget.movies.movieResults?.posterPath ?? '',
     );
-    
   }
 
   @override
@@ -68,20 +66,24 @@ class _MovieDetailsHeaderState extends State<MovieDetailsHeader> {
                   ),
                 ),
                 Positioned(
-                  bottom: 25,
-                  left: 20,
+                  bottom: kGlobalPadding,
+                  left: kfsExtraLarge,
                   child: MovieCardTile(
                     imageUrl: widget.movies.movieResults?.posterPath ?? '',
                     onTap: () {},
                     height: 130,
                   ),
                 ),
-                const Positioned(
-                  top: 50,
-                  left: 20,
-                  child: Icon(
-                    CupertinoIcons.back,
-                    color: Colors.white,
+                Positioned(
+                  top: kfs50,
+                  left: kfsExtraLarge,
+                  child: GestureDetector(
+                    onTap: goBack,
+                    child: CircleAvatar(
+                      radius: kfsExtraLarge,
+                      backgroundColor: kcGrey.withOpacity(.3),
+                      child: arrowLeftIcon.svg,
+                    ),
                   ),
                 )
               ],
