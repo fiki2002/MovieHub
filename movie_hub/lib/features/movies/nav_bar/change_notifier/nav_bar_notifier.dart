@@ -7,7 +7,7 @@ class NavBarNotifier extends ChangeNotifier {
 
   final List<Widget> _screens = [
     const HomeView(),
-    Container(color: Colors.red),
+    SearchView(),
     Container(color: Colors.blue),
     Container(color: Colors.green),
   ];

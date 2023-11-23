@@ -1,0 +1,1 @@
+export 'presentation/views/search_view.dart';

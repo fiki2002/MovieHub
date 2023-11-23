@@ -1,6 +1,6 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:movie_hub/cores/cores.dart';
+import 'package:movie_hub/cores/utils/precache_images.dart';
 import 'package:shimmer/shimmer.dart';
 
 class HomeImagePreview extends StatefulWidget {
@@ -20,18 +20,7 @@ class _ImagePreviewState extends State<HomeImagePreview> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    loadImages();
-  }
-
-  Future<void> loadImages() async {
-    try {
-      await precacheImage(
-          CachedNetworkImageProvider('$baseNetworkImage${widget.url}'),
-          context);
-      'image cached successfully!!'.log();
-    } catch (e) {
-      'Failed to cache image!!'.log();
-    }
+    PreCacheImage.loadImages(backDrop: widget.url);
   }
 
   @override

@@ -1,1 +1,1 @@
-export 'presentation/views/watch_movies_view.dart';
+export 'presentation/watch_movies_view.dart';

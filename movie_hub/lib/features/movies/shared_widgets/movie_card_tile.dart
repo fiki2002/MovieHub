@@ -1,6 +1,6 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:movie_hub/cores/cores.dart';
+import 'package:movie_hub/cores/utils/precache_images.dart';
 import 'package:movie_hub/features/movies/home/home.dart';
 
 class MovieCardTile extends StatefulWidget {
@@ -21,25 +21,11 @@ class MovieCardTile extends StatefulWidget {
 }
 
 class _MovieCardTileState extends State<MovieCardTile> {
+  
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    loadImages();
-  }
-
-  Future<void> loadImages() async {
-    try {
-      await precacheImage(
-        CachedNetworkImageProvider(
-          '$baseNetworkImage${widget.imageUrl}',
-        ),
-        context,
-      );
-      'image cached successfully!!'.log();
-    } catch (e) {
-      'ERROR:: $e '.log();
-      'Failed to cache image!!'.log();
-    }
+    PreCacheImage.loadImages(backDrop: widget.imageUrl);
   }
 
   @override
