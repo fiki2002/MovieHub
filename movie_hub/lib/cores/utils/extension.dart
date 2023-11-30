@@ -20,10 +20,10 @@ extension SvgExtension on String {
 
 /// extension for logging objects
 extension LogExtension<T> on T {
-  void log([s = '']) {
+  void log() {
     if (kDebugMode == false) return;
     dev.log(
-      '$this $s',
+      '$this',
     );
   }
 }

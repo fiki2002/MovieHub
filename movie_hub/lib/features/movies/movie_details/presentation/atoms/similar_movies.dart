@@ -19,12 +19,17 @@ class SimilarMovies extends StatelessWidget {
       child: Consumer<SimilarMoviesNotifier>(
         builder: (context, similarMovieNotifier, _) {
           return similarMovieNotifier.state.when(
-            done: (similarMovies) => GenreCardWidget(
-              padding: EdgeInsets.zero,
-              title: 'Similar Movies',
-              movies: similarMovies.results,
-              fontWeight: FontWeight.w700,
-            ),
+            done: (similarMovies) {
+              return Visibility(
+                visible: similarMovies.results?.isNotEmpty ?? true,
+                child: GenreCardWidget(
+                  padding: EdgeInsets.zero,
+                  title: 'Similar Movies',
+                  movies: similarMovies.results,
+                  fontWeight: FontWeight.w700,
+                ),
+              );
+            },
             error: (e) => Text(e ?? ""),
             loading: () => const Center(
               child: CupertinoActivityIndicator(),

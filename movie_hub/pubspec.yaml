@@ -50,6 +50,9 @@ dependencies:
   # For loading movie page
   webview_flutter: ^4.4.2
 
+  #For nice animated assets
+  lottie: ^2.7.0
+
   
 
 dev_dependencies:
@@ -64,6 +67,7 @@ flutter:
 
   assets:
     - assets/icons/
+    - assets/lottie/
 
   fonts:
     - family: Sacramento

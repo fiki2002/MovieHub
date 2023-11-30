@@ -14,7 +14,6 @@ class TrendingMoviesPreview extends StatelessWidget {
 
     return trendingMoviesNotifier.state.when(
       done: (MoviesModel trendingMovies) {
-        
         return Stack(
           children: [
             SizedBox(
@@ -49,15 +48,8 @@ class TrendingMoviesPreview extends StatelessWidget {
           ],
         );
       },
-      error: (message) => Container(
-        height: 20,
-        color: Colors.red,
-        child: Text('$message'),
-      ),
-      loading: () => const Center(
-        child: CupertinoActivityIndicator(),
-      ),
+      error: (message) => const ShimmerWidget(),
+      loading: () => const ShimmerWidget(),
     );
   }
-
 }

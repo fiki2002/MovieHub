@@ -9,3 +9,7 @@ export 'presentation/notifier/discover_movies_notifier.dart';
 export 'presentation/atoms/discover_movies_grid.dart';
 export 'presentation/components/discover_movies_grid.dart';
 export 'search_locator.dart';
+export 'data/model/search_params_model.dart';
+export 'presentation/notifier/search_movies_notifier.dart';
+export 'presentation/components/search_movies_grid.dart';
+export 'presentation/atoms/movie_not_found.dart';

@@ -31,6 +31,12 @@ class MovieDetailModel extends MovieDetailEntity {
   });
 
   factory MovieDetailModel.fromJson(Mapped json) {
+    final releaseDate = switch (json['release_date'] != null) {
+      true => DateTime.parse(json['release_date']),
+      false => throw FormatException(
+          'Invalid JSON: required "releaseDate" field of type String in ${json['release_date']}',
+        ),
+    };
     return MovieDetailModel(
       adult: json['adult'],
       backdropPath: json['backdrop_path'],
@@ -59,9 +65,7 @@ class MovieDetailModel extends MovieDetailEntity {
               .map((e) => ProductionCountryModel.fromJson(e as Mapped))
               .toList()
           : [],
-      releaseDate: json['release_date'] != null
-          ? DateTime.parse(json['release_date'])
-          : null,
+      releaseDate: releaseDate,
       revenue: json['revenue'],
       runtime: json['runtime'],
       spokenLanguages: json['spoken_languages'] != null

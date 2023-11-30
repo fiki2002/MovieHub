@@ -24,10 +24,10 @@ class MovieDetailRepoImpl extends MovieDetailRepository {
       movieId,
     );
   }
-  
+
   @override
   FutureOr<NotifierState<MoviesModel>> getSimilarMovies(String movieId) {
-return convertWithArgument(
+    return convertWithArgument(
       movieDetailsDataSource.getSimilarMovies,
       movieId,
     );

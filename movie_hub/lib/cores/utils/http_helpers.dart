@@ -23,7 +23,6 @@ class HttpHelper {
     try {
       if (query != null) {
         url += '?';
-
         query.forEach((key, value) {
           url += '&$key=$value';
         });
@@ -51,11 +50,11 @@ class HttpHelper {
         throw 'Unable To Format Data!';
       }
       throw 'Something went wrong, please try again';
-    } on SocketException catch (e, s) {
-      e.log(s);
+    } on SocketException catch (e) {
+      e.log;
       throw 'Unable to connect to server please check your network and try again!';
-    } on TimeoutException catch (e, s) {
-      e.log(s);
+    } on TimeoutException catch (e) {
+      e.log;
       throw 'Request Timeout, Unable to connect to server please check your network and try again!';
     } catch (e) {
       throw e.toString();

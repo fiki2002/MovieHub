@@ -4,6 +4,7 @@ import 'package:movie_hub/app/locator.dart';
 import 'package:movie_hub/cores/cores.dart';
 
 void main() async {
+
   WidgetsFlutterBinding.ensureInitialized();
 
   SetUpLocators.init();
@@ -11,4 +12,5 @@ void main() async {
   await Setups.run();
 
   runApp(const MyApp());
+  
 }

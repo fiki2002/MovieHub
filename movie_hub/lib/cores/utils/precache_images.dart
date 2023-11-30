@@ -9,15 +9,15 @@ class PreCacheImage {
     required String backDrop,
     String? posterPath,
   }) async {
-
-
     try {
       if (backDrop.isEmpty || (posterPath == null || posterPath.isEmpty)) {
         return;
       }
 
-      await _precache(backDrop);
-      await _precache(posterPath);
+      await Future.wait([
+        _precache(backDrop),
+        _precache(posterPath),
+      ]);
     } catch (e) {
       e.log();
       'Failed to cache image!!'.log();

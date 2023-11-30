@@ -16,4 +16,12 @@ class SearchMovieImpl extends SearchMoviesRepository {
       () => searchMovieDataSource.discoverMovies(),
     );
   }
+
+  @override
+  FutureOr<NotifierState<MoviesModel>> searchMovies(SearchParamsModel params) {
+    return convertWithArgument(
+      searchMovieDataSource.searchMovies,
+      params,
+    );
+  }
 }

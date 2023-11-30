@@ -23,6 +23,11 @@ void setUpSearchLocator() {
       searchMoviesRepo: getIt<SearchMoviesRepository>(),
     ),
   );
+    getIt.registerLazySingleton<SearchMoviesUsecase>(
+    () => SearchMoviesUsecase(
+      searchMoviesRepo: getIt<SearchMoviesRepository>(),
+    ),
+  );
 
   /// Notifier
   getIt.registerLazySingleton<DiscoverMoviesNotifier>(
@@ -30,4 +35,11 @@ void setUpSearchLocator() {
       discoverMoviesUsecase: getIt<DiscoverMoviesUsecase>(),
     ),
   );
+
+    getIt.registerLazySingleton<SearchNotifier>(
+    () => SearchNotifier(
+      searchMovieUsecase: getIt<SearchMoviesUsecase>(),
+    ),
+  );
+
 }

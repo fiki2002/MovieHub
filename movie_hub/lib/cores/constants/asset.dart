@@ -1,4 +1,5 @@
 const _baseIcons = 'assets/icons';
+const _baseLottie = 'assets/lottie';
 const baseNetworkImage = 'https://image.tmdb.org/t/p/original';
 
 const personIcon = '$_baseIcons/person.svg';
@@ -12,5 +13,6 @@ const userIcon = '$_baseIcons/user.svg';
 const listIcon = '$_baseIcons/watch_list.svg';
 const arrowLeftIcon = '$_baseIcons/arrow.svg';
 
+const notFoundLottie = '$_baseLottie/not_found.json';
 
 const playFair = 'Playfair';

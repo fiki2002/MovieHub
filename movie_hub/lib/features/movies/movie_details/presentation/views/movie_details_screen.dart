@@ -27,7 +27,7 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen>
 
     _animationController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 500),
+      duration: const Duration(milliseconds: 700),
     );
 
     _offsetAnimation = Tween<Offset>(
@@ -63,5 +63,11 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen>
       ),
       useSingleScroll: true,
     );
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
   }
 }
