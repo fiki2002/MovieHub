@@ -11,9 +11,9 @@ class SearchMovieImpl extends SearchMoviesRepository {
   });
 
   @override
-  FutureOr<NotifierState<MoviesModel>> discoverMovies() {
+  FutureOr<NotifierState<MoviesModel>> discoverMovies(int page) {
     return convert(
-      () => searchMovieDataSource.discoverMovies(),
+      () => searchMovieDataSource.discoverMovies(page),
     );
   }
 

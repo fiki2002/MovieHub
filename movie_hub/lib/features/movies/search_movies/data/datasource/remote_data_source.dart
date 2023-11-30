@@ -2,18 +2,23 @@ import 'package:movie_hub/cores/cores.dart';
 import 'package:movie_hub/features/movies/movie_dashboard.dart';
 
 abstract class SearchMovieDataSource {
-  Future<ServiceResponse<MoviesModel>> discoverMovies();
+  Future<ServiceResponse<MoviesModel>> discoverMovies(int page);
   Future<ServiceResponse<MoviesModel>> searchMovies(SearchParamsModel params);
 }
 
 class SearchMovieDataSourceImpl extends SearchMovieDataSource {
   @override
-  Future<ServiceResponse<MoviesModel>> discoverMovies() {
+  Future<ServiceResponse<MoviesModel>> discoverMovies(int page) {
     /// Fetches random movies that'd be under the Discover section
     return serveFuture<MoviesModel>(
       function: (dynamic Function(String) fail) async {
         final String url = '$baseUrl/discover/movie';
-        final result = await HttpHelper.get(url);
+        final result = await HttpHelper.get(
+          url,
+          query: {
+            'page': page,
+          },
+        );
         final MoviesModel discoverMovies = MoviesModel.fromJson(result);
         return discoverMovies;
       },
@@ -26,7 +31,6 @@ class SearchMovieDataSourceImpl extends SearchMovieDataSource {
     return serveFuture<MoviesModel>(
       function: (dynamic Function(String) fail) async {
         final String url = '$baseUrl/search/movie';
-        'We are on page${params.page}'.log;
         final result = await HttpHelper.get(
           url,
           query: {
@@ -34,8 +38,8 @@ class SearchMovieDataSourceImpl extends SearchMovieDataSource {
             'page': params.page,
           },
         );
-        final MoviesModel discoverMovies = MoviesModel.fromJson(result);
-        return discoverMovies;
+        final MoviesModel searchedMovies = MoviesModel.fromJson(result);
+        return searchedMovies;
       },
     );
   }

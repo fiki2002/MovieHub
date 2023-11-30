@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movie_hub/cores/cores.dart';
 import 'package:movie_hub/features/movies/movie_dashboard.dart';
+import 'package:provider/provider.dart';
 
 class DiscoverMoviesGrid extends StatelessWidget {
   const DiscoverMoviesGrid({super.key, this.movies});
@@ -8,9 +9,19 @@ class DiscoverMoviesGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final discoverMoviesNotifier = context.watch<DiscoverMoviesNotifier>();
+
     return Expanded(
       child: NotificationListener(
-        // onNotification: (notification) => ,
+        onNotification: (notification) {
+          if (notification is ScrollEndNotification &&
+              notification.metrics.extentAfter == 0) {
+            discoverMoviesNotifier.discoverMovies(
+              shouldFetch: true,
+            );
+          }
+          return true;
+        },
         child: GridView.builder(
           itemCount: movies?.length,
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(

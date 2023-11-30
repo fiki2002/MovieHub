@@ -1,7 +1,7 @@
 import 'package:movie_hub/cores/cores.dart';
 import 'package:movie_hub/features/movies/movie_dashboard.dart';
 
-class DiscoverMoviesNotifier extends BaseNotifier<MoviesModel> {
+class DiscoverMoviesNotifier extends BaseNotifier<List<MovieResultsEntity>> {
   final DiscoverMoviesUsecase discoverMoviesUsecase;
   DiscoverMoviesNotifier({
     required this.discoverMoviesUsecase,
@@ -13,10 +13,20 @@ class DiscoverMoviesNotifier extends BaseNotifier<MoviesModel> {
     super.onInit();
   }
 
-  Future<void> discoverMovies() async {
-    setLoading();
+  int _page = 1;
+  final List<MovieResultsEntity> _movies = [];
 
-    state = await discoverMoviesUsecase.execute();
+  Future<void> discoverMovies({bool shouldFetch = false}) async {
+    if (shouldFetch) {
+      _page++;
+      notifyListeners();
+    }
+    final NotifierState<MoviesModel> discoveredMoviesResponse =
+        await discoverMoviesUsecase.execute(page: _page);
+    final discoveredMovies = discoveredMoviesResponse.data?.results ?? [];
     notifyListeners();
+
+    _movies.addAll(discoveredMovies);
+    setData(_movies);
   }
 }

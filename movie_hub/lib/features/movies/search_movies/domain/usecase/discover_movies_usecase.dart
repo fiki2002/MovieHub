@@ -7,7 +7,7 @@ class DiscoverMoviesUsecase {
     required this.searchMoviesRepo,
   });
 
-  Future<NotifierState<MoviesModel>> execute() async {
-    return await searchMoviesRepo.discoverMovies();
+  Future<NotifierState<MoviesModel>> execute({required int page}) async {
+    return await searchMoviesRepo.discoverMovies(page);
   }
 }

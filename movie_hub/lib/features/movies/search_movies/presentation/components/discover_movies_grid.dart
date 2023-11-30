@@ -10,8 +10,8 @@ class DiscoverMoviesSection extends StatelessWidget {
     final discoverMoviesNotifier = context.watch<DiscoverMoviesNotifier>();
 
     return discoverMoviesNotifier.state.when(
-      done: (MoviesModel discoveredMovies) {
-        return DiscoverMoviesGrid(movies: discoveredMovies.results);
+      done: (discoveredMovies) {
+        return DiscoverMoviesGrid(movies: discoveredMovies);
       },
       error: (e) => Text(e.toString()),
       loading: () => const CupertinoActivityIndicator(),
