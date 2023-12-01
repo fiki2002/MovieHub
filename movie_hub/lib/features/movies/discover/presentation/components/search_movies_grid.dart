@@ -20,17 +20,22 @@ class SearchMoviesGrid extends StatelessWidget {
                   color: Colors.white,
                 ),
               ),
-            false => NotificationListener<ScrollNotification>(
-                onNotification: (notification) {
-                  if (notification is ScrollEndNotification &&
-                      notification.metrics.extentAfter == 0) {
-                    searchMoviesNotifier.searchMovies(
-                      shouldFetch: true,
-                    );
-                  }
-                  return false;
-                },
-                child: DiscoverMoviesGrid(movies: searchedMovies),
+            false => Expanded(
+                child: NotificationListener<ScrollNotification>(
+                  onNotification: (notification) {
+                    if (notification is ScrollEndNotification &&
+                        notification.metrics.extentAfter == 0) {
+                      searchMoviesNotifier.searchMovies(
+                        shouldFetch: true,
+                      );
+                    }
+                    return false;
+                  },
+                  child: MoviesGrid(
+                    movies: searchedMovies,
+                    genreTitle: 'Search',
+                  ),
+                ),
               ),
           },
         );

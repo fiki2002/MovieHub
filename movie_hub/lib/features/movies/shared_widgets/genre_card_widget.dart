@@ -3,17 +3,24 @@ import 'package:movie_hub/cores/cores.dart';
 import 'package:movie_hub/features/movies/movie_dashboard.dart';
 
 class GenreCardWidget extends StatelessWidget {
+ 
   const GenreCardWidget({
-    super.key,
+    Key? key,
     required this.title,
     required this.movies,
     this.padding,
     this.fontWeight,
-  });
+    this.onNotification,
+  }) : super(key: key);
+
+
   final String title;
   final List<MovieResultsEntity>? movies;
   final EdgeInsets? padding;
   final FontWeight? fontWeight;
+  final bool Function(Notification)? onNotification;
+ 
+ 
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -21,9 +28,25 @@ class GenreCardWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _GenreTitle(
-            genreTitle: title,
-            fontWeight: fontWeight,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              _GenreTitle(
+                genreTitle: title,
+                fontWeight: fontWeight,
+              ),
+              TextWidget(
+                'See All',
+                onTap: () => goTo(
+                  SeeAllMovies.route,
+                  arguments: SeeAllParams(
+                    genreTitle: title,
+                    movies: movies ?? [],
+                    onNotification: onNotification,
+                  ),
+                ),
+              )
+            ],
           ),
           vSpace(kMinute),
           SizedBox(

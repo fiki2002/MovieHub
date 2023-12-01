@@ -6,11 +6,12 @@ import 'package:movie_hub/features/movies/home/home.dart';
 abstract class HomeRepository {
   FutureOr<NotifierState<MoviesModel>> getTrendingMovies(
     String timeWindow,
+    int page,
   );
 
-  FutureOr<NotifierState<MoviesModel>> getPopularMovies();
+  FutureOr<NotifierState<MoviesModel>> getPopularMovies(int page);
 
-  FutureOr<NotifierState<MoviesModel>> getTopRatedMovies();
+  FutureOr<NotifierState<MoviesModel>> getTopRatedMovies(int page);
 
-  FutureOr<NotifierState<MoviesModel>> getUpcomingMovies();
+  FutureOr<NotifierState<MoviesModel>> getUpcomingMovies(int page);
 }

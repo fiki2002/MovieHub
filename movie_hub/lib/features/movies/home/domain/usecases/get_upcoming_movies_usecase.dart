@@ -10,7 +10,7 @@ class GetUpcomingMoviesUseCase {
     required this.homeRepository,
   });
 
-  Future<NotifierState<MoviesModel>> execute() async {
-    return await homeRepository.getUpcomingMovies();
+  Future<NotifierState<MoviesModel>> execute({required int page}) async {
+    return await homeRepository.getUpcomingMovies(page);
   }
 }

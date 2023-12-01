@@ -1,7 +1,7 @@
 import 'package:movie_hub/cores/cores.dart';
 import 'package:movie_hub/features/movies/home/home.dart';
 
-class PopularMoviesNotifier extends BaseNotifier<MoviesModel> {
+class PopularMoviesNotifier extends BaseNotifier<List<MovieResultsEntity>> {
   final PopularMoviesUsecase popularMoviesUsecase;
 
   PopularMoviesNotifier({
@@ -14,10 +14,22 @@ class PopularMoviesNotifier extends BaseNotifier<MoviesModel> {
     super.onInit();
   }
 
-  Future<void> getPopularMovies() async {
-    setLoading();
+  int _page = 1;
+  final List<MovieResultsEntity> _movies = [];
 
-    state = await popularMoviesUsecase.execute();
+  Future<void> getPopularMovies({bool shouldFetch = false}) async {
+    if (shouldFetch) {
+      _page++;
+      notifyListeners();
+    }
+    final NotifierState<MoviesModel> popularMoviesResponse =
+        await popularMoviesUsecase.execute(
+      page: _page,
+    );
+    final popularMovies = popularMoviesResponse.data?.results ?? [];
     notifyListeners();
+
+    _movies.addAll(popularMovies);
+    setData(_movies);
   }
 }

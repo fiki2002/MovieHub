@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:movie_hub/cores/cores.dart';
-import 'package:movie_hub/features/movies/home/presentation/notifier/upcoming_movies_notifier.dart';
 import 'package:movie_hub/features/movies/movie_dashboard.dart';
 import 'package:provider/provider.dart';
 
@@ -42,9 +41,18 @@ class _HomeViewState extends State<HomeView> {
     final popularMoviesNotifier = context.watch<PopularMoviesNotifier>();
 
     return popularMoviesNotifier.state.when(
-      done: (MoviesModel popularMovies) => GenreCardWidget(
+      done: (popularMovies) => GenreCardWidget(
         title: 'POPULAR MOVIES',
-        movies: popularMovies.results,
+        movies: popularMovies,
+        onNotification: (notification) {
+          if (notification is ScrollEndNotification &&
+              notification.metrics.extentAfter == 0) {
+            popularMoviesNotifier.getPopularMovies(
+              shouldFetch: true,
+            );
+          }
+          return true;
+        },
       ),
       error: (message) => Text(message.toString()),
       loading: () => const SizedBox.shrink(),
@@ -57,7 +65,16 @@ class _HomeViewState extends State<HomeView> {
     return topRatedMoviesNotifier.state.when(
       done: (topRatedMovies) => GenreCardWidget(
         title: 'TOP RATED',
-        movies: topRatedMovies.results,
+        movies: topRatedMovies,
+        onNotification: (notification) {
+          if (notification is ScrollEndNotification &&
+              notification.metrics.extentAfter == 0) {
+            topRatedMoviesNotifier.getTopRatedMovies(
+              shouldFetch: true,
+            );
+          }
+          return true;
+        },
       ),
       error: (message) => Text(message.toString()),
       loading: () => const SizedBox.shrink(),
@@ -70,7 +87,16 @@ class _HomeViewState extends State<HomeView> {
     return trendingMoviesNotifier.state.when(
       done: (trendingMovies) => GenreCardWidget(
         title: 'TRENDING FOR THE DAY',
-        movies: trendingMovies.results,
+        movies: trendingMovies,
+        onNotification: (notification) {
+          if (notification is ScrollEndNotification &&
+              notification.metrics.extentAfter == 0) {
+            trendingMoviesNotifier.getTrendingMoviesForTheDay(
+              shouldFetch: true,
+            );
+          }
+          return true;
+        },
       ),
       error: (message) => Text(message.toString()),
       loading: () => const SizedBox.shrink(),
@@ -84,7 +110,16 @@ class _HomeViewState extends State<HomeView> {
     return trendingMoviesForTheWeekNotifier.state.when(
       done: (trendingMovies) => GenreCardWidget(
         title: 'TRENDING FOR THE WEEK',
-        movies: trendingMovies.results,
+        movies: trendingMovies,
+        onNotification: (notification) {
+          if (notification is ScrollEndNotification &&
+              notification.metrics.extentAfter == 0) {
+            trendingMoviesForTheWeekNotifier.getTrendingMoviesForTheWeek(
+              shouldFetch: true,
+            );
+          }
+          return true;
+        },
       ),
       error: (message) => Text(message.toString()),
       loading: () => const SizedBox.shrink(),
@@ -97,7 +132,16 @@ class _HomeViewState extends State<HomeView> {
     return upcomingMoviesNotifier.state.when(
       done: (upcomingMovies) => GenreCardWidget(
         title: 'UPCOMING MOVIES',
-        movies: upcomingMovies.results,
+        movies: upcomingMovies,
+        onNotification: (notification) {
+          if (notification is ScrollEndNotification &&
+              notification.metrics.extentAfter == 0) {
+            upcomingMoviesNotifier.getUpcomingMovies(
+              shouldFetch: true,
+            );
+          }
+          return true;
+        },
       ),
       error: (message) => Text(message.toString()),
       loading: () => const SizedBox.shrink(),

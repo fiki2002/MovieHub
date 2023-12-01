@@ -8,8 +8,12 @@ class SearchView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: const SearchHeaderWidget(),
+    return ScaffoldWidget(
+      useSingleScroll: false,
+      usePadding: false,
+      appBar: const SearchHeaderWidget(
+        title: 'Discover',
+      ),
       body: Padding(
         padding: const EdgeInsets.fromLTRB(
           kfsExtraLarge,

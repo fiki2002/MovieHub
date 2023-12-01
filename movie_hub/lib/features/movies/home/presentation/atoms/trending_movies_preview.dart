@@ -13,36 +13,32 @@ class TrendingMoviesPreview extends StatelessWidget {
     final trendingMoviesNotifier = context.watch<TrendingMoviesNotifier>();
 
     return trendingMoviesNotifier.state.when(
-      done: (MoviesModel trendingMovies) {
+      done: ( trendingMovies) {
         return Stack(
           children: [
             SizedBox(
               height: screenHeight * .5,
-              child: Stack(
-                children: [
-                  CarouselSlider.builder(
-                    itemCount: 10,
-                    options: CarouselOptions(
-                      enlargeCenterPage: true,
-                      height: screenHeight * .5,
-                      autoPlay: true,
-                      viewportFraction: 1,
-                      enlargeFactor: .7,
-                      autoPlayInterval: Duration(seconds: kMinute.toInt()),
-                    ),
-                    itemBuilder: (context, index, realIndex) {
-                      final String url =
-                          trendingMovies.results?[index].backdropPath ?? '';
-                      final String title =
-                          trendingMovies.results?[index].originalName ?? '';
+              child: CarouselSlider.builder(
+                itemCount: 10,
+                options: CarouselOptions(
+                  enlargeCenterPage: true,
+                  height: screenHeight * .5,
+                  autoPlay: true,
+                  viewportFraction: 1,
+                  enlargeFactor: .7,
+                  autoPlayInterval: Duration(seconds: kMinute.toInt()),
+                ),
+                itemBuilder: (context, index, realIndex) {
+                  final String url =
+                      trendingMovies[index].backdropPath ?? '';
+                  final String title =
+                      trendingMovies[index].originalName ?? '';
 
-                      return HomeImagePreview(
-                        url: url,
-                        title: title,
-                      );
-                    },
-                  ),
-                ],
+                  return HomeImagePreview(
+                    url: url,
+                    title: title,
+                  );
+                },
               ),
             ),
           ],

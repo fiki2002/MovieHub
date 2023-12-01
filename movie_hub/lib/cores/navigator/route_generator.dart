@@ -43,6 +43,12 @@ class RouteGenerator {
             movieID: args as String,
           ),
         );
+      case SeeAllMovies.route:
+        return pageRoute(
+          SeeAllMovies(
+            params: args as SeeAllParams,
+          ),
+        );
 
       default:
         return errorRoute();

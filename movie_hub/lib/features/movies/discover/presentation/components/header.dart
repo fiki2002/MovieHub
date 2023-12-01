@@ -4,8 +4,8 @@ import 'package:movie_hub/features/movies/movie_dashboard.dart';
 import 'package:provider/provider.dart';
 
 class SearchHeaderWidget extends StatefulWidget implements PreferredSizeWidget {
-  const SearchHeaderWidget({super.key});
-
+  const SearchHeaderWidget({super.key, required this.title});
+  final String title;
   @override
   State<SearchHeaderWidget> createState() => _SearchHeaderWidgetState();
 
@@ -77,8 +77,8 @@ class _SearchHeaderWidgetState extends State<SearchHeaderWidget> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const TextWidget(
-                    'Discover',
+                  TextWidget(
+                    widget.title,
                     fontSize: kGlobalPadding,
                     fontWeight: FontWeight.w600,
                   ),

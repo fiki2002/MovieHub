@@ -25,7 +25,7 @@ class ScaffoldWidget extends StatelessWidget {
   final Widget? bottomNavigationBar;
   final Widget? floatingActionButton;
   final Widget body;
-  final AppBar? appBar;
+  final PreferredSizeWidget? appBar;
   final bool usePadding;
   final bool useSingleScroll;
   final Color? bg;

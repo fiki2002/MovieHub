@@ -10,8 +10,11 @@ class TrendingMoviesUseCase {
     required this.homeRepository,
   });
 
-  Future<NotifierState<MoviesModel>> execute(String timeWindow) async {
-    return await homeRepository.getTrendingMovies(timeWindow);
+  Future<NotifierState<MoviesModel>> execute(
+    String timeWindow, {
+    required int page ,
+  }) async {
+    return await homeRepository.getTrendingMovies(timeWindow, page);
   }
 }
 

@@ -11,7 +11,23 @@ class DiscoverMoviesSection extends StatelessWidget {
 
     return discoverMoviesNotifier.state.when(
       done: (discoveredMovies) {
-        return DiscoverMoviesGrid(movies: discoveredMovies);
+        return Expanded(
+          child: NotificationListener(
+            onNotification: (notification) {
+              if (notification is ScrollEndNotification &&
+                  notification.metrics.extentAfter == 0) {
+                discoverMoviesNotifier.discoverMovies(
+                  shouldFetch: true,
+                );
+              }
+              return true;
+            },
+            child: MoviesGrid(
+              movies: discoveredMovies,
+              genreTitle: 'Discover',
+            ),
+          ),
+        );
       },
       error: (e) => Text(e.toString()),
       loading: () => const CupertinoActivityIndicator(),

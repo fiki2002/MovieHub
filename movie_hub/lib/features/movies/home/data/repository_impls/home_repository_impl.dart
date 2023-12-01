@@ -13,30 +13,31 @@ class HomeRepositoryImpl extends HomeRepository {
   @override
   FutureOr<NotifierState<MoviesModel>> getTrendingMovies(
     String timeWindow,
+    int page
   ) {
     return convert(
-      () => homeRemoteDataSource.getTrendingMovies(timeWindow),
+      () => homeRemoteDataSource.getTrendingMovies(timeWindow, page),
     );
   }
 
   @override
-  FutureOr<NotifierState<MoviesModel>> getPopularMovies() {
+  FutureOr<NotifierState<MoviesModel>> getPopularMovies(int page) {
     return convert(
-      () => homeRemoteDataSource.getPopularMovies(),
+      () => homeRemoteDataSource.getPopularMovies(page),
     );
   }
 
   @override
-  FutureOr<NotifierState<MoviesModel>> getTopRatedMovies() {
+  FutureOr<NotifierState<MoviesModel>> getTopRatedMovies(int page) {
     return convert(
-      () => homeRemoteDataSource.getRatedMovies(),
+      () => homeRemoteDataSource.getRatedMovies(page),
     );
   }
   
   @override
-  FutureOr<NotifierState<MoviesModel>> getUpcomingMovies() {
+  FutureOr<NotifierState<MoviesModel>> getUpcomingMovies(int page) {
     return convert(
-      () => homeRemoteDataSource.getUpcomingMovie(),
+      () => homeRemoteDataSource.getUpcomingMovie(page),
     );
   }
 }

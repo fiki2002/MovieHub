@@ -14,6 +14,7 @@ class ShimmerWidget extends StatelessWidget {
         color: Colors.black.withOpacity(.04),
         child: SizedBox(
           height: height?? screenHeight * .5,
+          width: double.infinity,
         ),
       ),
     );

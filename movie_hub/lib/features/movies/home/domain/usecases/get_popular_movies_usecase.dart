@@ -7,7 +7,7 @@ class PopularMoviesUsecase {
     required this.homeRepository,
   });
 
-  Future<NotifierState<MoviesModel>> execute() async {
-    return await homeRepository.getPopularMovies();
+  Future<NotifierState<MoviesModel>> execute({required int page}) async {
+    return await homeRepository.getPopularMovies(page);
   }
 }
