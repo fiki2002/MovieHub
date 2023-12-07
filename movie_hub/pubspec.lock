@@ -89,6 +89,30 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.1.1"
+  cloud_firestore:
+    dependency: "direct main"
+    description:
+      name: cloud_firestore
+      sha256: "8fa76be13bf33c7e1521794d8f43e94abb83515201667d00a1e0063351867200"
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.13.3"
+  cloud_firestore_platform_interface:
+    dependency: transitive
+    description:
+      name: cloud_firestore_platform_interface
+      sha256: "5683de3ed02dded4857882493a7f359dff8cb9941ef36fa707f1b1cbde054838"
+      url: "https://pub.dev"
+    source: hosted
+    version: "6.0.7"
+  cloud_firestore_web:
+    dependency: transitive
+    description:
+      name: cloud_firestore_web
+      sha256: "29ed06af42c224e2ada69344b6d42e3d4c5e37f3931ea790733e859c0e5bfbf8"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.8.7"
   collection:
     dependency: transitive
     description:
@@ -256,6 +280,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  fpdart:
+    dependency: "direct main"
+    description:
+      name: fpdart
+      sha256: "7413acc5a6569a3fe8277928fc7487f3198530f0c4e635d0baef199ea36e8ee9"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.0"
   get_it:
     dependency: "direct main"
     description:

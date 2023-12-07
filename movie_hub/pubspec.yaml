@@ -57,6 +57,10 @@ dependencies:
   firebase_core: ^2.24.0
   
   firebase_auth: ^4.15.0
+  cloud_firestore: ^4.13.3
+
+  # Functional programming
+  fpdart: ^1.1.0
 
   
 

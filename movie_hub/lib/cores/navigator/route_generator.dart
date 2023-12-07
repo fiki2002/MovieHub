@@ -16,11 +16,11 @@ class RouteGenerator {
       case SplashPage.route:
         return pageRoute(const SplashPage());
       case SignUpView.route:
-        return pageRoute(SignUpView());
+        return pageRoute(const SignUpView());
       case HomeView.route:
         return pageRoute(const HomeView());
       case SignInView.route:
-        return pageRoute(SignInView());
+        return pageRoute(const SignInView());
       case ForgotPasswordView.route:
         return pageRoute(ForgotPasswordView());
       case NavBarView.route:
