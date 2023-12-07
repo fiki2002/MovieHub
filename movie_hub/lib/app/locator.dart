@@ -1,4 +1,5 @@
 import 'package:get_it/get_it.dart';
+import 'package:movie_hub/features/auth/auth.dart';
 import 'package:movie_hub/features/movies/movie_dashboard.dart';
 
 class SetUpLocators {
@@ -13,13 +14,16 @@ class SetUpLocators {
     //! ****** NavBar Locator ****** !//
     setUpNavBarLocator();
 
+    //! ***** Auth Locator ****** !//
+    setUpAuthLocator();
+
     //! ****** Home Locator ****** !//
     setUpHomeLocator();
 
     //! ****** Movie Details Locator ****** !//
     setUpMovieLocator();
 
-   //! ****** Search Movies Locator ****** !//
+    //! ****** Search Movies Locator ****** !//
     setUpSearchLocator();
   }
 }
