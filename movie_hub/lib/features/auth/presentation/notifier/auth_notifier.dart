@@ -8,14 +8,17 @@ class AuthNotifier extends ChangeNotifier {
   final LoginUsecase _logInUsecase;
   final ForgotPasswordUsecase _forgotPasswordUsecase;
   final SignUpUsecase _signUpUsecase;
+  final CheckUserLoginStatusUsecase _checkUserStatusUsecase;
 
   AuthNotifier({
     required logInUsecase,
     required forgotPasswordUsecase,
     required signUpUsecase,
+    required checkUserStatusUsecase,
   })  : _logInUsecase = logInUsecase,
         _forgotPasswordUsecase = forgotPasswordUsecase,
-        _signUpUsecase = signUpUsecase;
+        _signUpUsecase = signUpUsecase,
+        _checkUserStatusUsecase = checkUserStatusUsecase;
 
   Map<String, String> _authData = {
     email: '',
@@ -131,7 +134,7 @@ class AuthNotifier extends ChangeNotifier {
             message: 'Forgot Password Link Sent Successfully, '
                 'Please Check Your Email',
           );
-          
+
           goBack();
 
           return const Right(null);
@@ -140,6 +143,22 @@ class AuthNotifier extends ChangeNotifier {
     } finally {
       _finish();
     }
+  }
+
+  bool _isLoggedIn = false;
+  bool get isLoggedIn => _isLoggedIn;
+
+  /// Check User Login Status
+  Future<bool> checkLoginStatus() async {
+    final res = await _checkUserStatusUsecase.call(const NoParams());
+    res.fold(
+      (l) => Left(l),
+      (r) {
+        _isLoggedIn = true;
+        notifyListeners();
+      },
+    );
+    return _isLoggedIn;
   }
 
   void _handleFailure(Failure failure) {

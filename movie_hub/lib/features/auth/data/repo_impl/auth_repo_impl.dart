@@ -30,7 +30,9 @@ class AuthRepoImpl extends AuthRepository {
         return Either.left(BaseFailures(message: e.message));
       }
 
-      return Either.left(BaseFailures(message: e.toString()));
+      return Either.left(
+        const BaseFailures(message: 'Something went wrong, Try again!'),
+      );
     }
   }
 
@@ -57,5 +59,10 @@ class AuthRepoImpl extends AuthRepository {
   @override
   Future<Either<Failure, void>> logout() async {
     return _handleAuthOperation(() => _authDataSource.logOut());
+  }
+
+  @override
+  Future<Either<Failure, bool>> isUserLoggedIn() async {
+    return _handleAuthOperation(() => _authDataSource.isLoggedIn());
   }
 }

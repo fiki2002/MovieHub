@@ -43,9 +43,10 @@ class AuthFirebaseException extends BaseFailures {
 
       case "weak-password":
         return "Password should be at least 6 characters.";
-
+      case "INVALID_LOGIN_CREDENTIALS":
+        return "Wrong email/password combination";
       default:
-        return "Something went again, Try Again.";
+        return "Something went wrong, Try Again.";
     }
   }
 }

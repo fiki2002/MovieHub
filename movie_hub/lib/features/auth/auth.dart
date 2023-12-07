@@ -14,3 +14,4 @@ export 'domain/usecases/forgot_password_usecase.dart';
 export 'domain/usecases/log_in_usecase.dart';
 export 'domain/usecases/log_out_usecase.dart';
 export 'presentation/notifier/auth_notifier.dart';
+export 'domain/usecases/check_log_in_status_usecase.dart';

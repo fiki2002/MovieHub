@@ -45,11 +45,17 @@ void setUpAuthLocator() {
     ),
   );
 
+  getIt.registerLazySingleton<CheckUserLoginStatusUsecase>(
+    () => CheckUserLoginStatusUsecase(
+      authenticationRepository: getIt<AuthRepository>(),
+    ),
+  );
   getIt.registerLazySingleton<AuthNotifier>(
     () => AuthNotifier(
       forgotPasswordUsecase: getIt<ForgotPasswordUsecase>(),
       logInUsecase: getIt<LoginUsecase>(),
       signUpUsecase: getIt<SignUpUsecase>(),
+      checkUserStatusUsecase: getIt<CheckUserLoginStatusUsecase>(),
     ),
   );
 }

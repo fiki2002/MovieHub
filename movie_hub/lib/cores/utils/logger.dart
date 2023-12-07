@@ -7,6 +7,6 @@ class AppLogger {
 
   static void log(Object? e, [s]) {
     if (kDebugMode == false) return;
-    dev.log("Logs:: $e StackTrace:: $s");
+    dev.log("$e StackTrace:: $s");
   }
 }

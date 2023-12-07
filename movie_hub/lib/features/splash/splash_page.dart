@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:movie_hub/cores/cores.dart';
 import 'package:movie_hub/features/auth/auth.dart';
-
+import 'package:movie_hub/features/movies/movie_dashboard.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -25,6 +25,7 @@ class _SplashPageState extends State<SplashPage>
     super.initState();
     animationCalls();
     timerForSplashScreen();
+    context.auth.checkLoginStatus();
   }
 
   @override
@@ -78,7 +79,14 @@ class _SplashPageState extends State<SplashPage>
   void timerForSplashScreen() {
     Timer(
       const Duration(seconds: 3),
-      () => goReplace(SignInView.route),
+      () {
+        final isLoggedIn = context.auth.isLoggedIn;
+        if (isLoggedIn) {
+          goReplace(NavBarView.route);
+        } else {
+          goReplace(SignInView.route);
+        }
+      },
     );
   }
 

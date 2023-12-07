@@ -11,6 +11,8 @@ abstract interface class AuthDataSource {
   Future<void> forgotPassword(String email);
 
   Future<void> logOut();
+
+  Future<bool> isLoggedIn();
 }
 
 class AuthDataSourceImpl extends AuthDataSource {
@@ -92,5 +94,11 @@ class AuthDataSourceImpl extends AuthDataSource {
       'user_name': params.userName,
       'avatar_url': null,
     });
+  }
+
+  @override
+  Future<bool> isLoggedIn() async {
+    return _firebaseHelper.currentUserId != null ||
+        _firebaseHelper.currentUserId == '';
   }
 }
