@@ -45,7 +45,7 @@ class AuthFirebaseException extends BaseFailures {
         return "Password should be at least 6 characters.";
 
       default:
-        return "An Undefined Auth Error happened.";
+        return "Something went again, Try Again.";
     }
   }
 }

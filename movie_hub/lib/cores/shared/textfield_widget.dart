@@ -16,7 +16,9 @@ class CustomTextField extends StatelessWidget {
     this.validator,
     this.inputFormatters,
     this.focusNode,
-    this.onFieldSubmitted, this.textInputAction,
+    this.onFieldSubmitted,
+    this.textInputAction,
+    this.onChanged,
   });
   final String? title;
   final String? hintText;
@@ -31,7 +33,7 @@ class CustomTextField extends StatelessWidget {
   final List<TextInputFormatter>? inputFormatters;
   final Function(String)? onFieldSubmitted;
   final TextInputAction? textInputAction;
-
+  final void Function(String?)? onChanged;
   final ValueNotifier<bool> obscureText = ValueNotifier<bool>(true);
 
   @override
@@ -52,6 +54,7 @@ class CustomTextField extends StatelessWidget {
               TextFormField(
                 validator: validator,
                 focusNode: focusNode,
+                onSaved: onChanged,
                 cursorColor: kcWhiteColor.withOpacity(0.8),
                 onFieldSubmitted: onFieldSubmitted,
                 style: TextStyle(

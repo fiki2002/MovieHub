@@ -7,3 +7,4 @@ export 'setup.dart';
 export 'api_keys.dart';
 export 'exception/exception.dart';
 export 'firebase_helper.dart';
+export 'snack_bar_service.dart';

@@ -2,7 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:movie_hub/cores/cores.dart';
 import 'package:movie_hub/features/auth/auth.dart';
-import 'package:movie_hub/features/movies/movie_dashboard.dart';
+import 'package:provider/provider.dart';
 
 class SignUpView extends StatefulWidget {
   const SignUpView({super.key});
@@ -21,73 +21,87 @@ class _SignUpViewState extends State<SignUpView> {
   Widget build(BuildContext context) {
     return ScaffoldWidget(
       usePadding: true,
-      body: Form(
-        key: _key,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            TextWidget(
-              'Lights, Camera, Sign Up!',
-              fontSize: sp(kfsExtraLarge),
-              fontWeight: FontWeight.w600,
+      body: Consumer<AuthNotifier>(
+        builder: (context, signUpNotifier, _) {
+          return Form(
+            key: _key,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                TextWidget(
+                  'Lights, Camera, Sign Up!',
+                  fontSize: sp(kfsExtraLarge),
+                  fontWeight: FontWeight.w600,
+                ),
+                vSpace(kfsVeryTiny),
+                TextWidget(
+                  'Your Movie Journey Begins Here.',
+                  fontSize: sp(kfsTiny),
+                  fontWeight: FontWeight.w300,
+                ),
+                vSpace(kGlobalPadding),
+                CustomTextField(
+                  textInputAction: TextInputAction.next,
+                  title: 'User Name',
+                  hintText: 'John Doe',
+                  keyboardType: TextInputType.name,
+                  onFieldSubmitted: (_) => _emailNode.requestFocus(),
+                  prefixIcon: personIcon.svg,
+                  focusNode: _userNameNode,
+                  onChanged: (value) =>
+                      context.auth.updateAuthData(userName, value),
+                  validator: (value) =>
+                      value?.validateAnyField(field: 'User name'),
+                ),
+                vSpace(kGlobalPadding),
+                CustomTextField(
+                  textInputAction: TextInputAction.next,
+                  title: 'Email',
+                  hintText: 'johndoe@gmail.com',
+                  onFieldSubmitted: (_) => _passwordNode.requestFocus(),
+                  focusNode: _emailNode,
+                  keyboardType: TextInputType.emailAddress,
+                  onChanged: (value) =>
+                      context.auth.updateAuthData(email, value),
+                  prefixIcon: mailIcon.svg,
+                  validator: (value) => value?.validateEmail(),
+                ),
+                vSpace(kGlobalPadding),
+                CustomTextField(
+                  textInputAction: TextInputAction.done,
+                  title: 'Password',
+                  hintText: '..........',
+                  onFieldSubmitted: (_) => _submit(),
+                  focusNode: _passwordNode,
+                  isPassword: true,
+                  onChanged: (value) =>
+                      context.auth.updateAuthData(password, value),
+                  validator: (value) => value?.validatePassword(value),
+                  prefixIcon: lockIcon.svg,
+                ),
+                vSpace(kfs70),
+                switch (signUpNotifier.authState) {
+                  AuthState.isLoading => const Button.loading(),
+                  _ => Button(
+                      text: 'Let\'s Go!',
+                      circular: true,
+                      onTap: () => _submit(),
+                    ),
+                },
+                vSpace(kfsSuperLarge),
+                Center(
+                  child: RichTextWidget(
+                    'Already have an account?  ',
+                    'Sign in',
+                    onTap: TapGestureRecognizer()
+                      ..onTap = () => goTo(SignInView.route),
+                    decoration: TextDecoration.underline,
+                  ),
+                )
+              ],
             ),
-            vSpace(kfsVeryTiny),
-            TextWidget(
-              'Your Movie Journey Begins Here.',
-              fontSize: sp(kfsTiny),
-              fontWeight: FontWeight.w300,
-            ),
-            vSpace(kGlobalPadding),
-            CustomTextField(
-              textInputAction: TextInputAction.next,
-              title: 'User Name',
-              hintText: 'John Doe',
-              keyboardType: TextInputType.name,
-              onFieldSubmitted: (_) => _emailNode.requestFocus(),
-              prefixIcon: personIcon.svg,
-              focusNode: _userNameNode,
-              validator: (value) => value?.validateAnyField(field: 'User name'),
-            ),
-            vSpace(kGlobalPadding),
-            CustomTextField(
-              textInputAction: TextInputAction.next,
-              title: 'Email',
-              hintText: 'johndoe@gmail.com',
-              onFieldSubmitted: (_) => _passwordNode.requestFocus(),
-              focusNode: _emailNode,
-              keyboardType: TextInputType.emailAddress,
-              prefixIcon: mailIcon.svg,
-              validator: (value) => value?.validateEmail(),
-            ),
-            vSpace(kGlobalPadding),
-            CustomTextField(
-              textInputAction: TextInputAction.done,
-              title: 'Password',
-              hintText: '..........',
-              onFieldSubmitted: (_) => _submit(),
-              focusNode: _passwordNode,
-              isPassword: true,
-              validator: (value) => value?.validatePassword(value),
-              prefixIcon: lockIcon.svg,
-            ),
-            vSpace(kfs70),
-            Button(
-              text: 'Let\'s Go!',
-              circular: true,
-              onTap: () => _submit(),
-            ),
-            vSpace(kfsSuperLarge),
-            Center(
-              child: RichTextWidget(
-                'Already have an account?  ',
-                'Sign in',
-                onTap: TapGestureRecognizer()
-                  ..onTap = () => goTo(SignInView.route),
-                decoration: TextDecoration.underline,
-              ),
-            )
-          ],
-        ),
+          );
+        },
       ),
       useSingleScroll: true,
     );
@@ -96,7 +110,7 @@ class _SignUpViewState extends State<SignUpView> {
   void _submit() {
     if (_key.currentState?.validate() ?? false) {
       _key.currentState?.save();
-      goReplace(NavBarView.route);
+      context.auth.signUp();
     }
   }
 

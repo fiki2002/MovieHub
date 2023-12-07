@@ -19,12 +19,12 @@ class AuthRepoImpl extends AuthRepository {
       final result = await operation();
       return Either.right(result);
     } on FirebaseAuthException catch (e, s) {
-      AppLogger.log(e, s);
+      AppLogger.log('Error From Firebase: $e : Stack Trace $s');
       return Either.left(AuthFirebaseException(e.code));
     } on SocketException {
       return const Left(BaseFailures(message: ErrorText.noInternet));
-    } catch (e, s) {
-      AppLogger.log(e, s);
+    } catch (e) {
+      AppLogger.log(e);
 
       if (e is BaseFailures) {
         return Either.left(BaseFailures(message: e.message));

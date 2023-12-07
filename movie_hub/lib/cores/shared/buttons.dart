@@ -155,7 +155,7 @@ class Button extends StatelessWidget {
     if (busy) {
       backgroundColor = MaterialStateProperty.all(kcPrimaryColor);
     } else if (active == false) {
-      backgroundColor = MaterialStateProperty.all(kcWhiteColor);
+      backgroundColor = MaterialStateProperty.all(kcPrimaryColor);
     } else {
       backgroundColor = MaterialStateProperty.all(color ?? kcPrimaryColor);
     }

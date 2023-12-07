@@ -16,3 +16,7 @@ const arrowLeftIcon = '$_baseIcons/arrow.svg';
 const notFoundLottie = '$_baseLottie/not_found.json';
 
 const playFair = 'Playfair';
+
+const String email = 'email';
+const String password = 'password';
+const String userName = 'userName';

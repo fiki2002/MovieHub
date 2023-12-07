@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 import 'package:movie_hub/cores/constants/palette.dart';
+import 'package:movie_hub/features/auth/auth.dart';
+import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 /// extension for SVG
@@ -129,4 +131,9 @@ extension ValidatingExtensions on String {
     // If all criteria are met, the password is considered valid
     return true;
   }
+
+  
+}
+extension BuildContextNotifier on BuildContext {
+  AuthNotifier get auth => Provider.of<AuthNotifier>(this, listen: false);
 }

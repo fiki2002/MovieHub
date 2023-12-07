@@ -44,4 +44,12 @@ void setUpAuthLocator() {
       authenticationRepository: getIt<AuthRepository>(),
     ),
   );
+
+  getIt.registerLazySingleton<AuthNotifier>(
+    () => AuthNotifier(
+      forgotPasswordUsecase: getIt<ForgotPasswordUsecase>(),
+      logInUsecase: getIt<LoginUsecase>(),
+      signUpUsecase: getIt<SignUpUsecase>(),
+    ),
+  );
 }

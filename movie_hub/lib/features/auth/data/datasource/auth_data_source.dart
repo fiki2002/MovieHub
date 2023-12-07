@@ -48,7 +48,7 @@ class AuthDataSourceImpl extends AuthDataSource {
 
   @override
   Future<AuthResultModel> signUp(SignUpParamsModel signUpForm) async {
-    _checkIfUsernameAlreadyExist(signUpForm.userName);
+    await _checkIfUsernameAlreadyExist(signUpForm.userName);
 
     final UserCredential userCredential =
         await _firebaseHelper.auth.createUserWithEmailAndPassword(
@@ -64,7 +64,7 @@ class AuthDataSourceImpl extends AuthDataSource {
 
     final User user = userCredential.user!;
 
-    await _saveUser(user);
+    await _saveUser(user, signUpForm);
     return const AuthResultModel(
       success: true,
       message: 'Account created successfully!',
@@ -74,7 +74,7 @@ class AuthDataSourceImpl extends AuthDataSource {
   Future<void> _checkIfUsernameAlreadyExist(String username) async {
     final AggregateQuerySnapshot aggregateQuerySnapshot = await _firebaseHelper
         .userCollectionRef()
-        .where("username", isEqualTo: username)
+        .where("user_name", isEqualTo: username)
         .count()
         .get(source: AggregateSource.server);
 
@@ -85,11 +85,12 @@ class AuthDataSourceImpl extends AuthDataSource {
     }
   }
 
-  Future<void> _saveUser(User user) async {
+  Future<void> _saveUser(User user, SignUpParamsModel params) async {
     _firebaseHelper.userCollectionRef().doc(user.uid).set({
+      'user_id': user.uid,
       'email': user.email,
-      'user_name': user.displayName,
-      'avatar_url': user.photoURL,
+      'user_name': params.userName,
+      'avatar_url': null,
     });
   }
 }
