@@ -1,0 +1,9 @@
+export 'presentation/views/profile_view.dart';
+export 'domain/entity/user_details_entity.dart';
+export 'data/model/user_details_model.dart';
+export 'data/datasource/profile_datasource.dart';
+export 'domain/repository/profile_repo.dart';
+export 'data/repo-impl/profile_repo_impl.dart';
+export 'profile_locator.dart';
+export 'presentation/notifier/fetch_profile_details_notifier.dart';
+export 'presentation/atoms/action_list_tile.dart';

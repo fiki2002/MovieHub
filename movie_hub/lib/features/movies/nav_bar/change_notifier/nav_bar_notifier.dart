@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:movie_hub/features/movies/movie_dashboard.dart';
+import 'package:movie_hub/features/profile/profile.dart';
 
 class NavBarNotifier extends ChangeNotifier {
-
   int _currentIndex = 0;
   int get currentIndex => _currentIndex;
 
@@ -10,7 +10,7 @@ class NavBarNotifier extends ChangeNotifier {
     const HomeView(),
     const SearchView(),
     Container(color: Colors.blue),
-    Container(color: Colors.green),
+    const ProfileView(),
   ];
   List<Widget> get screens => _screens;
 
@@ -18,5 +18,4 @@ class NavBarNotifier extends ChangeNotifier {
     _currentIndex = index;
     notifyListeners();
   }
-  
 }

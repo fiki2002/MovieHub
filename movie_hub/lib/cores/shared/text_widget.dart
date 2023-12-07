@@ -73,7 +73,9 @@ class RichTextWidget extends StatelessWidget {
     this.overflow,
     this.decoration,
     this.fontFamily,
-    this.onTap, this.onTap1,
+    this.onTap,
+    this.onTap1,
+    this.fontFamily2,
   }) : super(key: key);
 
   final String text;
@@ -82,6 +84,7 @@ class RichTextWidget extends StatelessWidget {
   final double? fontSize2;
   final Color? textColor;
   final String? fontFamily;
+  final String? fontFamily2;
 
   final Color? textColor2;
   final FontWeight? fontWeight;
@@ -107,7 +110,6 @@ class RichTextWidget extends StatelessWidget {
           fontWeight: fontWeight,
           fontFamily: fontFamily ?? 'Montserrat',
           overflow: overflow,
-          
         ),
         children: <InlineSpan>[
           TextSpan(
@@ -116,9 +118,10 @@ class RichTextWidget extends StatelessWidget {
             style: TextStyle(
               fontSize: fontSize2,
               color: textColor2,
-              fontFamily: fontFamily ?? 'Montserrat',
+              fontFamily: fontFamily2 ?? 'Montserrat',
               fontWeight: fontWeight2,
               decoration: decoration,
+              
             ),
           )
         ],

@@ -55,6 +55,7 @@ void setUpAuthLocator() {
       forgotPasswordUsecase: getIt<ForgotPasswordUsecase>(),
       logInUsecase: getIt<LoginUsecase>(),
       signUpUsecase: getIt<SignUpUsecase>(),
+      logOutUsecase: getIt<LogOutUsecase>(),
       checkUserStatusUsecase: getIt<CheckUserLoginStatusUsecase>(),
     ),
   );

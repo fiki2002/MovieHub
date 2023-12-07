@@ -12,6 +12,9 @@ const homeIcon = '$_baseIcons/home.svg';
 const userIcon = '$_baseIcons/user.svg';
 const listIcon = '$_baseIcons/watch_list.svg';
 const arrowLeftIcon = '$_baseIcons/arrow.svg';
+const profileImg = '$_baseIcons/profile.png';
+const addAvatarIcon = '$_baseIcons/add_avatar.svg';
+const signOutIcon = '$_baseIcons/sign_out.svg';
 
 const notFoundLottie = '$_baseLottie/not_found.json';
 

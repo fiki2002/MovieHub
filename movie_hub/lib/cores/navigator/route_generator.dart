@@ -49,7 +49,7 @@ class RouteGenerator {
             params: args as SeeAllParams,
           ),
         );
-
+      
       default:
         return errorRoute();
     }

@@ -1,6 +1,7 @@
 import 'package:get_it/get_it.dart';
 import 'package:movie_hub/features/auth/auth.dart';
 import 'package:movie_hub/features/movies/movie_dashboard.dart';
+import 'package:movie_hub/features/profile/profile.dart';
 
 class SetUpLocators {
   static const SetUpLocators _instance = SetUpLocators._();
@@ -25,5 +26,8 @@ class SetUpLocators {
 
     //! ****** Search Movies Locator ****** !//
     setUpSearchLocator();
+
+    //! ******* Profile ******** !//
+    setUpProfileLocator();
   }
 }

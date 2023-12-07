@@ -9,15 +9,18 @@ class AuthNotifier extends ChangeNotifier {
   final ForgotPasswordUsecase _forgotPasswordUsecase;
   final SignUpUsecase _signUpUsecase;
   final CheckUserLoginStatusUsecase _checkUserStatusUsecase;
+  final LogOutUsecase _logOutUsecase;
 
   AuthNotifier({
     required logInUsecase,
     required forgotPasswordUsecase,
     required signUpUsecase,
     required checkUserStatusUsecase,
+    required logOutUsecase,
   })  : _logInUsecase = logInUsecase,
         _forgotPasswordUsecase = forgotPasswordUsecase,
         _signUpUsecase = signUpUsecase,
+        _logOutUsecase = logOutUsecase,
         _checkUserStatusUsecase = checkUserStatusUsecase;
 
   Map<String, String> _authData = {
@@ -137,6 +140,33 @@ class AuthNotifier extends ChangeNotifier {
 
           goBack();
 
+          return const Right(null);
+        },
+      );
+    } finally {
+      _finish();
+    }
+  }
+
+  Future<Either<Failure, void>> logOut() async {
+    try {
+      _setAuthState(AuthState.isLoading);
+      final response = await _logOutUsecase.call(const NoParams());
+      return response.fold(
+        (Failure failure) {
+          _handleFailure(failure);
+
+          return Left(failure);
+        },
+        (_) {
+          _setAuthState(AuthState.isDone);
+
+          SnackBarService.showSuccessSnackBar(
+            context: navigatorKey.currentContext!,
+            message: 'You\'ve been logged out successfully!',
+          );
+
+          clearRoad(SignInView.route);
           return const Right(null);
         },
       );
