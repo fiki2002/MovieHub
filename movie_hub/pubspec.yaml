@@ -53,6 +53,11 @@ dependencies:
   #For nice animated assets
   lottie: ^2.7.0
 
+  # Firebase
+  firebase_core: ^2.24.0
+  
+  firebase_auth: ^4.15.0
+
   
 
 dev_dependencies:

@@ -141,6 +141,7 @@ class ImageWidget extends StatelessWidget {
           width: width,
           child: SvgPicture.asset(
             imageUrl!,
+            // ignore: deprecated_member_use
             color: useIconColor
                 ? (color ?? kcPrimaryColor.withOpacity(0.6))
                 : null,

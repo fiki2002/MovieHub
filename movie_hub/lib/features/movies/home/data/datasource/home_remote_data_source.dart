@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:movie_hub/cores/cores.dart';
 import 'package:movie_hub/features/movies/home/home.dart';
 
@@ -44,7 +43,6 @@ class HomeRemoteDataSourceImpl extends HomeRemoteDataSource {
 
 /// Fetches all Movies of different [tag]
 Future<ServiceResponse<MoviesModel>> _getMovies(String tag, int page) {
-  debugPrint('PAGE:: $page');
   return serveFuture<MoviesModel>(
     function: (dynamic Function(String) fail) async {
       final String url = '$baseUrl$tag';

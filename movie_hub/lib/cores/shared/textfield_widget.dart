@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:movie_hub/cores/cores.dart';
 
-class CustomTextField extends StatefulWidget {
-  const CustomTextField({
+class CustomTextField extends StatelessWidget {
+  CustomTextField({
     super.key,
     this.title,
     this.controller,
@@ -12,6 +13,10 @@ class CustomTextField extends StatefulWidget {
     this.isPassword = false,
     this.keyboardType,
     this.fillColor,
+    this.validator,
+    this.inputFormatters,
+    this.focusNode,
+    this.onFieldSubmitted, this.textInputAction,
   });
   final String? title;
   final String? hintText;
@@ -19,14 +24,14 @@ class CustomTextField extends StatefulWidget {
   final Widget? prefixIcon;
   final Widget? suffixIcon;
   final bool isPassword;
+  final FocusNode? focusNode;
   final TextInputType? keyboardType;
   final Color? fillColor;
+  final String? Function(String?)? validator;
+  final List<TextInputFormatter>? inputFormatters;
+  final Function(String)? onFieldSubmitted;
+  final TextInputAction? textInputAction;
 
-  @override
-  State<CustomTextField> createState() => _CustomTextFieldState();
-}
-
-class _CustomTextFieldState extends State<CustomTextField> {
   final ValueNotifier<bool> obscureText = ValueNotifier<bool>(true);
 
   @override
@@ -37,36 +42,39 @@ class _CustomTextFieldState extends State<CustomTextField> {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              if (widget.title != null)
+              if (title != null)
                 TextWidget(
-                  widget.title!,
+                  title!,
                   fontSize: sp(kfsTiny),
                   fontWeight: FontWeight.w300,
                 ),
               vSpace(kMinute),
               TextFormField(
+                validator: validator,
+                focusNode: focusNode,
                 cursorColor: kcWhiteColor.withOpacity(0.8),
+                onFieldSubmitted: onFieldSubmitted,
                 style: TextStyle(
                   color: kcWhiteColor.withOpacity(0.8),
                   fontWeight: FontWeight.w400,
                   fontSize: sp(kfsTiny),
                 ),
-                keyboardType: widget.keyboardType,
-                controller: widget.controller,
-                obscureText: value && widget.isPassword,
+                keyboardType: keyboardType,
+                controller: controller,
+                obscureText: value && isPassword,
                 decoration: InputDecoration(
-                  fillColor: widget.fillColor,
-                  filled: widget.fillColor == null ? false : true,
-                  hintText: widget.hintText,
+                  fillColor: fillColor,
+                  filled: fillColor == null ? false : true,
+                  hintText: hintText,
                   hintStyle: TextStyle(
                     color: kcWhiteColor.withOpacity(0.4),
                     fontWeight: FontWeight.w400,
                     fontSize: sp(kfsTiny),
                   ),
-                  prefixIcon: widget.prefixIcon,
-                  suffixIcon: widget.isPassword == true
+                  prefixIcon: prefixIcon,
+                  suffixIcon: isPassword == true
                       ? suffixWidget(value)
-                      : widget.suffixIcon ?? const SizedBox(),
+                      : suffixIcon ?? const SizedBox(),
                   border: OutlineInputBorder(
                     borderSide:
                         BorderSide(color: kcWhiteColor.withOpacity(0.7)),
@@ -97,8 +105,9 @@ class _CustomTextFieldState extends State<CustomTextField> {
   Widget suffixWidget(bool value) {
     if (value) {
       return GestureDetector(
-          onTap: () => obscureText.value = !obscureText.value,
-          child: eyeIcon.svg);
+        onTap: () => obscureText.value = !obscureText.value,
+        child: eyeIcon.svg,
+      );
     } else {
       return GestureDetector(
         onTap: () => obscureText.value = !obscureText.value,

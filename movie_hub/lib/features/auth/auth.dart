@@ -1,3 +1,3 @@
-export 'sign_up/sign_up.dart';
-export 'sign_in/sign_in.dart';
-export 'forgot_password/forgot_password.dart';
+export 'presentation/views/forgot_password_view.dart';
+export 'presentation/views/sign_in_view.dart';
+export 'presentation/views/sign_up_view.dart';
