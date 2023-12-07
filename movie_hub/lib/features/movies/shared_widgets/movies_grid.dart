@@ -4,7 +4,7 @@ import 'package:movie_hub/features/movies/movie_dashboard.dart';
 
 class MoviesGrid extends StatelessWidget {
   const MoviesGrid({super.key, this.movies, required this.genreTitle});
-  
+
   final List<MovieResultsEntity>? movies;
   final String genreTitle;
 
@@ -14,7 +14,7 @@ class MoviesGrid extends StatelessWidget {
       itemCount: movies?.length,
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 4,
-        childAspectRatio: 111 / 161,
+        childAspectRatio: 111 / 180,
         crossAxisSpacing: kfsTiny,
         mainAxisSpacing: kfsMedium,
       ),

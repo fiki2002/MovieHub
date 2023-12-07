@@ -22,7 +22,7 @@ class RouteGenerator {
       case SignInView.route:
         return pageRoute(const SignInView());
       case ForgotPasswordView.route:
-        return pageRoute(ForgotPasswordView());
+        return pageRoute(const ForgotPasswordView());
       case NavBarView.route:
         return pageRoute(const NavBarView());
       case MovieDetailsScreen.route:

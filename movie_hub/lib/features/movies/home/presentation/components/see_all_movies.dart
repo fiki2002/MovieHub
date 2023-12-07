@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:movie_hub/cores/cores.dart';
 import 'package:movie_hub/features/movies/movie_dashboard.dart';
 
-class SeeAllMovies extends StatelessWidget {
+class SeeAllMovies extends StatefulWidget {
   static const String route = '/see-all-movies';
 
   const SeeAllMovies({
@@ -13,13 +13,19 @@ class SeeAllMovies extends StatelessWidget {
   final SeeAllParams params;
 
   @override
+  State<SeeAllMovies> createState() => _SeeAllMoviesState();
+}
+
+class _SeeAllMoviesState extends State<SeeAllMovies> {
+  bool shouldTriggerRebuild = false;
+  @override
   Widget build(BuildContext context) {
     return ScaffoldWidget(
       appBar: AppBar(
         backgroundColor: kcBackground,
         elevation: 0,
         title: TextWidget(
-          params.genreTitle,
+          widget.params.genreTitle,
           fontWeight: FontWeight.w700,
         ),
       ),
@@ -32,13 +38,16 @@ class SeeAllMovies extends StatelessWidget {
         ),
         child: NotificationListener(
           onNotification: (Notification notification) {
-            params.handleNotification(notification);
+            widget.params.handleNotification(notification);
+            setState(() {
+              shouldTriggerRebuild = false;
+            });
 
             return true;
           },
           child: MoviesGrid(
-            movies: params.movies,
-            genreTitle: params.genreTitle,
+            movies: widget.params.movies,
+            genreTitle: widget.params.genreTitle,
           ),
         ),
       ),
