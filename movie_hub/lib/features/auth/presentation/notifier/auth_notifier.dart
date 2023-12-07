@@ -70,6 +70,8 @@ class AuthNotifier extends ChangeNotifier {
         (AuthResultEntity res) {
           _handleSuccess(res);
 
+          goReplace(NavBarView.route);
+
           return Right(res);
         },
       );
@@ -98,6 +100,8 @@ class AuthNotifier extends ChangeNotifier {
         (AuthResultEntity res) {
           _handleSuccess(res);
 
+          goReplace(NavBarView.route);
+
           return Right(res);
         },
       );
@@ -121,13 +125,24 @@ class AuthNotifier extends ChangeNotifier {
         },
         (_) {
           _setAuthState(AuthState.isDone);
+
+          SnackBarService.showSuccessSnackBar(
+            context: navigatorKey.currentContext!,
+            message: 'Forgot Password Link Sent Successfully, '
+                'Please Check Your Email',
+          );
+          
+          goBack();
+
           return const Right(null);
         },
       );
-    } finally {}
+    } finally {
+      _finish();
+    }
   }
 
-  _handleFailure(Failure failure) {
+  void _handleFailure(Failure failure) {
     _setAuthState(AuthState.isError);
 
     SnackBarService.showErrorSnackBar(
@@ -136,7 +151,7 @@ class AuthNotifier extends ChangeNotifier {
     );
   }
 
-  _handleSuccess(AuthResultEntity res) {
+  void _handleSuccess(AuthResultEntity res) {
     _setAuthState(AuthState.isDone);
 
     resetAuthData();
@@ -145,8 +160,6 @@ class AuthNotifier extends ChangeNotifier {
       context: navigatorKey.currentContext!,
       message: res.message,
     );
-
-    goReplace(NavBarView.route);
   }
 
   void _finish() {

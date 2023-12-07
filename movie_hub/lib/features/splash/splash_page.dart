@@ -78,7 +78,7 @@ class _SplashPageState extends State<SplashPage>
   void timerForSplashScreen() {
     Timer(
       const Duration(seconds: 3),
-      () => goReplace(SignUpView.route),
+      () => goReplace(SignInView.route),
     );
   }
 

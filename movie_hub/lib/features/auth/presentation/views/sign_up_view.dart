@@ -85,7 +85,7 @@ class _SignUpViewState extends State<SignUpView> {
                   _ => Button(
                       text: 'Let\'s Go!',
                       circular: true,
-                      onTap: () => _submit(),
+                      onTap: _submit,
                     ),
                 },
                 vSpace(kfsSuperLarge),

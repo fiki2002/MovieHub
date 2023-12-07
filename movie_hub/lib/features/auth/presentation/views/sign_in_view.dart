@@ -82,7 +82,7 @@ class _SignInViewState extends State<SignInView> {
                   _ => Button(
                       text: 'Let\'s Continue!',
                       circular: true,
-                      onTap: () => _submit(),
+                      onTap: _submit,
                     ),
                 },
                 vSpace(kfsSuperLarge),
