@@ -4,9 +4,23 @@ import 'package:movie_hub/cores/cores.dart';
 import 'package:movie_hub/features/profile/profile.dart';
 import 'package:provider/provider.dart';
 
-class ProfileView extends StatelessWidget {
+class ProfileView extends StatefulWidget {
   const ProfileView({super.key});
   static const route = 'profile_view';
+
+  @override
+  State<ProfileView> createState() => _ProfileViewState();
+}
+
+class _ProfileViewState extends State<ProfileView> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      context.read<FetchProfileNotifier>().onInit();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final profileDetailsNotifier = context.watch<FetchProfileNotifier>();
@@ -37,9 +51,8 @@ class ProfileView extends StatelessWidget {
                         imageUrl: profileImg,
                         height: h(kfs90),
                       ),
-                    false => ImageWidget(
-                        imageTypes: ImageTypes.network,
-                        imageUrl: details.avatarUrl,
+                    false => _Image(
+                        details.avatarUrl!,
                       ),
                   },
                 ),
@@ -48,7 +61,7 @@ class ProfileView extends StatelessWidget {
               ActionListTile(
                 title: 'Choose Avatar',
                 icon: addAvatarIcon,
-                onTap: () {},
+                onTap: _navigateToAvatarScreen,
               ),
               vSpace(kfsMedium),
               ActionListTile(
@@ -59,11 +72,34 @@ class ProfileView extends StatelessWidget {
             ],
           ),
         ),
-        error: (_) => const Text(''),
+        error: (e) => Text(e ?? ''),
         loading: () => const CupertinoActivityIndicator(),
       ),
       safeAreaTop: false,
       useSingleScroll: true,
+    );
+  }
+
+  Future<void> _navigateToAvatarScreen() async {
+    goTo(AvatarView.route);
+  }
+}
+
+class _Image extends StatelessWidget {
+  const _Image(this.image);
+  final String image;
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 0),
+      decoration: const BoxDecoration(
+        shape: BoxShape.circle,
+      ),
+      child: CachedNetworkImageWidget(
+        url: image,
+        radius: 110,
+        fit: BoxFit.fill,
+      ),
     );
   }
 }

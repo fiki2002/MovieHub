@@ -6,6 +6,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 import 'package:movie_hub/cores/constants/palette.dart';
 import 'package:movie_hub/features/auth/auth.dart';
+import 'package:movie_hub/features/profile/presentation/notifier/update_avatar_notifier.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -136,4 +137,5 @@ extension ValidatingExtensions on String {
 }
 extension BuildContextNotifier on BuildContext {
   AuthNotifier get auth => Provider.of<AuthNotifier>(this, listen: false);
+  UpdateAvatarNotifier get updateAvatar => Provider.of<UpdateAvatarNotifier>(this, listen: false);
 }

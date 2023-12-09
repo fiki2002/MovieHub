@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:movie_hub/cores/cores.dart';
 import 'package:movie_hub/features/auth/auth.dart';
 import 'package:movie_hub/features/movies/movie_dashboard.dart';
+import 'package:movie_hub/features/profile/profile.dart';
 import 'package:movie_hub/features/splash/splash.dart';
 
 class RouteGenerator {
@@ -49,7 +50,10 @@ class RouteGenerator {
             params: args as SeeAllParams,
           ),
         );
-      
+
+      case AvatarView.route:
+        return pageRoute(const AvatarView());
+
       default:
         return errorRoute();
     }

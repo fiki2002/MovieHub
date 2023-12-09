@@ -73,7 +73,8 @@ class ImageWidget extends StatelessWidget {
                     child: const Center(
                       child: Icon(Icons.error),
                     ),
-                  ),                  placeholder: (_, __) => loader ?? const LoadingWidget(),
+                  ),
+                  placeholder: (_, __) => loader ?? const LoadingWidget(),
                 ),
         );
 

@@ -10,6 +10,7 @@ class PopularMoviesNotifier extends BaseNotifier<List<MovieResultsEntity>> {
 
   @override
   void onInit() {
+
     getPopularMovies();
     super.onInit();
   }

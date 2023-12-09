@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:movie_hub/cores/constants/palette.dart';
 
 class LoadingWidget extends StatelessWidget {
@@ -18,11 +18,8 @@ class LoadingWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: CircularProgressIndicator(
-        strokeWidth: strokeWidth ?? 2.0,
-        backgroundColor: backGroundColor ?? kcWhiteColor,
+      child: CupertinoActivityIndicator(
         color: color ?? kcWhiteColor,
-        value: value,
       ),
     );
   }

@@ -1,5 +1,4 @@
 import 'package:movie_hub/cores/cores.dart';
-import 'package:movie_hub/features/profile/domain/usecase/fetch_profile_details_usecase.dart';
 import 'package:movie_hub/features/profile/profile.dart';
 
 void setUpProfileLocator() {
@@ -21,9 +20,33 @@ void setUpProfileLocator() {
     ),
   );
 
+  getIt.registerLazySingleton<FetchAvatarsUsecase>(
+    () => FetchAvatarsUsecase(
+      profileRepo: getIt<ProfileRepo>(),
+    ),
+  );
+
+  getIt.registerLazySingleton<UpdateAvatarUsecase>(
+    () => UpdateAvatarUsecase(
+      profileRepo: getIt<ProfileRepo>(),
+    ),
+  );
+
   getIt.registerLazySingleton<FetchProfileNotifier>(
     () => FetchProfileNotifier(
       fetchProfileUsecase: getIt<FetchProfileDetailsUsecase>(),
+    ),
+  );
+
+  getIt.registerLazySingleton<FetchAvatarNotifier>(
+    () => FetchAvatarNotifier(
+      fetchAvatarsUsecase: getIt<FetchAvatarsUsecase>(),
+    ),
+  );
+
+  getIt.registerLazySingleton<UpdateAvatarNotifier>(
+    () => UpdateAvatarNotifier(
+      updateUsecase: getIt<UpdateAvatarUsecase>(),
     ),
   );
 }

@@ -3,7 +3,6 @@ import 'package:movie_hub/cores/cores.dart';
 import 'package:movie_hub/features/movies/movie_dashboard.dart';
 
 class GenreCardWidget extends StatelessWidget {
- 
   const GenreCardWidget({
     Key? key,
     required this.title,
@@ -13,14 +12,12 @@ class GenreCardWidget extends StatelessWidget {
     this.onNotification,
   }) : super(key: key);
 
-
   final String title;
   final List<MovieResultsEntity>? movies;
   final EdgeInsets? padding;
   final FontWeight? fontWeight;
   final bool Function(Notification)? onNotification;
- 
- 
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -71,7 +68,7 @@ class GenreCardWidget extends StatelessWidget {
                 );
               },
               separatorBuilder: (context, index) => hSpace(kMinute),
-              itemCount: movies?.length ?? 0,
+              itemCount: 20,
             ),
           ),
         ],

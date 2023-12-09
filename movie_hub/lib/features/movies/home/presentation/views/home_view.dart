@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movie_hub/cores/cores.dart';
 import 'package:movie_hub/features/movies/movie_dashboard.dart';
+import 'package:movie_hub/features/profile/profile.dart';
 import 'package:provider/provider.dart';
 
 class HomeView extends StatefulWidget {
@@ -13,6 +14,14 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      context.read<FetchProfileNotifier>().onInit();
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return ScaffoldWidget(

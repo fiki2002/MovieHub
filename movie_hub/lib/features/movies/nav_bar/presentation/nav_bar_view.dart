@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:movie_hub/app/app.dart';
 import 'package:movie_hub/cores/cores.dart';
 import 'package:movie_hub/features/movies/movie_dashboard.dart';
 import 'package:provider/provider.dart';
@@ -16,8 +15,15 @@ class NavBarView extends StatefulWidget {
 
 class _NavBarViewState extends State<NavBarView> {
   @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      context.read<NavBarNotifier>().reset();
+    });
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    SetUpLocators.getIt<NavBarNotifier>();
     return Consumer<NavBarNotifier>(
       builder: (context, navBar, _) {
         return Scaffold(

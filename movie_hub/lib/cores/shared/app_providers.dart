@@ -9,16 +9,18 @@ import 'package:provider/single_child_widget.dart';
 final GetIt getIt = SetUpLocators.getIt;
 
 List<SingleChildWidget> _providers = [
-  ChangeNotifierProvider.value(value: NavBarNotifier()),
-  ChangeNotifierProvider.value(value: getIt<TrendingMoviesNotifier>()),
-  ChangeNotifierProvider.value(value: getIt<PopularMoviesNotifier>()),
-  ChangeNotifierProvider.value(value: getIt<TopRatedMoviesNotifier>()),
-  ChangeNotifierProvider.value(value: getIt<UpcomingMoviesNotifier>()),
-  ChangeNotifierProvider.value(value: getIt<TrendingForTheWeekNotifier>()),
-  ChangeNotifierProvider.value(value: getIt<DiscoverMoviesNotifier>()),
-  ChangeNotifierProvider.value(value: getIt<SearchNotifier>()),
-  ChangeNotifierProvider.value(value: getIt<AuthNotifier>()),
-  ChangeNotifierProvider.value(value: getIt<FetchProfileNotifier>()),
+  ChangeNotifierProvider(create: (_) => NavBarNotifier()),
+  ChangeNotifierProvider(create: (_) => getIt<TrendingMoviesNotifier>()),
+  ChangeNotifierProvider(create: (_) => getIt<PopularMoviesNotifier>()),
+  ChangeNotifierProvider(create: (_) => getIt<TopRatedMoviesNotifier>()),
+  ChangeNotifierProvider(create: (_) => getIt<UpcomingMoviesNotifier>()),
+  ChangeNotifierProvider(create: (_) => getIt<TrendingForTheWeekNotifier>()),
+  ChangeNotifierProvider(create: (_) => getIt<DiscoverMoviesNotifier>()),
+  ChangeNotifierProvider(create: (_) => getIt<SearchNotifier>()),
+  ChangeNotifierProvider(create: (_) => getIt<AuthNotifier>()),
+  ChangeNotifierProvider(create: (_) => getIt<FetchProfileNotifier>()),
+  ChangeNotifierProvider(create: (_) => getIt<FetchAvatarNotifier>()),
+  ChangeNotifierProvider(create: (_) => getIt<UpdateAvatarNotifier>()),
 ];
 
 List<SingleChildWidget> get providers => _providers;

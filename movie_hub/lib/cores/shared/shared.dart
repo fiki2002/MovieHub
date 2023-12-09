@@ -9,3 +9,4 @@ export 'success_view.dart';
 export 'text_widget.dart';
 export 'textfield_widget.dart';
 export 'app_providers.dart';
+export 'cached_network_image_widget.dart';
