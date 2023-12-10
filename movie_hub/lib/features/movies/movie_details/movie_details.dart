@@ -21,3 +21,5 @@ export 'presentation/components/movie_info.dart';
 export 'presentation/atoms/similar_movies.dart';
 export 'presentation/atoms/watch_movie_button.dart';
 export 'presentation/components/images_section.dart';
+export 'domain/usecase/is_movie_a_watchlist_usecase.dart';
+export 'presentation/notifier/check_movie_is_a_watchlist_notifier.dart';

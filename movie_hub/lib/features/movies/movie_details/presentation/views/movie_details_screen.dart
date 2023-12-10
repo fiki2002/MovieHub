@@ -24,7 +24,11 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen>
   @override
   void initState() {
     super.initState();
-
+    
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      context.checkWatchListStatus
+          .isMovieAWatchList((widget.movies.movieResults?.id ?? '').toString());
+    });
     _animationController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 700),

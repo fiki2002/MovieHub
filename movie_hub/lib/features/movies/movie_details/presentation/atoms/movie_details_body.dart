@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:movie_hub/cores/cores.dart';
 import 'package:movie_hub/features/movies/movie_dashboard.dart';
+import 'package:provider/provider.dart';
 
 class MovieInfoAtom extends StatelessWidget {
   const MovieInfoAtom({
@@ -144,14 +145,12 @@ class _ActionButtons extends StatelessWidget {
   final String movieId;
   @override
   Widget build(BuildContext context) {
-    ValueNotifier<bool> tapNotifier = ValueNotifier(false);
-    return ValueListenableBuilder<bool>(
-      valueListenable: tapNotifier,
-      builder: (context, isClicked, _) {
+    AppLogger.log(context.checkWatchListStatus.isWatchListStatus);
+    return Consumer<CheckMovieWatchListStatusNotifier>(
+      builder: (context, val, _) {
         return ElevatedButton(
           onPressed: () {
-            tapNotifier.value = !tapNotifier.value;
-            context.addToWatchList.addToWatchList(movieId);
+            context.checkWatchListStatus.watchListAction(movieId);
           },
           style: ButtonStyle(
             overlayColor:
@@ -165,9 +164,15 @@ class _ActionButtons extends StatelessWidget {
           ),
           child: Row(
             children: [
-              addIcon.svg,
+              (context.checkWatchListStatus.isWatchListStatus ?? false)
+                  ? checkIcon.svg
+                  : addIcon.svg,
               hSpace(kMinute),
-              TextWidget(isClicked ? 'Remove' : 'Add'),
+              TextWidget(
+                (context.checkWatchListStatus.isWatchListStatus ?? false)
+                    ? 'Remove'
+                    : 'Add',
+              ),
             ],
           ),
         );

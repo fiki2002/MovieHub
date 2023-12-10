@@ -10,3 +10,5 @@ export 'domain/usecase/get_watchlist_movie_id_usecase.dart';
 export 'domain/usecase/watchlist_movie_details.dart';
 export  'presentation/notifier/watch_list_details_notifier.dart';
 export 'presentation/widgets/watch_list_body_widget.dart';
+export 'domain/usecase/remove_from_watch_list_usecase.dart';
+export 'presentation/notifier/remove_from_watchlist_notifier.dart';

@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:movie_hub/cores/cores.dart';
 import 'package:movie_hub/features/profile/profile.dart';
@@ -73,7 +72,12 @@ class _ProfileViewState extends State<ProfileView> {
           ),
         ),
         error: (e) => Text(e ?? ''),
-        loading: () => const CupertinoActivityIndicator(),
+        loading: () => Column(
+          children: [
+            vSpace(screenHeight * .3),
+            const LoadingWidget(),
+          ],
+        ),
       ),
       safeAreaTop: false,
       useSingleScroll: true,

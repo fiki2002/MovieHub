@@ -5,6 +5,7 @@ import 'package:movie_hub/features/profile/profile.dart';
 
 abstract class WatchListDataSource {
   Future<BaseModel> addToWatchList(String movieId);
+  Future<BaseModel> removeFromWatchList(String movieId);
   Future<ServiceResponse<List<String>>> getWatchListIds();
   Future<MovieDetailModel> getWatchListMovieDetail(String movieId);
 }
@@ -19,19 +20,50 @@ class WatchListDataSourceImpl extends WatchListDataSource {
   @override
   Future<BaseModel> addToWatchList(String movieId) async {
     final String? userId = _firebaseHelper.currentUserId;
-    await _firebaseHelper
-        .watchListRef(
-      userId: userId ?? '',
-      movieId: movieId,
-    )
-        .set({
-      'movie_id': movieId,
-    });
+
+    final QuerySnapshot watchListSnapshot =
+        await _firebaseHelper.watchListRef(userId: userId ?? '').limit(1).get();
+    if (watchListSnapshot.docs.isEmpty) {
+      await _firebaseHelper.userCollectionRef().doc(userId).set({});
+    }
+
+    await _firebaseHelper.watchListRef(userId: userId ?? '').doc(movieId).set(
+      {
+        'movie_id': movieId,
+      },
+    );
 
     return const BaseModel(
       message: 'Added to Watch list Successfully!',
       success: true,
     );
+  }
+
+  @override
+  Future<BaseModel> removeFromWatchList(String movieId) async {
+    final String? userId = _firebaseHelper.currentUserId;
+
+    final DocumentSnapshot watchListDoc = await _firebaseHelper
+        .watchListRef(userId: userId ?? '')
+        .doc(movieId)
+        .get();
+    AppLogger.log('Watch list: ${watchListDoc.exists}');
+    if (watchListDoc.exists) {
+      await _firebaseHelper
+          .watchListRef(userId: userId ?? '')
+          .doc(movieId)
+          .delete();
+
+      return const BaseModel(
+        message: 'Removed from Watch list Successfully!',
+        success: true,
+      );
+    } else {
+      return const BaseModel(
+        message: 'Movie not found in Watch list',
+        success: false,
+      );
+    }
   }
 
   @override
@@ -41,16 +73,11 @@ class WatchListDataSourceImpl extends WatchListDataSource {
     return serveFuture<List<String>>(
       function: (fail) async {
         final QuerySnapshot<Map<String, dynamic>> watchListId =
-            await _firebaseHelper
-                .userCollectionRef()
-                .doc(userId)
-                .collection('watch_list')
-                .get();
-
+            await _firebaseHelper.watchListRef(userId: userId ?? '').get();
         final List<String> listOfId = watchListId.docs
             .map((watchList) => watchList['movie_id'] as String)
             .toList();
-
+        AppLogger.log('Ids of watchList $listOfId');
         return listOfId;
       },
     );

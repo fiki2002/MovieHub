@@ -1,5 +1,4 @@
 import 'package:movie_hub/cores/cores.dart';
-import 'package:movie_hub/features/movies/watchlist/presentation/notifier/watch_list_details_notifier.dart';
 import 'package:movie_hub/features/movies/watchlist/watchlist.dart';
 
 void setUpWatchListLocator() {
@@ -21,12 +20,18 @@ void setUpWatchListLocator() {
     ),
   );
 
+  getIt.registerLazySingleton<RemoveFromWatchListUsecase>(
+    () => RemoveFromWatchListUsecase(
+      watchListRepo: getIt<WatchListRepo>(),
+    ),
+  );
+
   getIt.registerLazySingleton<GetWatchListMovieIdsUsecase>(
     () => GetWatchListMovieIdsUsecase(
       watchListRepo: getIt<WatchListRepo>(),
     ),
   );
-   getIt.registerLazySingleton<WatchListDetailsUsecase>(
+  getIt.registerLazySingleton<WatchListDetailsUsecase>(
     () => WatchListDetailsUsecase(
       watchListRepo: getIt<WatchListRepo>(),
     ),
@@ -37,7 +42,7 @@ void setUpWatchListLocator() {
       addToWatchListNotifier: getIt<AddToWatchListUsecase>(),
     ),
   );
-  
+
   getIt.registerLazySingleton<GetWatchListMovieIdsNotifier>(
     () => GetWatchListMovieIdsNotifier(
       watchListMovieIdUsecase: getIt<GetWatchListMovieIdsUsecase>(),
@@ -46,8 +51,13 @@ void setUpWatchListLocator() {
 
   getIt.registerLazySingleton<WatchListNotifier>(
     () => WatchListNotifier(
-     watchListDetailsUsecase: getIt<WatchListDetailsUsecase>(),
+      watchListDetailsUsecase: getIt<WatchListDetailsUsecase>(),
     ),
   );
 
+   getIt.registerLazySingleton<RemoveFromWatchListNotifier>(
+    () => RemoveFromWatchListNotifier(
+      removeFromWatchListNotifier: getIt<RemoveFromWatchListUsecase>(),
+    ),
+  );
 }

@@ -29,8 +29,6 @@ class GetWatchListMovieIdsNotifier extends BaseNotifier<List<String>> {
       _allMovieIds.addAll(state.data!);
     }
     notifyListeners();
-    AppLogger.log('Id length: $_allMovieIds');
-    AppLogger.log('Id : ${_allMovieIds.length}');
 
     for (var id in _allMovieIds) {
       _setWatchListState(GetWatchListState.loading);
@@ -46,7 +44,6 @@ class GetWatchListMovieIdsNotifier extends BaseNotifier<List<String>> {
 
           _allWatchList.add(r);
           notifyListeners();
-          AppLogger.log('WatchList length: ${_allWatchList.length}');
         },
       );
       _setWatchListState(GetWatchListState.isDone);

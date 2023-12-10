@@ -72,4 +72,25 @@ class WatchListRepoImpl extends WatchListRepo {
       );
     }
   }
+
+  @override
+  Future<Either<Failure, BaseEntity>> removeFromWatchList(
+      String movieId) async {
+    try {
+      final BaseModel result =
+          await _watchListDataSource.removeFromWatchList(movieId);
+
+      return Either.right(result);
+    } on SocketFailures {
+      return const Left(BaseFailures(message: ErrorText.noInternet));
+    } catch (e, s) {
+      AppLogger.log(e, s);
+
+      if (e is BaseFailures) {
+        return Either.left(BaseFailures(message: e.message));
+      }
+
+      return Either.left(BaseFailures(message: e.toString()));
+    }
+  }
 }

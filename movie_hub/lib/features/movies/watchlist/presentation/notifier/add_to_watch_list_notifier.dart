@@ -30,12 +30,12 @@ class AddToWatchListNotifier extends ChangeNotifier {
     }
   }
 
-  AddToWatchListState _authState = AddToWatchListState.isDone;
+  AddToWatchListState _addToWatchListState = AddToWatchListState.isDone;
 
-  AddToWatchListState get authState => _authState;
+  AddToWatchListState get addToWatchListState => _addToWatchListState;
 
   void _setUpAddToWatchListState(AddToWatchListState state) {
-    _authState = state;
+    _addToWatchListState = state;
     notifyListeners();
   }
 

@@ -21,13 +21,9 @@ class FirebaseHelper {
     return FirebaseFirestore.instance.collection(userCollection);
   }
 
-  DocumentReference<Map<String, dynamic>> watchListRef({
+  CollectionReference<Map<String, dynamic>> watchListRef({
     required String userId,
-    required String movieId,
   }) {
-    return userCollectionRef()
-        .doc(userId)
-        .collection('watch_list')
-        .doc('movieId');
+    return userCollectionRef().doc(userId).collection('watch_list');
   }
 }

@@ -6,6 +6,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 import 'package:movie_hub/cores/constants/palette.dart';
 import 'package:movie_hub/features/auth/auth.dart';
+import 'package:movie_hub/features/movies/movie_dashboard.dart';
 import 'package:movie_hub/features/movies/watchlist/watchlist.dart';
 import 'package:movie_hub/features/profile/profile.dart';
 import 'package:provider/provider.dart';
@@ -141,8 +142,12 @@ extension BuildContextNotifier on BuildContext {
       Provider.of<UpdateAvatarNotifier>(this, listen: false);
   AddToWatchListNotifier get addToWatchList =>
       Provider.of<AddToWatchListNotifier>(this, listen: false);
+        RemoveFromWatchListNotifier get removeFromWatchList =>
+      Provider.of<RemoveFromWatchListNotifier>(this, listen: false);
   WatchListNotifier get watchListNotifier =>
       Provider.of<WatchListNotifier>(this, listen: false);
-       GetWatchListMovieIdsNotifier get getWatchListNotifier =>
+  GetWatchListMovieIdsNotifier get getWatchListNotifier =>
       Provider.of<GetWatchListMovieIdsNotifier>(this, listen: false);
+  CheckMovieWatchListStatusNotifier get checkWatchListStatus =>
+      Provider.of<CheckMovieWatchListStatusNotifier>(this, listen: false);
 }

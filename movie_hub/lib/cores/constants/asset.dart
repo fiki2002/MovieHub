@@ -16,6 +16,7 @@ const profileImg = '$_baseIcons/profile.png';
 const addAvatarIcon = '$_baseIcons/add_avatar.svg';
 const signOutIcon = '$_baseIcons/sign_out.svg';
 const addIcon = '$_baseIcons/add.svg';
+const checkIcon = '$_baseIcons/check.svg';
 
 const notFoundLottie = '$_baseLottie/not_found.json';
 const loadingFailed = '$_baseLottie/loading_failed.json';

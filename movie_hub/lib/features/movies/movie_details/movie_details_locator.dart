@@ -1,5 +1,6 @@
 import 'package:get_it/get_it.dart';
 import 'package:movie_hub/app/app.dart';
+import 'package:movie_hub/cores/cores.dart';
 import 'package:movie_hub/features/movies/movie_dashboard.dart';
 
 void setUpMovieLocator() {
@@ -7,7 +8,7 @@ void setUpMovieLocator() {
 
   /// Data Source
   getIt.registerLazySingleton<MovieDetailsRemoteDataSource>(
-    () => MovieDetailRemoteDataSourceImpl(),
+    () => MovieDetailRemoteDataSourceImpl(firebaseHelper: FirebaseHelper()),
   );
 
   /// Repository
@@ -33,6 +34,18 @@ void setUpMovieLocator() {
   getIt.registerLazySingleton<SimilarMovieUsecase>(
     () => SimilarMovieUsecase(
       movieDetailRepo: getIt<MovieDetailRepository>(),
+    ),
+  );
+
+  getIt.registerLazySingleton<CheckIfMovieIsAUsecase>(
+    () => CheckIfMovieIsAUsecase(
+      movieDetailRepo: getIt<MovieDetailRepository>(),
+    ),
+  );
+
+  getIt.registerLazySingleton<CheckMovieWatchListStatusNotifier>(
+    () => CheckMovieWatchListStatusNotifier(
+      checkWatchListStatus: getIt<CheckIfMovieIsAUsecase>(),
     ),
   );
 }
