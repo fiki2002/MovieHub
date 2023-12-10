@@ -166,6 +166,13 @@ class AuthNotifier extends ChangeNotifier {
             message: 'You\'ve been logged out successfully!',
           );
 
+          navigatorKey.currentContext!.getWatchListNotifier.allMovieIds
+              .clear();
+          navigatorKey.currentContext!.getWatchListNotifier.allWatchList
+              ?.clear();
+
+          notifyListeners();
+
           clearRoad(SignInView.route);
           return const Right(null);
         },

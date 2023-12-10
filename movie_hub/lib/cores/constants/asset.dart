@@ -15,9 +15,11 @@ const arrowLeftIcon = '$_baseIcons/arrow.svg';
 const profileImg = '$_baseIcons/profile.png';
 const addAvatarIcon = '$_baseIcons/add_avatar.svg';
 const signOutIcon = '$_baseIcons/sign_out.svg';
+const addIcon = '$_baseIcons/add.svg';
 
 const notFoundLottie = '$_baseLottie/not_found.json';
 const loadingFailed = '$_baseLottie/loading_failed.json';
+const emptyWatchList = '$_baseLottie/empty_watchlist.json';
 
 const playFair = 'Playfair';
 

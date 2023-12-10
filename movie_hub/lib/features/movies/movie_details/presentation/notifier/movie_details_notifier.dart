@@ -14,9 +14,12 @@ class MovieDetailsNotifier extends BaseNotifier<MovieDetailModel> {
     getMovieDetails(movieId);
   }
 
-  Future<void> getMovieDetails(String movieId) async {
+  Future<MovieDetailModel?> getMovieDetails(String movieId) async {
     setLoading();
     state = await movieDetailsUsecase.execute(movieId);
+    final movieDetail = state.data;
     notifyListeners();
+
+    return movieDetail;
   }
 }

@@ -4,11 +4,10 @@ import 'package:movie_hub/cores/cores.dart';
 
 String userCollection = "users";
 
-class FirebaseHelper{
-
+class FirebaseHelper {
   final fireStore = FirebaseFirestore.instance;
 
-    /// -------- AUTHENTICATION --------- ///
+  /// -------- AUTHENTICATION --------- ///
   FirebaseAuth get auth => FirebaseAuth.instance;
   String? get currentUserId {
     final String? userId = auth.currentUser?.uid;
@@ -20,5 +19,15 @@ class FirebaseHelper{
   /// ------ FIRESTORE ------ ///
   CollectionReference<Map<String, dynamic>> userCollectionRef() {
     return FirebaseFirestore.instance.collection(userCollection);
+  }
+
+  DocumentReference<Map<String, dynamic>> watchListRef({
+    required String userId,
+    required String movieId,
+  }) {
+    return userCollectionRef()
+        .doc(userId)
+        .collection('watch_list')
+        .doc('movieId');
   }
 }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:movie_hub/cores/cores.dart';
-import 'package:movie_hub/cores/utils/precache_images.dart';
 import 'package:shimmer/shimmer.dart';
 
 class HomeImagePreview extends StatefulWidget {

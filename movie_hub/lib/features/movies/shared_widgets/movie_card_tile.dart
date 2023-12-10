@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:movie_hub/cores/cores.dart';
-import 'package:movie_hub/cores/utils/precache_images.dart';
 import 'package:movie_hub/features/movies/home/home.dart';
 
 class MovieCardTile extends StatefulWidget {
@@ -21,7 +20,6 @@ class MovieCardTile extends StatefulWidget {
 }
 
 class _MovieCardTileState extends State<MovieCardTile> {
-  
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();

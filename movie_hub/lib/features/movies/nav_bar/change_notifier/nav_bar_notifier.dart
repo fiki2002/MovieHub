@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movie_hub/features/movies/movie_dashboard.dart';
+import 'package:movie_hub/features/movies/watchlist/watchlist.dart';
 import 'package:movie_hub/features/profile/profile.dart';
 
 class NavBarNotifier extends ChangeNotifier {
@@ -9,7 +10,7 @@ class NavBarNotifier extends ChangeNotifier {
   final List<Widget> _screens = [
     const HomeView(),
     const SearchView(),
-    Container(color: Colors.blue),
+    const WatchListView(),
     const ProfileView(),
   ];
   List<Widget> get screens => _screens;

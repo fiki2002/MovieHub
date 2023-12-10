@@ -2,18 +2,17 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:movie_hub/cores/cores.dart';
 import 'package:movie_hub/features/movies/movie_dashboard.dart';
-import 'package:movie_hub/features/movies/movie_details/presentation/atoms/similar_movies.dart';
-import 'package:movie_hub/features/movies/movie_details/presentation/atoms/watch_movie_button.dart';
-import 'package:movie_hub/features/movies/movie_details/presentation/components/images_section.dart';
 
 class MovieInfoAtom extends StatelessWidget {
   const MovieInfoAtom({
     super.key,
     required this.movies,
     required this.movieDetails,
+    required this.movieId,
   });
   final MovieDetailsParams movies;
   final MovieDetailModel movieDetails;
+  final String movieId;
 
   @override
   Widget build(BuildContext context) {
@@ -22,27 +21,42 @@ class MovieInfoAtom extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          TextWidget(
-            movies.movieResults?.originalName ?? '',
-            textAlign: TextAlign.start,
-            fontWeight: FontWeight.w700,
-            fontStyle: FontStyle.normal,
-            fontSize: sp(kfsExtraLarge),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    width: screenWidth * .5,
+                    child: TextWidget(
+                      movies.movieResults?.originalName ?? '',
+                      textAlign: TextAlign.start,
+                      fontWeight: FontWeight.w700,
+                      fontStyle: FontStyle.normal,
+                      fontSize: sp(kfsExtraLarge),
+                    ),
+                  ),
+                  vSpace(kMinute),
+                  if (movieDetails.homepage != null) ...[
+                    RichTextWidget(
+                      'Visit Webpage',
+                      '',
+                      onTap1: TapGestureRecognizer()
+                        ..onTap = () async =>
+                            await '${movieDetails.homepage}'.launchInBrowser(),
+                      fontWeight: FontWeight.w600,
+                      textColor: Colors.blue.withOpacity(.7),
+                      fontWeight2: FontWeight.w400,
+                    ),
+                    vSpace(kSize5),
+                  ],
+                ],
+              ),
+              _ActionButtons(movieId),
+            ],
           ),
-          vSpace(kMinute),
-          if (movieDetails.homepage != null) ...[
-            RichTextWidget(
-              'Visit Webpage',
-              '',
-              onTap1: TapGestureRecognizer()
-                ..onTap = () async =>
-                    await '${movieDetails.homepage}'.launchInBrowser(),
-              fontWeight: FontWeight.w600,
-              textColor: Colors.blue.withOpacity(.7),
-              fontWeight2: FontWeight.w400,
-            ),
-            vSpace(kSize5),
-          ],
           TextWidget(
             '${movies.movieResults?.overview}',
           ),
@@ -121,6 +135,43 @@ class MovieInfoAtom extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class _ActionButtons extends StatelessWidget {
+  const _ActionButtons(this.movieId);
+  final String movieId;
+  @override
+  Widget build(BuildContext context) {
+    ValueNotifier<bool> tapNotifier = ValueNotifier(false);
+    return ValueListenableBuilder<bool>(
+      valueListenable: tapNotifier,
+      builder: (context, isClicked, _) {
+        return ElevatedButton(
+          onPressed: () {
+            tapNotifier.value = !tapNotifier.value;
+            context.addToWatchList.addToWatchList(movieId);
+          },
+          style: ButtonStyle(
+            overlayColor:
+                MaterialStateColor.resolveWith((states) => Colors.transparent),
+            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+              RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(sp(kMinute)),
+              ),
+            ),
+            backgroundColor: MaterialStateProperty.all(kcPrimaryColor),
+          ),
+          child: Row(
+            children: [
+              addIcon.svg,
+              hSpace(kMinute),
+              TextWidget(isClicked ? 'Remove' : 'Add'),
+            ],
+          ),
+        );
+      },
     );
   }
 }

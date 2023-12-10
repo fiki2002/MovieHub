@@ -6,7 +6,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 import 'package:movie_hub/cores/constants/palette.dart';
 import 'package:movie_hub/features/auth/auth.dart';
-import 'package:movie_hub/features/profile/presentation/notifier/update_avatar_notifier.dart';
+import 'package:movie_hub/features/movies/watchlist/watchlist.dart';
+import 'package:movie_hub/features/profile/profile.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -132,10 +133,16 @@ extension ValidatingExtensions on String {
     // If all criteria are met, the password is considered valid
     return true;
   }
-
-  
 }
+
 extension BuildContextNotifier on BuildContext {
   AuthNotifier get auth => Provider.of<AuthNotifier>(this, listen: false);
-  UpdateAvatarNotifier get updateAvatar => Provider.of<UpdateAvatarNotifier>(this, listen: false);
+  UpdateAvatarNotifier get updateAvatar =>
+      Provider.of<UpdateAvatarNotifier>(this, listen: false);
+  AddToWatchListNotifier get addToWatchList =>
+      Provider.of<AddToWatchListNotifier>(this, listen: false);
+  WatchListNotifier get watchListNotifier =>
+      Provider.of<WatchListNotifier>(this, listen: false);
+       GetWatchListMovieIdsNotifier get getWatchListNotifier =>
+      Provider.of<GetWatchListMovieIdsNotifier>(this, listen: false);
 }

@@ -18,3 +18,6 @@ export 'domain/usecase/get_similar_movies_usecase.dart';
 export 'presentation/notifier/similar_movies_notifier.dart';
 export 'presentation/atoms/movie_details_body.dart';
 export 'presentation/components/movie_info.dart';
+export 'presentation/atoms/similar_movies.dart';
+export 'presentation/atoms/watch_movie_button.dart';
+export 'presentation/components/images_section.dart';

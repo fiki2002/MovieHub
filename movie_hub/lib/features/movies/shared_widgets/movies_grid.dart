@@ -3,7 +3,11 @@ import 'package:movie_hub/cores/cores.dart';
 import 'package:movie_hub/features/movies/movie_dashboard.dart';
 
 class MoviesGrid extends StatelessWidget {
-  const MoviesGrid({super.key, this.movies, required this.genreTitle});
+  const MoviesGrid({
+    super.key,
+    this.movies,
+    required this.genreTitle,
+  });
 
   final List<MovieResultsEntity>? movies;
   final String genreTitle;

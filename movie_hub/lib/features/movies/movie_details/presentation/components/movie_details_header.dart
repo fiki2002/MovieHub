@@ -1,8 +1,5 @@
-// ignore_for_file: use_build_context_synchronously
-
 import 'package:flutter/material.dart';
 import 'package:movie_hub/cores/cores.dart';
-import 'package:movie_hub/cores/utils/precache_images.dart';
 import 'package:movie_hub/features/movies/movie_dashboard.dart';
 
 class MovieDetailsHeader extends StatefulWidget {

@@ -1,3 +1,7 @@
+import 'dart:async';
+import 'dart:io';
+
+import 'package:flutter/foundation.dart';
 import 'package:movie_hub/cores/cores.dart';
 
 class ServiceResponse<T> {
@@ -52,11 +56,27 @@ Future<ServiceResponse<T>> serveFuture<T>({
     return serveData(data: response, message: message);
   } on ServeException catch (e) {
     return serveError(errorMessage: e.message);
-  } catch (e, s) {
-    e.log();
-    s.log();
-    String error = handleError == null ? e.toString() : handleError(e);
-    return serveError(errorMessage: error);
+  } on FormatException catch (e, s) {
+    AppLogger.log(e, s);
+    if (kDebugMode) {
+      return serveError(errorMessage: 'Unable To Format Data');
+    }
+
+    return serveError(errorMessage: 'Something went wrong, please try again');
+  } on TimeoutException catch (e, s) {
+    AppLogger.log(e, s);
+    return serveError(
+      errorMessage:
+          'Request Timeout, Unable to connect to server please check your network and try again!',
+    );
+  } on SocketException catch (e, s) {
+    AppLogger.log(e, s);
+    return serveError(
+      errorMessage:
+          'Unable to connect to server please check your network and try again!',
+    );
+  } catch (e) {
+    throw e.toString();
   }
 }
 

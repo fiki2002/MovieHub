@@ -56,7 +56,7 @@ class _AvatarViewState extends State<AvatarView> {
             ],
           );
         },
-        error: (e) => _ErrorWidget(
+        error: (e) => CustomErrorWidget(
           errorMessage: 'Something went wrong\nwe couldn\'t fetch avatars😓',
           retryCallBack: () => context.read<FetchAvatarNotifier>().onInit(),
         ),
@@ -73,8 +73,12 @@ class _AvatarViewState extends State<AvatarView> {
   }
 }
 
-class _ErrorWidget extends StatelessWidget {
-  const _ErrorWidget({required this.errorMessage, required this.retryCallBack});
+class CustomErrorWidget extends StatelessWidget {
+  const CustomErrorWidget({
+    super.key,
+    required this.errorMessage,
+    required this.retryCallBack,
+  });
   final String errorMessage;
   final VoidCallback retryCallBack;
   @override

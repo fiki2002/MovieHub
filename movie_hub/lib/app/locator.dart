@@ -1,6 +1,7 @@
 import 'package:get_it/get_it.dart';
 import 'package:movie_hub/features/auth/auth.dart';
 import 'package:movie_hub/features/movies/movie_dashboard.dart';
+import 'package:movie_hub/features/movies/watchlist/watchlist.dart';
 import 'package:movie_hub/features/profile/profile.dart';
 
 class SetUpLocators {
@@ -29,5 +30,8 @@ class SetUpLocators {
 
     //! ******* Profile ******** !//
     setUpProfileLocator();
+
+    //! ******* WatchList ******** !//
+    setUpWatchListLocator();
   }
 }

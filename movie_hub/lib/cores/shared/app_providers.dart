@@ -2,6 +2,8 @@ import 'package:get_it/get_it.dart';
 import 'package:movie_hub/app/app.dart';
 import 'package:movie_hub/features/auth/auth.dart';
 import 'package:movie_hub/features/movies/movie_dashboard.dart';
+import 'package:movie_hub/features/movies/watchlist/presentation/notifier/watch_list_details_notifier.dart';
+import 'package:movie_hub/features/movies/watchlist/watchlist.dart';
 import 'package:movie_hub/features/profile/profile.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
@@ -21,6 +23,9 @@ List<SingleChildWidget> _providers = [
   ChangeNotifierProvider(create: (_) => getIt<FetchProfileNotifier>()),
   ChangeNotifierProvider(create: (_) => getIt<FetchAvatarNotifier>()),
   ChangeNotifierProvider(create: (_) => getIt<UpdateAvatarNotifier>()),
+  ChangeNotifierProvider(create: (_) => getIt<AddToWatchListNotifier>()),
+  ChangeNotifierProvider(create: (_) => getIt<GetWatchListMovieIdsNotifier>()),
+  ChangeNotifierProvider(create: (_) => getIt<WatchListNotifier>()),
 ];
 
 List<SingleChildWidget> get providers => _providers;

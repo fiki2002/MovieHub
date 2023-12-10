@@ -34,6 +34,7 @@ class _MovieInfoState extends State<MovieInfo> {
               return MovieInfoAtom(
                 movies: widget.movies,
                 movieDetails: movieDetails,
+                movieId: widget.movieId,
               );
             },
             error: (_) => const Text(''),
