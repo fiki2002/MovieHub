@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+import 'package:movie_hub/cores/cores.dart';
 import 'package:movie_hub/features/movies/movie_dashboard.dart';
 import 'package:provider/provider.dart';
 
@@ -15,10 +15,8 @@ class SearchMoviesGrid extends StatelessWidget {
           visible: searchedMovies.isNotEmpty,
           replacement: const MovieNotFound(),
           child: switch (searchMoviesNotifier.isLoading) {
-            true => const Center(
-                child: CupertinoActivityIndicator(
-                  color: Colors.white,
-                ),
+            true => LoadingWidget(
+                radius: sr(kfsTiny),
               ),
             false => Expanded(
                 child: NotificationListener<ScrollNotification>(

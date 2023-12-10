@@ -29,6 +29,7 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen>
       context.checkWatchListStatus
           .isMovieAWatchList((widget.movies.movieResults?.id ?? '').toString());
     });
+    
     _animationController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 700),

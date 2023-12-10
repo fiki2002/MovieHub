@@ -75,7 +75,9 @@ class _ProfileViewState extends State<ProfileView> {
         loading: () => Column(
           children: [
             vSpace(screenHeight * .3),
-            const LoadingWidget(),
+            LoadingWidget(
+              radius: sr(15),
+            ),
           ],
         ),
       ),

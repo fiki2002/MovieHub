@@ -31,9 +31,26 @@ class _WatchListGrid extends StatelessWidget {
         mainAxisSpacing: kfsMedium,
       ),
       itemBuilder: (context, int index) {
-        return MovieCardTile(
-          imageUrl: movies?[index].posterPath ?? '',
-          onTap: () {},
+        final movie = movies?[index];
+        return Hero(
+          tag: 'WatchList${movie?.originalTitle}${movie?.id}',
+          child: MovieCardTile(
+            imageUrl: movie?.posterPath ?? '',
+            onTap: () => goTo(
+              MovieDetailsScreen.route,
+              arguments: MovieDetailsParams(
+                genreTitle: 'WatchList',
+                movieResults: MovieResultsEntity(
+                  adult: movie?.adult,
+                  backdropPath: movie?.backdropPath,
+                  originalName: movie?.originalTitle,
+                  id: movie?.id,
+                  overview: movie?.overview,
+                  posterPath: movie?.posterPath,
+                ),
+              ),
+            ),
+          ),
         );
       },
     );

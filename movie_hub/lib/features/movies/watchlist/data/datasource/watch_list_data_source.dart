@@ -77,7 +77,6 @@ class WatchListDataSourceImpl extends WatchListDataSource {
         final List<String> listOfId = watchListId.docs
             .map((watchList) => watchList['movie_id'] as String)
             .toList();
-        AppLogger.log('Ids of watchList $listOfId');
         return listOfId;
       },
     );

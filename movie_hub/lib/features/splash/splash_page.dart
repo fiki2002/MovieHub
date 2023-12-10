@@ -82,6 +82,8 @@ class _SplashPageState extends State<SplashPage>
       () {
         final isLoggedIn = context.auth.isLoggedIn;
         if (isLoggedIn) {
+          context.trendingMovies.getTrendingMoviesForTheDay();
+
           goReplace(NavBarView.route);
         } else {
           goReplace(SignInView.route);

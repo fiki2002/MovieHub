@@ -1,4 +1,4 @@
-export 'presentation/views/watch_list_view.dart';
+export 'presentation/views/watchlist_view.dart';
 export 'domain/repo/watch_list_repo.dart';
 export 'domain/usecase/add_to_Watchlist_usecase.dart';
 export 'presentation/notifier/add_to_watch_list_notifier.dart';
@@ -11,4 +11,4 @@ export 'domain/usecase/watchlist_movie_details.dart';
 export  'presentation/notifier/watch_list_details_notifier.dart';
 export 'presentation/widgets/watch_list_body_widget.dart';
 export 'domain/usecase/remove_from_watch_list_usecase.dart';
-export 'presentation/notifier/remove_from_watchlist_notifier.dart';
+export 'presentation/notifier/remove_movie_from watchlist.dart';

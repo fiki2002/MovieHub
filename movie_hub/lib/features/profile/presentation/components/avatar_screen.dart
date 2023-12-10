@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:movie_hub/cores/cores.dart';
@@ -60,7 +59,9 @@ class _AvatarViewState extends State<AvatarView> {
           errorMessage: 'Something went wrong\nwe couldn\'t fetch avatars😓',
           retryCallBack: () => context.read<FetchAvatarNotifier>().onInit(),
         ),
-        loading: () => const Center(child: CupertinoActivityIndicator()),
+        loading: () => LoadingWidget(
+          radius: sr(kfsTiny),
+        ),
       ),
       safeAreaTop: false,
       useSingleScroll: false,

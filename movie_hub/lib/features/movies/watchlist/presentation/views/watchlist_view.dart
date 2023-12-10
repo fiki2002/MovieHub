@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movie_hub/cores/cores.dart';
 import 'package:movie_hub/features/movies/watchlist/watchlist.dart';
+import 'package:movie_hub/features/profile/profile.dart';
 import 'package:provider/provider.dart';
 
 class WatchListView extends StatefulWidget {
@@ -45,14 +46,18 @@ class _WatchListViewState extends State<WatchListView> {
             child: Column(
               children: [
                 switch (val.watchListState) {
-                  GetWatchListState.loading => const LoadingWidget(),
+                  GetWatchListState.loading =>  LoadingWidget(
+                      radius: sr(kfsTiny),
+                    ),
                   GetWatchListState.error => CustomErrorWidget(
-                      message: 'Failed to fetch watchlist😓',
-                      onRetry: () {
+                      errorMessage: 'Failed to fetch watchlist😓',
+                      retryCallBack: () {
                         context.read<GetWatchListMovieIdsNotifier>().init();
                       },
                     ),
-                  GetWatchListState.isDone =>  WatchListBodyWidget(movies: val.allWatchList,),
+                  GetWatchListState.isDone => WatchListBodyWidget(
+                      movies: val.allWatchList,
+                    ),
                 }
               ],
             ),

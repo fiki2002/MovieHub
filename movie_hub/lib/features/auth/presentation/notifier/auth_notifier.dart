@@ -108,6 +108,9 @@ class AuthNotifier extends ChangeNotifier {
 
           goReplace(NavBarView.route);
 
+          navigatorKey.currentContext!.trendingMovies
+              .getTrendingMoviesForTheDay();
+
           return Right(res);
         },
       );
@@ -166,8 +169,7 @@ class AuthNotifier extends ChangeNotifier {
             message: 'You\'ve been logged out successfully!',
           );
 
-          navigatorKey.currentContext!.getWatchListNotifier.allMovieIds
-              .clear();
+          navigatorKey.currentContext!.getWatchListNotifier.allMovieIds.clear();
           navigatorKey.currentContext!.getWatchListNotifier.allWatchList
               ?.clear();
 

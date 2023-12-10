@@ -1,76 +1,41 @@
 import 'package:flutter/material.dart';
-import 'package:movie_hub/cores/shared/image_widget.dart';
-import 'package:movie_hub/cores/shared/retry_button_widget.dart';
-import 'package:movie_hub/cores/shared/text_widget.dart';
-import 'package:movie_hub/cores/utils/sizer.dart';
+import 'package:lottie/lottie.dart';
+import 'package:movie_hub/cores/cores.dart';
 
-class CustomErrorWidget extends StatelessWidget {
-  const CustomErrorWidget({
-    Key? key,
-    required this.message,
-    this.onRetry,
-    this.assetPath,
-    this.useFlex = true,
-    this.showButton = true,
-  }) : super(key: key);
-
-  final String message;
-  final String? assetPath;
-  final bool useFlex;
-  final bool showButton;
-  final void Function()? onRetry;
-
+class PageErrorWidget extends StatelessWidget {
+  const PageErrorWidget({super.key, required this.onTap});
+  final VoidCallback onTap;
   @override
   Widget build(BuildContext context) {
-    if (useFlex) {
-      return Flexible(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            hSpace(double.infinity),
-            if (assetPath != null)
-              SizedBox(
-                height: sp(200),
-                width: sp(200),
-                child: ImageWidget(
-                  imageTypes: ImageTypes.asset,
-                  imageUrl: assetPath!,
+    return SafeArea(
+      child: Column(
+        children: [
+          vSpace(screenHeight * .1),
+          Lottie.asset(loadingFailed),
+          AnimatedOpacity(
+            opacity: 1,
+            duration: const Duration(milliseconds: 400),
+            child: Column(
+              children: [
+                const Center(
+                  child: TextWidget(
+                    'Something went wrong!😓\nYou should check your internet connection',
+                    textAlign: TextAlign.center,
+                  ),
                 ),
-              ),
-            SizedBox(
-              width: sw(70),
-              child: TextWidget(
-                message,
-                textAlign: TextAlign.center,
-                fontSize: sp(18),
-              ),
-            ),
-            const SizedBox(height: 10.0),
-            if (showButton) RetryButtonWidget(callback: () => onRetry!.call()),
-          ],
-        ),
-      );
-    }
-
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        hSpace(double.infinity),
-        if (assetPath != null)
-          SizedBox(
-            height: sp(200),
-            width: sp(200),
-            child: ImageWidget(
-              imageTypes: ImageTypes.asset,
-              imageUrl: assetPath!,
+                vSpace(30),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Button(
+                    text: 'Retry',
+                    onTap: onTap,
+                  ),
+                ),
+              ],
             ),
           ),
-        TextWidget(message, textAlign: TextAlign.center, maxLines: 4),
-        const SizedBox(height: 10.0),
-        if (showButton) RetryButtonWidget(callback: () => onRetry!.call()),
-      ],
+        ],
+      ),
     );
   }
 }
-
-

@@ -145,7 +145,6 @@ class _ActionButtons extends StatelessWidget {
   final String movieId;
   @override
   Widget build(BuildContext context) {
-    AppLogger.log(context.checkWatchListStatus.isWatchListStatus);
     return Consumer<CheckMovieWatchListStatusNotifier>(
       builder: (context, val, _) {
         return ElevatedButton(

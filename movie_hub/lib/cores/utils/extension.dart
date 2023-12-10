@@ -142,7 +142,7 @@ extension BuildContextNotifier on BuildContext {
       Provider.of<UpdateAvatarNotifier>(this, listen: false);
   AddToWatchListNotifier get addToWatchList =>
       Provider.of<AddToWatchListNotifier>(this, listen: false);
-        RemoveFromWatchListNotifier get removeFromWatchList =>
+  RemoveFromWatchListNotifier get removeFromWatchList =>
       Provider.of<RemoveFromWatchListNotifier>(this, listen: false);
   WatchListNotifier get watchListNotifier =>
       Provider.of<WatchListNotifier>(this, listen: false);
@@ -150,4 +150,16 @@ extension BuildContextNotifier on BuildContext {
       Provider.of<GetWatchListMovieIdsNotifier>(this, listen: false);
   CheckMovieWatchListStatusNotifier get checkWatchListStatus =>
       Provider.of<CheckMovieWatchListStatusNotifier>(this, listen: false);
+  DiscoverMoviesNotifier get discoverMovies =>
+      Provider.of<DiscoverMoviesNotifier>(this, listen: false);
+  TrendingMoviesNotifier get trendingMovies =>
+      Provider.of<TrendingMoviesNotifier>(this, listen: false);
+  TopRatedMoviesNotifier get topRated =>
+      Provider.of<TopRatedMoviesNotifier>(this, listen: false);
+  PopularMoviesNotifier get popularMovies =>
+      Provider.of<PopularMoviesNotifier>(this, listen: false);
+  TrendingForTheWeekNotifier get trendingForTheWeek =>
+      Provider.of<TrendingForTheWeekNotifier>(this, listen: false);
+  UpcomingMoviesNotifier get upcomingMovies =>
+      Provider.of<UpcomingMoviesNotifier>(this, listen: false);
 }
