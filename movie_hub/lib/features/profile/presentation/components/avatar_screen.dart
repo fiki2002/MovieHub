@@ -70,7 +70,7 @@ class _AvatarViewState extends State<AvatarView> {
 
   void _pickAvatar(String imageUrl) {
     context.updateAvatar.updateAvatar(imageUrl);
-    context.read<FetchProfileNotifier>().onInit();
+    context.read<FetchProfileNotifier>().init();
   }
 }
 

@@ -25,7 +25,6 @@ class _WatchMoviesViewState extends State<WatchMoviesView> {
 
   @override
   Widget build(BuildContext context) {
-
     _controller.setBackgroundColor(kcBackground);
 
     _controller.loadRequest(
@@ -33,9 +32,11 @@ class _WatchMoviesViewState extends State<WatchMoviesView> {
         '$videoBaseUrl${widget.movieID}',
       ),
     );
-    
+
     return ScaffoldWidget(
-      body: WebViewWidget(controller: _controller),
+      body: WebViewWidget(
+        controller: _controller,
+      ),
       usePadding: false,
       useSingleScroll: false,
     );

@@ -17,7 +17,7 @@ class _HomeViewState extends State<HomeView> {
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      context.read<FetchProfileNotifier>().onInit();
+      context.read<FetchProfileNotifier>().init();
     });
     super.initState();
   }

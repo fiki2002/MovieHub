@@ -16,7 +16,7 @@ class _ProfileViewState extends State<ProfileView> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      context.read<FetchProfileNotifier>().onInit();
+      context.read<FetchProfileNotifier>().init();
     });
   }
 

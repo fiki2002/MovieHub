@@ -50,9 +50,12 @@ class ProfileDataSourceImpl extends ProfileDataSource {
   Future<BaseModel> updateAvatarUrl(String avatarUrl) async {
     final String? userId = _firebaseHelper.currentUserId;
 
-    await _firebaseHelper.userCollectionRef().doc(userId).update({
-      'avatar_url': avatarUrl,
-    });
+    await _firebaseHelper.userCollectionRef().doc(userId).set(
+      {
+        'avatar_url': avatarUrl,
+      },
+      SetOptions(merge: true),
+    );
 
     return const BaseModel(
       success: true,

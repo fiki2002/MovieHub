@@ -8,11 +8,7 @@ class FetchProfileNotifier extends BaseNotifier<UserDetailsEntity> {
     required fetchProfileUsecase,
   }) : _fetchProfileUsecase = fetchProfileUsecase;
 
-  @override
-  void onInit() {
-    if (state.isLoading) {
-      return;
-    }
+  void init() {
     fetchProfileDetails();
     super.onInit();
   }
