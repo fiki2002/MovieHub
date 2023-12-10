@@ -44,6 +44,9 @@ class CheckMovieWatchListStatusNotifier extends ChangeNotifier {
         break;
       default:
     }
+    navigatorKey.currentContext!.getWatchListNotifier.allMovieIds.clear();
+    navigatorKey.currentContext!.getWatchListNotifier.allWatchList?.clear();
+    navigatorKey.currentContext!.getWatchListNotifier.init();
   }
 
   void _remove(String movieId, bool? isWatchListStatus) async {
