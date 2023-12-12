@@ -25,8 +25,8 @@ void setUpMovieLocator() {
     ),
   );
 
-  getIt.registerLazySingleton<ImagesUsecase>(
-    () => ImagesUsecase(
+  getIt.registerLazySingleton<CheckIfMovieIsAUsecase>(
+    () => CheckIfMovieIsAUsecase(
       movieDetailRepo: getIt<MovieDetailRepository>(),
     ),
   );
@@ -37,8 +37,8 @@ void setUpMovieLocator() {
     ),
   );
 
-  getIt.registerLazySingleton<CheckIfMovieIsAUsecase>(
-    () => CheckIfMovieIsAUsecase(
+  getIt.registerLazySingleton<ImagesUsecase>(
+    () => ImagesUsecase(
       movieDetailRepo: getIt<MovieDetailRepository>(),
     ),
   );
@@ -46,6 +46,23 @@ void setUpMovieLocator() {
   getIt.registerLazySingleton<CheckMovieWatchListStatusNotifier>(
     () => CheckMovieWatchListStatusNotifier(
       checkWatchListStatus: getIt<CheckIfMovieIsAUsecase>(),
+    ),
+  );
+
+  getIt.registerLazySingleton<MovieDetailsNotifier>(
+    () => MovieDetailsNotifier(
+      movieDetailsUsecase: getIt<MovieDetailUsecase>(),
+    ),
+  );
+  getIt.registerLazySingleton<SimilarMoviesNotifier>(
+    () => SimilarMoviesNotifier(
+      similarMovieUsecase: getIt<SimilarMovieUsecase>(),
+    ),
+  );
+
+  getIt.registerLazySingleton<ImageNotifier>(
+    () => ImageNotifier(
+      imageUsecase: getIt<ImagesUsecase>(),
     ),
   );
 }

@@ -26,6 +26,9 @@ List<SingleChildWidget> _providers = [
   ChangeNotifierProvider(create: (_) => getIt<RemoveFromWatchListNotifier>()),
   ChangeNotifierProvider(create: (_) => getIt<GetWatchListMovieIdsNotifier>()),
   ChangeNotifierProvider(create: (_) => getIt<WatchListNotifier>()),
+  ChangeNotifierProvider(create: (_) => getIt<MovieDetailsNotifier>()),
+  ChangeNotifierProvider(create: (_) => getIt<ImageNotifier>()),
+  ChangeNotifierProvider(create: (_) => getIt<SimilarMoviesNotifier>()),
   ChangeNotifierProvider(
     create: (_) => getIt<CheckMovieWatchListStatusNotifier>(),
   ),

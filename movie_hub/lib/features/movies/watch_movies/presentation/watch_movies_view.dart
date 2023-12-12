@@ -16,11 +16,22 @@ class WatchMoviesView extends StatefulWidget {
 
 class _WatchMoviesViewState extends State<WatchMoviesView> {
   late final WebViewController _controller;
+  late final Future<void> _pageLoader;
 
   @override
   void initState() {
     _controller = WebViewController();
+    _pageLoader = _loadPage();
     super.initState();
+  }
+
+  Future<void> _loadPage() async {
+    await _controller.setBackgroundColor(kcBackground);
+    await _controller.loadRequest(
+      Uri.parse(
+        '$videoBaseUrl${widget.movieID}',
+      ),
+    );
   }
 
   @override
@@ -34,8 +45,17 @@ class _WatchMoviesViewState extends State<WatchMoviesView> {
     );
 
     return ScaffoldWidget(
-      body: WebViewWidget(
-        controller: _controller,
+      body: FutureBuilder(
+        future: _pageLoader,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            return WebViewWidget(
+              controller: _controller,
+            );
+          } else {
+            return const LoadingWidget();
+          }
+        },
       ),
       usePadding: false,
       useSingleScroll: false,

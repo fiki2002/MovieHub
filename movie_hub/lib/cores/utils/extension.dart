@@ -162,4 +162,9 @@ extension BuildContextNotifier on BuildContext {
       Provider.of<TrendingForTheWeekNotifier>(this, listen: false);
   UpcomingMoviesNotifier get upcomingMovies =>
       Provider.of<UpcomingMoviesNotifier>(this, listen: false);
+  MovieDetailsNotifier get movieDetails =>
+      Provider.of<MovieDetailsNotifier>(this, listen: false);
+  SimilarMoviesNotifier get similarMovies =>
+      Provider.of<SimilarMoviesNotifier>(this, listen: false);
+  ImageNotifier get images => Provider.of<ImageNotifier>(this, listen: false);
 }

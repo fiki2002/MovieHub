@@ -4,14 +4,11 @@ import 'package:movie_hub/features/movies/movie_details/movie_details.dart';
 
 class SimilarMoviesNotifier extends BaseNotifier<MoviesModel> {
   final SimilarMovieUsecase similarMovieUsecase;
-  final String movieId;
 
   SimilarMoviesNotifier({
     required this.similarMovieUsecase,
-    required this.movieId,
   });
-  @override
-  void onInit() {
+  void init(String movieId) {
     getMovieDetails(movieId);
   }
 

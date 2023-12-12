@@ -18,30 +18,29 @@ class MovieInfo extends StatefulWidget {
 
 class _MovieInfoState extends State<MovieInfo> {
   @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      context.movieDetails.init(widget.movieId);
+    });
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) {
-        final s = getIt<MovieDetailUsecase>();
-        return MovieDetailsNotifier(
-          movieDetailsUsecase: s,
-          movieId: widget.movieId,
+    return Consumer<MovieDetailsNotifier>(
+      builder: (context, movieDetailsNotifier, _) {
+        return movieDetailsNotifier.state.when(
+          done: (MovieDetailModel movieDetails) {
+            return MovieInfoAtom(
+              movies: widget.movies,
+              movieDetails: movieDetails,
+              movieId: widget.movieId,
+            );
+          },
+          error: (_) => const Text(''),
+          loading: () => const LoadingWidget(),
         );
       },
-      child: Consumer<MovieDetailsNotifier>(
-        builder: (context, movieDetailsNotifier, _) {
-          return movieDetailsNotifier.state.when(
-            done: (MovieDetailModel movieDetails) {
-              return MovieInfoAtom(
-                movies: widget.movies,
-                movieDetails: movieDetails,
-                movieId: widget.movieId,
-              );
-            },
-            error: (_) => const Text(''),
-            loading: () => const LoadingWidget(),
-          );
-        },
-      ),
     );
   }
 }

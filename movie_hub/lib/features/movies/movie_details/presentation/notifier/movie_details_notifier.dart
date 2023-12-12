@@ -3,14 +3,12 @@ import 'package:movie_hub/features/movies/movie_details/movie_details.dart';
 
 class MovieDetailsNotifier extends BaseNotifier<MovieDetailModel> {
   final MovieDetailUsecase movieDetailsUsecase;
-  final String movieId;
 
   MovieDetailsNotifier({
     required this.movieDetailsUsecase,
-    required this.movieId,
   });
-  @override
-  void onInit() {
+
+  void init(String movieId) {
     getMovieDetails(movieId);
   }
 
