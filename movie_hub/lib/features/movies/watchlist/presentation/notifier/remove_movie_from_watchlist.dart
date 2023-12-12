@@ -17,6 +17,7 @@ class RemoveFromWatchListNotifier extends ChangeNotifier {
     try {
       _setUpAddToWatchListState(RemoveFromWatchListState.isLoading);
       final response = await _removeWatchListUsecase.call(movieId);
+
       return response.fold(
         (l) {
           _handleFailure(l);

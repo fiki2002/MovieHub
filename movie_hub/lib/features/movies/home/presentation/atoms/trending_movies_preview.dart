@@ -17,7 +17,7 @@ class _TrendingMoviesPreviewState extends State<TrendingMoviesPreview> {
   void initState() {
     super.initState();
     Future.delayed(
-      const Duration(seconds: 2),
+      const Duration(seconds: 5),
       () {
         if (mounted) {
           setState(() {

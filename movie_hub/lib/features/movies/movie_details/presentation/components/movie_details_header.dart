@@ -59,7 +59,10 @@ class _MovieDetailsHeaderState extends State<MovieDetailsHeader> {
                     fit: BoxFit.cover,
                     width: screenWidth,
                     imageUrl: widget.movies.movieResults?.backdropPath ?? '',
-                    loader: const ShimmerWidget(),
+                    loader: ShimmerWidget(
+                      highlightColor: Colors.grey[200]!,
+                      baseColor: kcBackground.withOpacity(.1),
+                    ),
                   ),
                 ),
                 Positioned(

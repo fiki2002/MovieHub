@@ -150,6 +150,7 @@ class _ActionButtons extends StatelessWidget {
         return ElevatedButton(
           onPressed: () {
             context.checkWatchListStatus.watchListAction(movieId);
+            
           },
           style: ButtonStyle(
             overlayColor:

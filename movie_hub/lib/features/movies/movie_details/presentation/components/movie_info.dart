@@ -38,9 +38,7 @@ class _MovieInfoState extends State<MovieInfo> {
               );
             },
             error: (_) => const Text(''),
-            loading: () => const Center(
-              child: CupertinoActivityIndicator(),
-            ),
+            loading: () => const LoadingWidget(),
           );
         },
       ),

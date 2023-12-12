@@ -11,4 +11,4 @@ export 'domain/usecase/watchlist_movie_details.dart';
 export  'presentation/notifier/watch_list_details_notifier.dart';
 export 'presentation/widgets/watch_list_body_widget.dart';
 export 'domain/usecase/remove_from_watch_list_usecase.dart';
-export 'presentation/notifier/remove_movie_from watchlist.dart';
+export 'presentation/notifier/remove_movie_from_watchlist.dart';

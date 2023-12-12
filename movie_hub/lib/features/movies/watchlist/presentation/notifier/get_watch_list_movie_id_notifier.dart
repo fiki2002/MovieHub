@@ -8,7 +8,7 @@ class GetWatchListMovieIdsNotifier extends BaseNotifier<List<String>> {
   GetWatchListMovieIdsNotifier({
     required watchListMovieIdUsecase,
   }) : _watchListMovieIdUsecase = watchListMovieIdUsecase;
-  
+
   Future<void> init() async {
     await getWatchListMovieId();
   }

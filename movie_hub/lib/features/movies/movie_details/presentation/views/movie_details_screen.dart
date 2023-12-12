@@ -18,21 +18,23 @@ class MovieDetailsScreen extends StatefulWidget {
 
 class _MovieDetailsScreenState extends State<MovieDetailsScreen>
     with SingleTickerProviderStateMixin {
+      
   late AnimationController _animationController;
   late Animation<Offset> _offsetAnimation;
 
   @override
   void initState() {
     super.initState();
-    
+
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      context.checkWatchListStatus
-          .isMovieAWatchList((widget.movies.movieResults?.id ?? '').toString());
+      context.checkWatchListStatus.isMovieAWatchList(
+        (widget.movies.movieResults?.id ?? '').toString(),
+      );
     });
-    
+
     _animationController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 700),
+      duration: const Duration(milliseconds: 500),
     );
 
     _offsetAnimation = Tween<Offset>(
@@ -57,6 +59,7 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen>
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           MovieDetailsHeader(movies: widget.movies),
+          vSpace(kMinute),
           SlideTransition(
             position: _offsetAnimation,
             child: MovieInfo(

@@ -45,6 +45,7 @@ class HomeRemoteDataSourceImpl extends HomeRemoteDataSource {
 Future<ServiceResponse<MoviesModel>> _getMovies(String tag, int page) {
   return serveFuture<MoviesModel>(
     function: (dynamic Function(String) fail) async {
+      
       final String url = '$baseUrl$tag';
       final result = await HttpHelper.get(url, query: {
         'page': page,

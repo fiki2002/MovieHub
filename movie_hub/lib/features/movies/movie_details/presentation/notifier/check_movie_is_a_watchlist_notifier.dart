@@ -33,23 +33,26 @@ class CheckMovieWatchListStatusNotifier extends ChangeNotifier {
   void watchListAction(String movieId) async {
     switch (isWatchListStatus) {
       case true:
+      
         isWatchListStatus = false;
         notifyListeners();
-        _remove(movieId, isWatchListStatus);
+       await _remove(movieId, isWatchListStatus);
+   
         break;
+
       case false:
         isWatchListStatus = true;
         notifyListeners();
-        _add(movieId, isWatchListStatus);
+       await _add(movieId, isWatchListStatus);
         break;
       default:
     }
     navigatorKey.currentContext!.getWatchListNotifier.allMovieIds.clear();
     navigatorKey.currentContext!.getWatchListNotifier.allWatchList?.clear();
-    navigatorKey.currentContext!.getWatchListNotifier.init();
+    await navigatorKey.currentContext!.getWatchListNotifier.init();
   }
 
-  void _remove(String movieId, bool? isWatchListStatus) async {
+  Future<void> _remove(String movieId, bool? isWatchListStatus) async {
     final result = await navigatorKey.currentContext!.removeFromWatchList
         .removeFromWatchList(movieId);
     result.fold(
@@ -64,7 +67,7 @@ class CheckMovieWatchListStatusNotifier extends ChangeNotifier {
     );
   }
 
-  void _add(String movieId, bool? isWatchListStatus) async {
+  Future<void> _add(String movieId, bool? isWatchListStatus) async {
     final result = await navigatorKey.currentContext!.addToWatchList
         .addToWatchList(movieId);
     result.fold((l) {
