@@ -27,26 +27,23 @@ class GetWatchListMovieIdsNotifier extends BaseNotifier<List<String>> {
 
     if (state.data != null) {
       _allMovieIds.addAll(state.data!);
-    }
-    notifyListeners();
 
-    for (var id in _allMovieIds) {
-      _setWatchListState(GetWatchListState.loading);
+      for (var id in _allMovieIds) {
+        _setWatchListState(GetWatchListState.loading);
 
-      final result =
-          await navigatorKey.currentContext!.watchListNotifier.movieDetail(id);
-      result.fold(
-        (l) {
-          _setWatchListState(GetWatchListState.error);
-        },
-        (MovieDetailModel r) {
-          _setWatchListState(GetWatchListState.isDone);
-
-          _allWatchList.add(r);
-          notifyListeners();
-        },
-      );
-      _setWatchListState(GetWatchListState.isDone);
+        final result = await navigatorKey.currentContext!.watchListNotifier
+            .movieDetail(id);
+        result.fold(
+          (l) {
+            _setWatchListState(GetWatchListState.error);
+          },
+          (MovieDetailModel r) {
+            _allWatchList.add(r);
+            _setWatchListState(GetWatchListState.isDone);
+            notifyListeners();
+          },
+        );
+      }
     }
   }
 

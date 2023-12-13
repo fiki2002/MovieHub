@@ -66,12 +66,12 @@ class _MovieDetailsHeaderState extends State<MovieDetailsHeader> {
                   ),
                 ),
                 Positioned(
-                  bottom: kGlobalPadding,
+                  bottom: kMinute,
                   left: kfsExtraLarge,
                   child: MovieCardTile(
                     imageUrl: widget.movies.movieResults?.posterPath ?? '',
                     onTap: () {},
-                    height: h(100),
+                    height: h(120),
                   ),
                 ),
                 Positioned(

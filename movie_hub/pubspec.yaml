@@ -58,7 +58,7 @@ dependencies:
   firebase_auth: ^4.15.0
   cloud_firestore: ^4.13.3
   firebase_storage: ^11.5.5
-
+  firebase_crashlytics: ^3.4.8
 
   # Functional programming
   fpdart: ^1.1.0
