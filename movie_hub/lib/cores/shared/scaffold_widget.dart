@@ -38,16 +38,17 @@ class ScaffoldWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(
       SystemUiOverlayStyle.dark.copyWith(
-        systemNavigationBarIconBrightness: Brightness.dark,
-        systemNavigationBarColor: kcWhiteColor,
+        systemNavigationBarIconBrightness: Brightness.light,
+        systemNavigationBarColor: kcBackground,
         statusBarIconBrightness: Brightness.light,
-        statusBarColor: Colors.black,
+        statusBarColor: kcBackground,
       ),
     );
 
     return Scaffold(
       drawerEnableOpenDragGesture: true,
       key: scaffoldKey,
+      extendBody: true,
       appBar: appBar,
       backgroundColor: bg ?? kcBackground,
       body: SafeArea(

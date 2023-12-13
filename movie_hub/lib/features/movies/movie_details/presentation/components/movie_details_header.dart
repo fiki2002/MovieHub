@@ -49,19 +49,19 @@ class _MovieDetailsHeaderState extends State<MovieDetailsHeader> {
       child: Stack(
         children: [
           SizedBox(
-            height: screenHeight * .3,
+            height: screenHeight * .4,
             child: Stack(
               children: [
                 SizedBox(
-                  height: screenHeight * .2,
+                  height: screenHeight * .3,
                   child: ImageWidget(
                     imageTypes: ImageTypes.network,
                     fit: BoxFit.cover,
                     width: screenWidth,
                     imageUrl: widget.movies.movieResults?.backdropPath ?? '',
-                    loader: ShimmerWidget(
-                      highlightColor: Colors.grey[200]!,
-                      baseColor: kcBackground.withOpacity(.1),
+                    loader: const ShimmerWidget(
+                      highlightColor: Colors.white,
+                      baseColor: kcBackground,
                     ),
                   ),
                 ),
@@ -71,7 +71,7 @@ class _MovieDetailsHeaderState extends State<MovieDetailsHeader> {
                   child: MovieCardTile(
                     imageUrl: widget.movies.movieResults?.posterPath ?? '',
                     onTap: () {},
-                    height: 130,
+                    height: h(100),
                   ),
                 ),
                 Positioned(

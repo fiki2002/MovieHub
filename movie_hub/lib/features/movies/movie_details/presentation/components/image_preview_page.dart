@@ -12,7 +12,13 @@ class ImagePreview extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return ScaffoldWidget(
+      appBar: AppBar(
+        backgroundColor: kcBackground,
+        elevation: 0,
+      ),
+      useSingleScroll: false,
+      usePadding: false,
       body: InteractiveViewer(
         child: Center(
           child: ImageWidget(
