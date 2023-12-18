@@ -15,7 +15,7 @@ class MoviesGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
-      itemCount: movies?.length,
+      itemCount: movies?.length ?? 0,
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 4,
         childAspectRatio: 111 / 180,
@@ -23,8 +23,9 @@ class MoviesGrid extends StatelessWidget {
         mainAxisSpacing: kfsMedium,
       ),
       itemBuilder: (context, int index) {
+        final id = '$genreTitle${movies?[index].name}${movies?[index].id}';
         return Hero(
-          tag: '$genreTitle${movies?[index].name}${movies?[index].id}',
+          tag: id,
           child: MovieCardTile(
             imageUrl: movies?[index].posterPath ?? '',
             onTap: () => goTo(

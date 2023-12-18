@@ -8,12 +8,10 @@ class WatchListBodyWidget extends StatelessWidget {
   final List<MovieDetailModel>? movies;
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: switch (movies?.length.toString() == '0') {
-        true => const _EmptyWatchListView(),
-        false => _WatchListGrid(movies: movies)
-      },
-    );
+    return switch (movies?.length.toString() == '0') {
+      true => const _EmptyWatchListView(),
+      false => _WatchListGrid(movies: movies)
+    };
   }
 }
 
@@ -43,7 +41,7 @@ class _WatchListGrid extends StatelessWidget {
                 movieResults: MovieResultsEntity(
                   adult: movie?.adult,
                   backdropPath: movie?.backdropPath,
-                  originalName: movie?.originalTitle,
+                  name: movie?.originalTitle,
                   id: movie?.id,
                   overview: movie?.overview,
                   posterPath: movie?.posterPath,

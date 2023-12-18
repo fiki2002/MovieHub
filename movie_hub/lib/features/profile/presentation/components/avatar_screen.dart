@@ -15,8 +15,15 @@ class AvatarView extends StatefulWidget {
 
 class _AvatarViewState extends State<AvatarView> {
   @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      context.fetchAvatar.fetchAvatar();
+    });
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final avatarNotifier = context.watch<FetchAvatarNotifier>();
     return ScaffoldWidget(
       appBar: AppBar(
         backgroundColor: kcBackground,
@@ -26,42 +33,46 @@ class _AvatarViewState extends State<AvatarView> {
           fontWeight: FontWeight.w700,
         ),
       ),
-      body: avatarNotifier.state.when(
-        done: (avatar) {
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              vSpace(kMinute),
-              Expanded(
-                child: GridView.builder(
-                  itemCount: avatar.length,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 3,
-                    mainAxisSpacing: kMinute,
-                    crossAxisSpacing: kMinute,
-                  ),
-                  itemBuilder: (context, int index) {
-                    return GestureDetector(
-                      onTap: () => _pickAvatar(avatar[index]),
-                      child: CachedNetworkImageWidget(
-                        url: avatar[index],
-                        fit: BoxFit.cover,
-                        radius: kMinute,
+      body: Consumer<FetchAvatarNotifier>(
+        builder: (_, viewModel, __) {
+          return switch (viewModel.avatarState) {
+            FetchAvatarState.isDone => Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  vSpace(kMinute),
+                  Expanded(
+                    child: GridView.builder(
+                      itemCount: viewModel.listOfAvatar?.length ?? 0,
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 3,
+                        mainAxisSpacing: kMinute,
+                        crossAxisSpacing: kMinute,
                       ),
-                    );
-                  },
-                ),
+                      itemBuilder: (context, int index) {
+                        final String? avatar = viewModel.listOfAvatar?[index];
+                        return GestureDetector(
+                          onTap: () => _pickAvatar(avatar ?? ''),
+                          child: CachedNetworkImageWidget(
+                            url: avatar ?? '',
+                            fit: BoxFit.cover,
+                            radius: kMinute,
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ],
               ),
-            ],
-          );
+            FetchAvatarState.isError => CustomErrorWidget(
+                errorMessage:
+                    'Something went wrong\nwe couldn\'t fetch avatars😓',
+                retryCallBack: () =>
+                    context.read<FetchAvatarNotifier>().fetchAvatar(),
+              ),
+            FetchAvatarState.isLoading => const LoadingWidget()
+          };
         },
-        error: (e) => CustomErrorWidget(
-          errorMessage: 'Something went wrong\nwe couldn\'t fetch avatars😓',
-          retryCallBack: () => context.read<FetchAvatarNotifier>().onInit(),
-        ),
-        loading: () => LoadingWidget(
-          radius: sr(kfsTiny),
-        ),
       ),
       safeAreaTop: false,
       useSingleScroll: false,
@@ -70,7 +81,7 @@ class _AvatarViewState extends State<AvatarView> {
 
   void _pickAvatar(String imageUrl) {
     context.updateAvatar.updateAvatar(imageUrl);
-    context.read<FetchProfileNotifier>().init();
+    context.read<FetchProfileNotifier>().fetchProfileDetails();
   }
 }
 

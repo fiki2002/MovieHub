@@ -1,8 +1,9 @@
+import 'package:flutter/material.dart';
 import 'package:movie_hub/cores/cores.dart';
 import 'package:movie_hub/features/movies/movie_dashboard.dart';
 import 'package:movie_hub/features/movies/watchlist/watchlist.dart';
 
-class GetWatchListMovieIdsNotifier extends BaseNotifier<List<String>> {
+class GetWatchListMovieIdsNotifier extends ChangeNotifier {
   final GetWatchListMovieIdsUsecase _watchListMovieIdUsecase;
 
   GetWatchListMovieIdsNotifier({
@@ -20,31 +21,34 @@ class GetWatchListMovieIdsNotifier extends BaseNotifier<List<String>> {
   List<MovieDetailModel>? get allWatchList => _allWatchList;
 
   Future<void> getWatchListMovieId() async {
-    setLoading();
-
-    state = await _watchListMovieIdUsecase.execute();
-    notifyListeners();
-
-    if (state.data != null) {
-      _allMovieIds.addAll(state.data!);
-
-      for (var id in _allMovieIds) {
-        _setWatchListState(GetWatchListState.loading);
-
-        final result = await navigatorKey.currentContext!.watchListNotifier
-            .movieDetail(id);
-        result.fold(
-          (l) {
-            _setWatchListState(GetWatchListState.error);
-          },
-          (MovieDetailModel r) {
-            _allWatchList.add(r);
-            _setWatchListState(GetWatchListState.isDone);
-            notifyListeners();
-          },
+    final res = await _watchListMovieIdUsecase.call(const NoParams());
+    return res.fold(
+      (l) {
+        SnackBarService.showErrorSnackBar(
+          context: navigatorKey.currentContext!,
+          message: 'Something went wrong!',
         );
-      }
-    }
+      },
+      (r) async {
+        _allMovieIds.addAll(r);
+        for (var id in _allMovieIds) {
+          _setWatchListState(GetWatchListState.loading);
+
+          final result = await navigatorKey.currentContext!.movieDetails
+              .getMovieDetails(id);
+          result.fold(
+            (l) {
+              _setWatchListState(GetWatchListState.error);
+            },
+            (MovieDetailModel r) {
+              _allWatchList.add(r);
+              _setWatchListState(GetWatchListState.isDone);
+            },
+          );
+        }
+        notifyListeners();
+      },
+    );
   }
 
   GetWatchListState _watchListState = GetWatchListState.isDone;

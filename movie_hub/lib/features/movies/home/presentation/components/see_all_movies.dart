@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movie_hub/cores/cores.dart';
-import 'package:movie_hub/features/movies/movie_dashboard.dart';
+import 'package:movie_hub/features/movies/home/home.dart';
+import 'package:movie_hub/features/movies/shared_widgets/movies_grid.dart';
 
 class SeeAllMovies extends StatefulWidget {
   static const String route = '/see-all-movies';
@@ -47,7 +48,7 @@ class _SeeAllMoviesState extends State<SeeAllMovies> {
           },
           child: MoviesGrid(
             movies: widget.params.movies,
-            genreTitle: widget.params.genreTitle,
+            genreTitle: 'SEE ALL${widget.params.genreTitle}',
           ),
         ),
       ),

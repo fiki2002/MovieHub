@@ -1,13 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:movie_hub/cores/cores.dart';
-import 'package:movie_hub/features/movies/movie_details/data/model/movie_details_model.dart';
 import 'package:movie_hub/features/profile/profile.dart';
 
 abstract class WatchListDataSource {
   Future<BaseModel> addToWatchList(String movieId);
   Future<BaseModel> removeFromWatchList(String movieId);
-  Future<ServiceResponse<List<String>>> getWatchListIds();
-  Future<MovieDetailModel> getWatchListMovieDetail(String movieId);
+  Future<List<String>> getWatchListIds();
 }
 
 class WatchListDataSourceImpl extends WatchListDataSource {
@@ -60,30 +58,15 @@ class WatchListDataSourceImpl extends WatchListDataSource {
   }
 
   @override
-  Future<ServiceResponse<List<String>>> getWatchListIds() {
+  Future<List<String>> getWatchListIds() async {
     final String? userId = _firebaseHelper.currentUserId;
-
-    return serveFuture<List<String>>(
-      function: (fail) async {
-        final QuerySnapshot<Map<String, dynamic>> watchListId =
-            await _firebaseHelper.watchListRef(userId: userId ?? '').get(
-                  const GetOptions(source: Source.server),
-                );
-        final List<String> listOfId = watchListId.docs
-            .map((watchList) => watchList['movie_id'] as String)
-            .toList();
-        return listOfId;
-      },
-    );
-  }
-
-  @override
-  Future<MovieDetailModel> getWatchListMovieDetail(String movieId) async {
-    final String url = '$baseUrl/movie/$movieId';
-
-    final result = await HttpHelper.get(url);
-
-    final MovieDetailModel movieDetail = MovieDetailModel.fromJson(result);
-    return movieDetail;
+    final QuerySnapshot<Map<String, dynamic>> watchListId =
+        await _firebaseHelper.watchListRef(userId: userId ?? '').get(
+              const GetOptions(source: Source.server),
+            );
+    final List<String> listOfId = watchListId.docs
+        .map((watchList) => watchList['movie_id'] as String)
+        .toList();
+    return listOfId;
   }
 }

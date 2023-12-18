@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movie_hub/cores/cores.dart';
-import 'package:movie_hub/features/movies/movie_dashboard.dart';
+import 'package:movie_hub/features/movies/home/home.dart';
+import 'package:movie_hub/features/movies/shared_widgets/widgets.dart';
 
 class MovieDetailsHeader extends StatefulWidget {
   const MovieDetailsHeader({super.key, required this.movies});
@@ -24,9 +25,11 @@ class _MovieDetailsHeaderState extends State<MovieDetailsHeader> {
 
   @override
   Widget build(BuildContext context) {
+    final String id =
+        '${widget.movies.genreTitle}${widget.movies.movieResults?.name}${widget.movies.movieResults?.id}';
+
     return Hero(
-      tag:
-          '${widget.movies.genreTitle}${widget.movies.movieResults?.name}${widget.movies.movieResults?.id}',
+      tag: id,
       placeholderBuilder: (context, heroSize, child) {
         return Opacity(
           opacity: 0.6,
@@ -59,10 +62,7 @@ class _MovieDetailsHeaderState extends State<MovieDetailsHeader> {
                     fit: BoxFit.cover,
                     width: screenWidth,
                     imageUrl: widget.movies.movieResults?.backdropPath ?? '',
-                    loader: const ShimmerWidget(
-                      highlightColor: Colors.white,
-                      baseColor: kcBackground,
-                    ),
+                    loader: const ShimmerWidget(),
                   ),
                 ),
                 Positioned(

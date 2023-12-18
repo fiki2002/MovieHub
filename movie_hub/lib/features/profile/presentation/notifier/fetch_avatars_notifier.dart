@@ -1,25 +1,37 @@
+import 'package:flutter/material.dart';
 import 'package:movie_hub/cores/cores.dart';
 import 'package:movie_hub/features/profile/profile.dart';
 
-class FetchAvatarNotifier extends BaseNotifier<List<String>> {
+class FetchAvatarNotifier extends ChangeNotifier {
   final FetchAvatarsUsecase _fetchAvatarsUsecase;
 
   FetchAvatarNotifier({
     required fetchAvatarsUsecase,
   }) : _fetchAvatarsUsecase = fetchAvatarsUsecase;
 
-  @override
-  void onInit() {
-    if (state.isLoading) {
-      return;
-    }
-    fetchProfileDetails();
-    super.onInit();
+  List<String>? _avatarList;
+  List<String>? get listOfAvatar => _avatarList;
+
+  Future<void> fetchAvatar() async {
+    _setAvatarState(FetchAvatarState.isLoading);
+    final res = await _fetchAvatarsUsecase.call(const NoParams());
+    res.fold(
+      (l) {},
+      (r) {
+        _avatarList = r;
+        notifyListeners();
+        _setAvatarState(FetchAvatarState.isDone);
+      },
+    );
   }
 
-  Future<void> fetchProfileDetails() async {
-    setLoading();
-    state = await _fetchAvatarsUsecase.execute();
+  FetchAvatarState _avatarState = FetchAvatarState.isDone;
+  FetchAvatarState get avatarState => _avatarState;
+
+  void _setAvatarState(FetchAvatarState state) {
+    _avatarState = state;
     notifyListeners();
   }
 }
+
+enum FetchAvatarState { isLoading, isError, isDone }

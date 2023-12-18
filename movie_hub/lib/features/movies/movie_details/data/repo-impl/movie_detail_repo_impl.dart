@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:fpdart/fpdart.dart';
 import 'package:movie_hub/cores/cores.dart';
 import 'package:movie_hub/features/movies/movie_dashboard.dart';
 
@@ -11,37 +10,35 @@ class MovieDetailRepoImpl extends MovieDetailRepository {
   MovieDetailRepoImpl({
     required this.movieDetailsDataSource,
   });
-
-  @override
-  FutureOr<NotifierState<MovieDetailModel>> getMovieDetails(String movieId) {
-    return convertWithArgument(
-      movieDetailsDataSource.getMovieDetails,
-      movieId,
-    );
-  }
-
-  @override
-  FutureOr<NotifierState<ImageModel>> getImages(String movieId) {
-    return convertWithArgument(
-      movieDetailsDataSource.getImages,
-      movieId,
-    );
-  }
-
-  @override
-  FutureOr<NotifierState<MoviesModel>> getSimilarMovies(String movieId) {
-    return convertWithArgument(
-      movieDetailsDataSource.getSimilarMovies,
-      movieId,
-    );
-  }
   
   @override
   Future<Either<Failure, bool>> isMovieAWatchList(String movieId) {
-    return _handleAuthOperation(()=> movieDetailsDataSource.checkIfMovieIdHasBeenWatchListed(movieId));
+    return _handleMovieDetailsOperation(
+      () => movieDetailsDataSource.checkIfMovieIdHasBeenWatchListed(movieId),
+    );
   }
 
-    Future<Either<Failure, T>> _handleAuthOperation<T>(
+  @override
+  FutureOr<Either<Failure, ImageModel>> getImages(String movieId) {
+    return _handleMovieDetailsOperation(
+        () => movieDetailsDataSource.getImages(movieId));
+  }
+
+  @override
+  FutureOr<Either<Failure, MovieDetailModel>> getMovieDetails(String movieId) {
+    return _handleMovieDetailsOperation(
+      () => movieDetailsDataSource.getMovieDetails(movieId),
+    );
+  }
+
+  @override
+  FutureOr<Either<Failure, MoviesModel>> getSimilarMovies(String movieId) {
+    return _handleMovieDetailsOperation(
+      () => movieDetailsDataSource.getSimilarMovies(movieId),
+    );
+  }
+
+  Future<Either<Failure, T>> _handleMovieDetailsOperation<T>(
     Future<T> Function() operation,
   ) async {
     try {
@@ -64,5 +61,4 @@ class MovieDetailRepoImpl extends MovieDetailRepository {
       );
     }
   }
-
 }

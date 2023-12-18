@@ -31,11 +31,6 @@ void setUpWatchListLocator() {
       watchListRepo: getIt<WatchListRepo>(),
     ),
   );
-  getIt.registerLazySingleton<WatchListDetailsUsecase>(
-    () => WatchListDetailsUsecase(
-      watchListRepo: getIt<WatchListRepo>(),
-    ),
-  );
 
   getIt.registerLazySingleton<AddToWatchListNotifier>(
     () => AddToWatchListNotifier(
@@ -46,12 +41,6 @@ void setUpWatchListLocator() {
   getIt.registerLazySingleton<GetWatchListMovieIdsNotifier>(
     () => GetWatchListMovieIdsNotifier(
       watchListMovieIdUsecase: getIt<GetWatchListMovieIdsUsecase>(),
-    ),
-  );
-
-  getIt.registerLazySingleton<WatchListNotifier>(
-    () => WatchListNotifier(
-      watchListDetailsUsecase: getIt<WatchListDetailsUsecase>(),
     ),
   );
 

@@ -1,13 +1,16 @@
-import 'package:movie_hub/cores/cores.dart';
-import 'package:movie_hub/features/movies/home/home.dart';
+import 'dart:async';
 
-class PopularMoviesUsecase {
+import 'package:movie_hub/cores/cores.dart';
+import 'package:movie_hub/features/movies/movie_dashboard.dart';
+
+class PopularMoviesUsecase implements UseCaseFuture<Failure, MoviesModel, int> {
   final HomeRepository homeRepository;
   PopularMoviesUsecase({
     required this.homeRepository,
   });
 
-  Future<NotifierState<MoviesModel>> execute({required int page}) async {
-    return await homeRepository.getPopularMovies(page);
+  @override
+  FutureOr<Either<Failure, MoviesModel>> call(int params) async {
+    return await homeRepository.getPopularMovies(params);
   }
 }

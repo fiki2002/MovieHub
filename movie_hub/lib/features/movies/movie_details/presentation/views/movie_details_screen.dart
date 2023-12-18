@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:movie_hub/cores/cores.dart';
-import 'package:movie_hub/features/movies/movie_dashboard.dart';
+import 'package:movie_hub/features/movies/movie_details/movie_details.dart';
+import 'package:movie_hub/features/movies/shared_widgets/widgets.dart';
 
 class MovieDetailsScreen extends StatefulWidget {
   static const String route = '/movie_details';
@@ -18,7 +19,6 @@ class MovieDetailsScreen extends StatefulWidget {
 
 class _MovieDetailsScreenState extends State<MovieDetailsScreen>
     with SingleTickerProviderStateMixin {
-      
   late AnimationController _animationController;
   late Animation<Offset> _offsetAnimation;
 
@@ -28,6 +28,15 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen>
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       context.checkWatchListStatus.isMovieAWatchList(
+        (widget.movies.movieResults?.id ?? '').toString(),
+      );
+      context.movieDetails.getMovieDetails(
+        (widget.movies.movieResults?.id ?? '').toString(),
+      );
+      context.similarMovies.getSimilarMovies(
+        (widget.movies.movieResults?.id ?? '').toString(),
+      );
+      context.images.getImages(
         (widget.movies.movieResults?.id ?? '').toString(),
       );
     });

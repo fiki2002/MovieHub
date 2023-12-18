@@ -43,24 +43,18 @@ class _WatchListViewState extends State<WatchListView> {
               kfsExtraLarge,
               0,
             ),
-            child: Column(
-              children: [
-                switch (val.watchListState) {
-                  GetWatchListState.loading =>  LoadingWidget(
-                      radius: sr(kfsTiny),
-                    ),
-                  GetWatchListState.error => CustomErrorWidget(
-                      errorMessage: 'Failed to fetch watchlist😓',
-                      retryCallBack: () {
-                        context.read<GetWatchListMovieIdsNotifier>().init();
-                      },
-                    ),
-                  GetWatchListState.isDone => WatchListBodyWidget(
-                      movies: val.allWatchList,
-                    ),
-                }
-              ],
-            ),
+            child: switch (val.watchListState) {
+              GetWatchListState.loading => const LoadingWidget(),
+              GetWatchListState.error => CustomErrorWidget(
+                  errorMessage: 'Failed to fetch watchlist😓',
+                  retryCallBack: () {
+                    context.read<GetWatchListMovieIdsNotifier>().init();
+                  },
+                ),
+              GetWatchListState.isDone => WatchListBodyWidget(
+                  movies: val.allWatchList,
+                ),
+            },
           );
         },
       ),

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:movie_hub/cores/cores.dart';
-import 'package:movie_hub/features/movies/movie_dashboard.dart';
+import 'package:movie_hub/features/movies/movie_details/movie_details.dart';
+import 'package:movie_hub/features/movies/shared_widgets/widgets.dart';
 import 'package:provider/provider.dart';
 
 class MovieInfo extends StatefulWidget {
@@ -17,28 +18,37 @@ class MovieInfo extends StatefulWidget {
 }
 
 class _MovieInfoState extends State<MovieInfo> {
+  
   @override
   void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      context.movieDetails.init(widget.movieId);
-    });
+    WidgetsBinding.instance.addPostFrameCallback(
+      (timeStamp) {
+        context.movieDetails.getMovieDetails(widget.movieId);
+      },
+    );
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Consumer<MovieDetailsNotifier>(
-      builder: (context, movieDetailsNotifier, _) {
-        return movieDetailsNotifier.state.when(
-          done: (MovieDetailModel movieDetails) {
-            return MovieInfoAtom(
-              movies: widget.movies,
-              movieDetails: movieDetails,
-              movieId: widget.movieId,
-            );
-          },
-          error: (_) => const Text(''),
-          loading: () => const LoadingWidget(),
+      builder: (context, viewModel, _) {
+        return Column(
+          children: [
+            switch (viewModel.movieDetailState) {
+              MovieDetailState.isLoading => const LoadingWidget(),
+              MovieDetailState.isError => PageErrorWidget(
+                  onTap: () {
+                    context.movieDetails.getMovieDetails(widget.movieId);
+                  },
+                ),
+              MovieDetailState.isDone => MovieInfoAtom(
+                  movies: widget.movies,
+                  movieDetails: viewModel.movieDetail,
+                  movieId: widget.movieId,
+                ),
+            }
+          ],
         );
       },
     );

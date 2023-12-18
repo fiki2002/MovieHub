@@ -12,7 +12,7 @@ class MovieInfoAtom extends StatelessWidget {
     required this.movieId,
   });
   final MovieDetailsParams movies;
-  final MovieDetailModel movieDetails;
+  final MovieDetailModel? movieDetails;
   final String movieId;
 
   @override
@@ -40,13 +40,13 @@ class MovieInfoAtom extends StatelessWidget {
                     ),
                   ),
                   vSpace(kMinute),
-                  if (movieDetails.homepage != null) ...[
+                  if (movieDetails?.homepage != null) ...[
                     RichTextWidget(
                       'Visit Webpage',
                       '',
                       onTap1: TapGestureRecognizer()
                         ..onTap = () async =>
-                            await '${movieDetails.homepage}'.launchInBrowser(),
+                            await '${movieDetails?.homepage}'.launchInBrowser(),
                       fontWeight: FontWeight.w600,
                       textColor: Colors.blue.withOpacity(.7),
                       fontWeight2: FontWeight.w400,
@@ -71,55 +71,55 @@ class MovieInfoAtom extends StatelessWidget {
             ),
             vSpace(kSize5),
           ],
-          if (movieDetails.genres != null) ...[
+          if (movieDetails?.genres != null) ...[
             RichTextWidget(
               'Genre:  ',
-              '${movieDetails.genres?.map((genre) => genre.name?.capitalize()).join(', ')}',
+              '${movieDetails?.genres?.map((genre) => genre.name?.capitalize()).join(', ')}',
               fontWeight: FontWeight.w600,
               fontWeight2: FontWeight.w400,
             ),
             vSpace(kSize5),
           ],
-          if (movieDetails.tagline != null) ...[
+          if (movieDetails?.tagline != null) ...[
             RichTextWidget(
               'Tagline:   ',
-              '${movieDetails.tagline}',
+              '${movieDetails?.tagline}',
               fontWeight: FontWeight.w600,
               fontWeight2: FontWeight.w400,
             ),
             vSpace(kSize5),
           ],
-          if (movieDetails.releaseDate != null) ...[
+          if (movieDetails?.releaseDate != null) ...[
             RichTextWidget(
               'Release Date:   ',
-              movieDetails.releaseDate!.parse(),
+              movieDetails!.releaseDate!.parse(),
               fontWeight: FontWeight.w600,
               fontWeight2: FontWeight.w400,
             ),
             vSpace(kSize5),
           ],
-          if (movieDetails.productionCompanies != null) ...[
+          if (movieDetails?.productionCompanies != null) ...[
             RichTextWidget(
               'Production Country:  ',
-              '${movieDetails.productionCountries?.map((c) => c.name?.capitalize()).join(', ')}',
+              '${movieDetails?.productionCountries?.map((c) => c.name?.capitalize()).join(', ')}',
               fontWeight: FontWeight.w600,
               fontWeight2: FontWeight.w400,
             ),
             vSpace(kSize5),
           ],
-          if (movieDetails.productionCompanies != null) ...[
+          if (movieDetails?.productionCompanies != null) ...[
             RichTextWidget(
               'Companies:  ',
-              '${movieDetails.productionCompanies?.map((c) => c.name?.capitalize()).join(', ')}',
+              '${movieDetails?.productionCompanies?.map((c) => c.name?.capitalize()).join(', ')}',
               fontWeight: FontWeight.w600,
               fontWeight2: FontWeight.w400,
             ),
             vSpace(kSize5),
           ],
-          if (movieDetails.spokenLanguages != null) ...[
+          if (movieDetails?.spokenLanguages != null) ...[
             RichTextWidget(
               'Languages:  ',
-              '${movieDetails.spokenLanguages?.map((c) => c.name?.capitalize()).join(', ')}',
+              '${movieDetails?.spokenLanguages?.map((c) => c.name?.capitalize()).join(', ')}',
               fontWeight: FontWeight.w600,
               fontWeight2: FontWeight.w400,
             ),
@@ -147,10 +147,11 @@ class _ActionButtons extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<CheckMovieWatchListStatusNotifier>(
       builder: (context, val, _) {
+        final bool isWatchListed =
+            context.checkWatchListStatus.isWatchListStatus ?? false;
         return ElevatedButton(
           onPressed: () {
             context.checkWatchListStatus.watchListAction(movieId);
-            
           },
           style: ButtonStyle(
             overlayColor:
@@ -164,14 +165,10 @@ class _ActionButtons extends StatelessWidget {
           ),
           child: Row(
             children: [
-              (context.checkWatchListStatus.isWatchListStatus ?? false)
-                  ? checkIcon.svg
-                  : addIcon.svg,
+              isWatchListed  ? checkIcon.svg : addIcon.svg,
               hSpace(kMinute),
               TextWidget(
-                (context.checkWatchListStatus.isWatchListStatus ?? false)
-                    ? 'Remove'
-                    : 'Add',
+                isWatchListed ? 'Remove' : 'Add',
               ),
             ],
           ),

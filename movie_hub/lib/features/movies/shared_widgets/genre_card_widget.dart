@@ -51,21 +51,34 @@ class GenreCardWidget extends StatelessWidget {
             child: ListView.separated(
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, index) {
-                final imageUrl = movies?[index].posterPath ?? '';
-                final id = '$title${movies?[index].name}${movies?[index].id}';
-                return Hero(
-                  tag: id,
-                  child: MovieCardTile(
-                    imageUrl: imageUrl,
-                    onTap: () => goTo(
-                      MovieDetailsScreen.route,
-                      arguments: MovieDetailsParams(
-                        genreTitle: title,
-                        movieResults: movies?[index],
+                final movie = movies?[index];
+                final imageUrl = movie?.posterPath ?? '';
+                final id = '$title${movie?.name}${movie?.id}';
+                return switch (title == 'Similar Movies') {
+                  true => MovieCardTile(
+                      imageUrl: imageUrl,
+                      onTap: () => goTo(
+                        MovieDetailsScreen.route,
+                        arguments: MovieDetailsParams(
+                          genreTitle: title,
+                          movieResults: movies?[index],
+                        ),
                       ),
                     ),
-                  ),
-                );
+                  false => Hero(
+                      tag: id,
+                      child: MovieCardTile(
+                        imageUrl: imageUrl,
+                        onTap: () => goTo(
+                          MovieDetailsScreen.route,
+                          arguments: MovieDetailsParams(
+                            genreTitle: title,
+                            movieResults: movies?[index],
+                          ),
+                        ),
+                      ),
+                    ),
+                };
               },
               separatorBuilder: (context, index) => hSpace(kMinute),
               itemCount: 20,

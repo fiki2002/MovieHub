@@ -1,10 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:movie_hub/cores/cores.dart';
 import 'package:movie_hub/features/movies/movie_dashboard.dart';
 
-class SearchNotifier extends BaseNotifier<List<MovieResultsEntity>> {
+class SearchNotifier extends ChangeNotifier {
   final SearchMoviesUsecase searchMovieUsecase;
   SearchNotifier({
     required this.searchMovieUsecase,
@@ -18,11 +17,9 @@ class SearchNotifier extends BaseNotifier<List<MovieResultsEntity>> {
   String? get searchedValue => _searchedValue;
 
   final List<MovieResultsEntity> _movies = [];
+  List<MovieResultsEntity> get searchedMovies => _movies;
 
   Timer? _debounce;
-
-  bool _isLoading = false;
-  bool get isLoading => _isLoading;
 
   void updateSearchValue(String value) {
     _searchedValue = value;
@@ -35,6 +32,7 @@ class SearchNotifier extends BaseNotifier<List<MovieResultsEntity>> {
   }
 
   Future<void> searchMovies({bool shouldFetch = false}) async {
+    _setSearchState(SearchState.isLoading);
     if (shouldFetch) {
       _page++;
       notifyListeners();
@@ -53,21 +51,21 @@ class SearchNotifier extends BaseNotifier<List<MovieResultsEntity>> {
       _debounce = Timer(
         const Duration(milliseconds: 200),
         () async {
+          final searchMoviesResponse =
+              await searchMovieUsecase.call(searchParams);
+          searchMoviesResponse.fold(
+            (l) {
+              _setSearchState(SearchState.isError);
+            },
+            (searchedMoviesRes) {
+              final searchedMovies = searchedMoviesRes.results ?? [];
+              notifyListeners();
 
-          _isLoading = true;
-          notifyListeners();
-
-          final NotifierState<MoviesModel> searchMoviesResponse =
-              await searchMovieUsecase.execute(searchParams);
-          
-          final searchedMovies = searchMoviesResponse.data?.results ?? [];
-          notifyListeners();
-
-          _isLoading = false;
-          notifyListeners();
-          _movies.addAll(searchedMovies);
-
-          setData(_movies);
+              _setSearchState(SearchState.isDone);
+              notifyListeners();
+              _movies.addAll(searchedMovies);
+            },
+          );
         },
       );
     }
@@ -81,4 +79,14 @@ class SearchNotifier extends BaseNotifier<List<MovieResultsEntity>> {
     _page = 1;
     notifyListeners();
   }
+
+  SearchState _searchState = SearchState.isDone;
+  SearchState get searchState => _searchState;
+
+  void _setSearchState(SearchState state) {
+    _searchState = state;
+    notifyListeners();
+  }
 }
+
+enum SearchState { isLoading, isError, isDone }

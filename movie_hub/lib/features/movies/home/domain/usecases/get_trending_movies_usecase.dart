@@ -3,20 +3,30 @@ import 'dart:async';
 import 'package:movie_hub/cores/cores.dart';
 import 'package:movie_hub/features/movies/movie_dashboard.dart';
 
-class TrendingMoviesUseCase {
+class TrendingMoviesUseCase
+    implements UseCaseFuture<Failure, MoviesModel, TrendingMoviesParams> {
   final HomeRepository homeRepository;
 
   TrendingMoviesUseCase({
     required this.homeRepository,
   });
 
-  Future<NotifierState<MoviesModel>> execute(
-    String timeWindow, {
-    required int page ,
-  }) async {
-    return await homeRepository.getTrendingMovies(timeWindow, page);
+  @override
+  FutureOr<Either<Failure, MoviesModel>> call(
+    TrendingMoviesParams params,
+  ) async {
+    return await homeRepository.getTrendingMovies(
+      params.timeWindow,
+      params.page,
+    );
   }
 }
 
-
-// RemoteDS *-> Repo *-> Use
+class TrendingMoviesParams {
+  final String timeWindow;
+  final int page;
+  TrendingMoviesParams({
+    required this.timeWindow,
+    required this.page,
+  });
+}

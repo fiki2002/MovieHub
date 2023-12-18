@@ -6,7 +6,6 @@ export 'domain/usecase/discover_movies_usecase.dart';
 export 'domain/usecase/search_movies_usecase.dart';
 export 'presentation/components/header.dart';
 export 'presentation/notifier/discover_movies_notifier.dart';
-export '../shared_widgets/movies_grid.dart';
 export 'presentation/components/discover_movies_grid.dart';
 export 'search_locator.dart';
 export 'data/model/search_params_model.dart';

@@ -16,70 +16,71 @@ class _ProfileViewState extends State<ProfileView> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      context.read<FetchProfileNotifier>().init();
+      context.read<FetchProfileNotifier>().fetchProfileDetails();
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    final profileDetailsNotifier = context.watch<FetchProfileNotifier>();
-
     return ScaffoldWidget(
-      body: profileDetailsNotifier.state.when(
-        done: (details) => Padding(
-          padding: EdgeInsets.only(top: h(kfsExtraLarge)),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              RichTextWidget(
-                'Hello ',
-                '${details.userName ?? ''} 👋,',
-                fontSize: kfsLarge,
-                fontSize2: kfsLarge,
-                fontWeight: FontWeight.w500,
-                fontWeight2: FontWeight.w700,
-              ),
-              vSpace(kfs30),
-              Center(
-                child: CircleAvatar(
-                  radius: sr(kfs90),
-                  backgroundColor: kcPrimaryColor.withOpacity(.8),
-                  child: switch (details.avatarUrl?.isEmpty ?? true) {
-                    true => ImageWidget(
-                        imageTypes: ImageTypes.asset,
-                        imageUrl: profileImg,
-                        height: h(kfs90),
+      body: Consumer<FetchProfileNotifier>(
+        builder: (_, viewModel, __) {
+          return switch (viewModel.profileState) {
+            FetchProfileState.isDone => Padding(
+                padding: EdgeInsets.only(top: h(kfsExtraLarge)),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    RichTextWidget(
+                      'Hello ',
+                      '${viewModel.userModel?.userName ?? ''} 👋,',
+                      fontSize: kfsLarge,
+                      fontSize2: kfsLarge,
+                      fontWeight: FontWeight.w500,
+                      fontWeight2: FontWeight.w700,
+                    ),
+                    vSpace(kfs30),
+                    Center(
+                      child: CircleAvatar(
+                        radius: sr(kfs90),
+                        backgroundColor: kcPrimaryColor.withOpacity(.8),
+                        child: switch (
+                            viewModel.userModel?.avatarUrl?.isEmpty ??
+                                true) {
+                          true => ImageWidget(
+                              imageTypes: ImageTypes.asset,
+                              imageUrl: profileImg,
+                              height: h(kfs90),
+                            ),
+                          false => _Image(
+                              viewModel.userModel!.avatarUrl!,
+                            ),
+                        },
                       ),
-                    false => _Image(
-                        details.avatarUrl!,
-                      ),
-                  },
+                    ),
+                    vSpace(screenHeight * .03),
+                    ActionListTile(
+                      title: 'Choose Avatar',
+                      icon: addAvatarIcon,
+                      onTap: _navigateToAvatarScreen,
+                    ),
+                    vSpace(kfsMedium),
+                    ActionListTile(
+                      title: 'Sign Out',
+                      icon: signOutIcon,
+                      onTap: () => context.auth.logOut(),
+                    ),
+                  ],
                 ),
               ),
-              vSpace(screenHeight * .03),
-              ActionListTile(
-                title: 'Choose Avatar',
-                icon: addAvatarIcon,
-                onTap: _navigateToAvatarScreen,
+            FetchProfileState.isError => PageErrorWidget(
+                onTap: () => context
+                    .read<FetchProfileNotifier>()
+                    .fetchProfileDetails(),
               ),
-              vSpace(kfsMedium),
-              ActionListTile(
-                title: 'Sign Out',
-                icon: signOutIcon,
-                onTap: () => context.auth.logOut(),
-              ),
-            ],
-          ),
-        ),
-        error: (e) => Text(e ?? ''),
-        loading: () => Column(
-          children: [
-            vSpace(screenHeight * .3),
-            LoadingWidget(
-              radius: sr(15),
-            ),
-          ],
-        ),
+            FetchProfileState.isLoading => const LoadingWidget(),
+          };
+        },
       ),
       safeAreaTop: false,
       useSingleScroll: true,

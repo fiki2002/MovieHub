@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:movie_hub/cores/cores.dart';
-import 'package:movie_hub/features/movies/movie_dashboard.dart';
+import 'package:movie_hub/features/movies/nav_bar/nav_bar.dart';
 import 'package:provider/provider.dart';
 
 class NavBarView extends StatefulWidget {

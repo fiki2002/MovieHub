@@ -1,34 +1,43 @@
-import 'package:movie_hub/cores/cores.dart';
+import 'package:flutter/material.dart';
 import 'package:movie_hub/features/movies/home/home.dart';
 
-class TopRatedMoviesNotifier extends BaseNotifier<List<MovieResultsEntity>> {
+class TopRatedMoviesNotifier extends ChangeNotifier {
   final TopRatedMoviesUseCase topRatedMoviesUseCase;
 
   TopRatedMoviesNotifier({
     required this.topRatedMoviesUseCase,
   });
 
-  @override
-  void onInit() {
-    getTopRatedMovies();
-    super.onInit();
-  }
-
   int _page = 1;
   final List<MovieResultsEntity> _movies = [];
+  List<MovieResultsEntity>? get topRatedMovies => _movies;
 
   Future<void> getTopRatedMovies({bool shouldFetch = false}) async {
+    _setTopRatedMoviesState(TopRatedMoviesState.isLoading);
     if (shouldFetch) {
       _page++;
       notifyListeners();
     }
-    final NotifierState<MoviesModel> topRatedMoviesResponse =
-        await topRatedMoviesUseCase.execute(page: _page);
+    final topRatedMoviesResponse = await topRatedMoviesUseCase.call(_page);
+    topRatedMoviesResponse.fold(
+      (l) {
+        _setTopRatedMoviesState(TopRatedMoviesState.isError);
+      },
+      (r) {
+        _movies.addAll(r.results ?? []);
+        notifyListeners();
+        _setTopRatedMoviesState(TopRatedMoviesState.isDone);
+      },
+    );
+  }
 
-    final topRatedMovies = topRatedMoviesResponse.data?.results ?? [];
+  TopRatedMoviesState _topRatedMoviesState = TopRatedMoviesState.isDone;
+  TopRatedMoviesState get topRatedMoviesState => _topRatedMoviesState;
+
+  void _setTopRatedMoviesState(TopRatedMoviesState state) {
+    _topRatedMoviesState = state;
     notifyListeners();
-
-    _movies.addAll(topRatedMovies);
-    setData(_movies);
   }
 }
+
+enum TopRatedMoviesState { isLoading, isError, isDone }

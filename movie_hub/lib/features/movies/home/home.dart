@@ -14,7 +14,6 @@ export 'presentation/atoms/shimmer.dart';
 export 'presentation/notifier/top_rated_movies_notifier.dart';
 export 'domain/usecases/get_top_rated_movies_usecase.dart';
 export 'domain/usecases/get_upcoming_movies_usecase.dart';
-export '../movie_details/presentation/views/movie_details_screen.dart';
 export 'presentation/notifier/trending_for_the_week_notifier.dart';
 export 'presentation/atoms/image_preview.dart';
 export 'presentation/notifier/upcoming_movies_notifier.dart';

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:movie_hub/cores/cores.dart';
 import 'package:movie_hub/features/movies/movie_dashboard.dart';
+import 'package:movie_hub/features/movies/shared_widgets/movies_grid.dart';
 import 'package:provider/provider.dart';
 
 class SearchMoviesGrid extends StatelessWidget {
@@ -8,38 +9,36 @@ class SearchMoviesGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final searchMoviesNotifier = context.watch<SearchNotifier>();
-    return searchMoviesNotifier.state.when(
-      done: (searchedMovies) {
+    return Consumer<SearchNotifier>(
+      builder: (_, viewModel, __) {
         return Visibility(
-          visible: searchedMovies.isNotEmpty,
+          visible: viewModel.searchedMovies.isNotEmpty,
           replacement: const MovieNotFound(),
-          child: switch (searchMoviesNotifier.isLoading) {
-            true => LoadingWidget(
-                radius: sr(kfsTiny),
+          child: switch (viewModel.searchState) {
+            SearchState.isLoading => const LoadingWidget(),
+            SearchState.isDone => NotificationListener<ScrollNotification>(
+                onNotification: (notification) {
+                  if (notification is ScrollEndNotification &&
+                      notification.metrics.extentAfter == 0) {
+                    context.search.searchMovies(
+                      shouldFetch: true,
+                    );
+                  }
+                  return false;
+                },
+                child: MoviesGrid(
+                  movies: viewModel.searchedMovies,
+                  genreTitle: 'Search',
+                ),
               ),
-            false => Expanded(
-                child: NotificationListener<ScrollNotification>(
-                  onNotification: (notification) {
-                    if (notification is ScrollEndNotification &&
-                        notification.metrics.extentAfter == 0) {
-                      searchMoviesNotifier.searchMovies(
-                        shouldFetch: true,
-                      );
-                    }
-                    return false;
-                  },
-                  child: MoviesGrid(
-                    movies: searchedMovies,
-                    genreTitle: 'Search',
-                  ),
+            SearchState.isError => PageErrorWidget(
+                onTap: () => viewModel.updateSearchValue(
+                  viewModel.searchedValue.toString(),
                 ),
               ),
           },
         );
       },
-      error: (e) => Text(e.toString()),
-      loading: () => const CupertinoActivityIndicator(),
     );
   }
 }

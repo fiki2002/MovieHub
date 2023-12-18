@@ -1,6 +1,7 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:movie_hub/cores/cores.dart';
-import 'package:movie_hub/features/movies/movie_dashboard.dart';
+import 'package:movie_hub/features/movies/discover/presentation/notifier/discover_movies_notifier.dart';
+import 'package:movie_hub/features/movies/shared_widgets/movies_grid.dart';
 import 'package:provider/provider.dart';
 
 class DiscoverMoviesSection extends StatefulWidget {
@@ -11,68 +12,42 @@ class DiscoverMoviesSection extends StatefulWidget {
 }
 
 class _DiscoverMoviesSectionState extends State<DiscoverMoviesSection> {
-  bool loadingTimePassed = false;
-
   @override
   void initState() {
     super.initState();
-    Future.delayed(
-      const Duration(seconds: 2),
-      () {
-        if (mounted) {
-          setState(() {
-            loadingTimePassed = true;
-          });
-        }
-      },
-    );
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      context.discoverMovies.discoverMovies();
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    final discoverMoviesNotifier = context.watch<DiscoverMoviesNotifier>();
-
-    return loadingTimePassed
-        ? _buildContent(discoverMoviesNotifier)
-        : Column(
-          children: [
-            vSpace(screenHeight*.2),
-            const LoadingWidget(),
-          ],
-        );
-  }
-
-  Widget _buildContent(DiscoverMoviesNotifier discoverMoviesNotifier) {
-    if (discoverMoviesNotifier.state.data == null) {
-      return PageErrorWidget(
-        onTap: () {
-          context.discoverMovies.discoverMovies();
-        },
-      );
-    } else {
-      return discoverMoviesNotifier.state.when(
-        done: (discoveredMovies) {
-          return Expanded(
-            child: NotificationListener(
+    return Consumer<DiscoverMoviesNotifier>(
+      builder: (_, viewModel, __) {
+        return switch (viewModel.discoverMovieState) {
+          DiscoverMovieState.error => PageErrorWidget(
+              onTap: () {
+                context.discoverMovies.discoverMovies();
+              },
+            ),
+          DiscoverMovieState.idle => NotificationListener(
               onNotification: (notification) {
                 if (notification is ScrollEndNotification &&
                     notification.metrics.extentAfter == 0) {
-                  discoverMoviesNotifier.discoverMovies(
+                  context.discoverMovies.discoverMovies(
                     shouldFetch: true,
                   );
                 }
                 return true;
               },
               child: MoviesGrid(
-                movies: discoveredMovies,
+                movies: viewModel.discoveredMovies,
                 genreTitle: 'Discover',
               ),
             ),
-          );
-        },
-        error: (e) => Text(e.toString()),
-        loading: () => const CupertinoActivityIndicator(),
-      );
-    }
+          DiscoverMovieState.loading => const LoadingWidget(),
+        };
+      },
+    );
   }
 }

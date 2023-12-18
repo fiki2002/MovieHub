@@ -23,13 +23,9 @@ class SearchView extends StatelessWidget {
         ),
         child: Consumer<SearchNotifier>(
           builder: (context, search, _) {
-            return Column(
-              children: [
-                search.isSearching
-                    ? const SearchMoviesGrid()
-                    : const DiscoverMoviesSection(),
-              ],
-            );
+            return search.isSearching
+                ? const SearchMoviesGrid()
+                : const DiscoverMoviesSection();
           },
         ),
       ),

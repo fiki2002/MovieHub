@@ -1,13 +1,17 @@
+import 'dart:async';
+
 import 'package:movie_hub/cores/cores.dart';
 import 'package:movie_hub/features/movies/movie_dashboard.dart';
 
-class MovieDetailUsecase {
+class MovieDetailUsecase
+    implements UseCaseFuture<Failure, MovieDetailModel, String> {
   final MovieDetailRepository movieDetailRepo;
   MovieDetailUsecase({
     required this.movieDetailRepo,
   });
 
-  Future<NotifierState<MovieDetailModel>> execute(String movieId) async {
-    return await movieDetailRepo.getMovieDetails(movieId);
+  @override
+  FutureOr<Either<Failure, MovieDetailModel>> call(String params) async {
+    return await movieDetailRepo.getMovieDetails(params);
   }
 }

@@ -1,17 +1,16 @@
 import 'dart:async';
-
 import 'package:movie_hub/cores/cores.dart';
-import 'package:movie_hub/features/movies/home/home.dart';
+import 'package:movie_hub/features/movies/movie_dashboard.dart';
 
 abstract class HomeRepository {
-  FutureOr<NotifierState<MoviesModel>> getTrendingMovies(
+  FutureOr<Either<Failure, MoviesModel>> getTrendingMovies(
     String timeWindow,
     int page,
   );
 
-  FutureOr<NotifierState<MoviesModel>> getPopularMovies(int page);
+  FutureOr<Either<Failure, MoviesModel>> getPopularMovies(int page);
 
-  FutureOr<NotifierState<MoviesModel>> getTopRatedMovies(int page);
+  FutureOr<Either<Failure, MoviesModel>> getTopRatedMovies(int page);
 
-  FutureOr<NotifierState<MoviesModel>> getUpcomingMovies(int page);
+  FutureOr<Either<Failure, MoviesModel>> getUpcomingMovies(int page);
 }

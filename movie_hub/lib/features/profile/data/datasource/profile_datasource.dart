@@ -4,8 +4,8 @@ import 'package:movie_hub/cores/cores.dart';
 import 'package:movie_hub/features/profile/profile.dart';
 
 abstract class ProfileDataSource {
-  Future<ServiceResponse<UserDetailsModel>> fetchProfileDetails();
-  Future<ServiceResponse<List<String>>> getAvatars();
+  Future<UserDetailsModel> fetchProfileDetails();
+  Future<List<String>> getAvatars();
   Future<BaseModel> updateAvatarUrl(String avatarUrl);
 }
 
@@ -18,32 +18,25 @@ class ProfileDataSourceImpl extends ProfileDataSource {
   }) : _firebaseHelper = firebaseHelper;
 
   @override
-  Future<ServiceResponse<UserDetailsModel>> fetchProfileDetails() {
-    return serveFuture<UserDetailsModel>(function: (fail) async {
-      final String? userId = _firebaseHelper.currentUserId;
+  Future<UserDetailsModel> fetchProfileDetails() async {
+    final String? userId = _firebaseHelper.currentUserId;
 
-      final DocumentSnapshot<Map<String, dynamic>> result =
-          await _firebaseHelper.userCollectionRef().doc(userId).get();
+    final DocumentSnapshot<Map<String, dynamic>> result =
+        await _firebaseHelper.userCollectionRef().doc(userId).get();
 
-      return UserDetailsModel.fromMap(result.data()!);
-    });
+    return UserDetailsModel.fromMap(result.data()!);
   }
 
   @override
-  Future<ServiceResponse<List<String>>> getAvatars() async {
-    return serveFuture(
-      function: (fail) async {
-        final List<String> imageUrlList = [];
+  Future<List<String>> getAvatars() async {
+    final List<String> imageUrlList = [];
 
-        for (var index = 1; index < 7; index++) {
-          final ref =
-              _firebaseStorage.child('avatar').child('avatar_$index.jpg');
-          final path = await ref.getDownloadURL();
-          imageUrlList.add(path);
-        }
-        return imageUrlList;
-      },
-    );
+    for (var index = 1; index < 7; index++) {
+      final ref = _firebaseStorage.child('avatar').child('avatar_$index.jpg');
+      final path = await ref.getDownloadURL();
+      imageUrlList.add(path);
+    }
+    return imageUrlList;
   }
 
   @override

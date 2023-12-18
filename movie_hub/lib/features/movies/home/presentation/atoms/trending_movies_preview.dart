@@ -12,79 +12,63 @@ class TrendingMoviesPreview extends StatefulWidget {
 }
 
 class _TrendingMoviesPreviewState extends State<TrendingMoviesPreview> {
-  bool loadingTimePassed = false;
-  @override
-  void initState() {
-    super.initState();
-    Future.delayed(
-      const Duration(seconds: 5),
-      () {
-        if (mounted) {
-          setState(() {
-            loadingTimePassed = true;
-          });
-        }
-      },
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
-    final trendingMoviesNotifier = context.watch<TrendingMoviesNotifier>();
-    return !loadingTimePassed
-        ? Column(
-            children: [
-              vSpace(screenHeight * .4),
-              const LoadingWidget(),
-            ],
-          )
-        : trendingMoviesNotifier.state.data == null
-            ? PageErrorWidget(
-                onTap: () {
-                  context.trendingMovies.getTrendingMoviesForTheDay();
-                  context.popularMovies.getPopularMovies();
-                  context.topRated.getTopRatedMovies();
-                  context.upcomingMovies.getUpcomingMovies();
-                  context.trendingForTheWeek.getTrendingMoviesForTheWeek();
-                },
-              )
-            : trendingMoviesNotifier.state.when(
-                done: (trendingMovies) {
-                  return Stack(
-                    children: [
-                      SizedBox(
-                        height: screenHeight * .5,
-                        child: CarouselSlider.builder(
-                          itemCount: 10,
-                          options: CarouselOptions(
-                            enlargeCenterPage: true,
-                            height: screenHeight * .5,
-                            autoPlay: true,
-                            viewportFraction: 1,
-                            enlargeFactor: .7,
-                            autoPlayInterval:
-                                Duration(seconds: kMinute.toInt()),
-                          ),
-                          itemBuilder: (context, index, realIndex) {
-                            final String url =
-                                trendingMovies[index].backdropPath ?? '';
-                            final String title =
-                                trendingMovies[index].originalName ?? '';
-
-                            return HomeImagePreview(
-                              url: url,
-                              title: title,
-                            );
-                          },
-                        ),
-                      ),
-                    ],
-                  );
-                },
-                error: (message) => const ShimmerWidget(),
-                loading: () => LoadingWidget(
-                  radius: sr(kfsTiny),
+    return Consumer<TrendingMoviesNotifier>(
+      builder: (_, viewModel, __) {
+        return Column(
+          children: [
+            switch (viewModel.trendingMoviesForTheDay) {
+              TrendingForTheDayState.isLoading => Column(
+                  children: [
+                    vSpace(screenHeight * .4),
+                    const LoadingWidget(),
+                  ],
                 ),
-              );
+              TrendingForTheDayState.isError => PageErrorWidget(
+                  onTap: () {
+                    context.trendingMovies.getTrendingMoviesForTheDay();
+                    context.popularMovies.getPopularMovies();
+                    context.topRated.getTopRatedMovies();
+                    context.upcomingMovies.getUpcomingMovies();
+                    context.trendingForTheWeek.getTrendingMoviesForTheWeek();
+                  },
+                ),
+              TrendingForTheDayState.isDone => Stack(
+                  children: [
+                    SizedBox(
+                      height: screenHeight * .5,
+                      child: CarouselSlider.builder(
+                        itemCount: 10,
+                        options: CarouselOptions(
+                          enlargeCenterPage: true,
+                          height: screenHeight * .5,
+                          autoPlay: true,
+                          viewportFraction: 1,
+                          enlargeFactor: .7,
+                          autoPlayInterval: Duration(seconds: kMinute.toInt()),
+                        ),
+                        itemBuilder: (context, index, realIndex) {
+                          final MovieResultsEntity? trendingMovies =
+                              viewModel.trendingMovies?[index];
+
+                          final String url = trendingMovies?.backdropPath ?? '';
+                          final String title =
+                              trendingMovies?.originalName ?? '';
+
+                          return HomeImagePreview(
+                            url: url,
+                            title: title,
+                          );
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+            }
+          ],
+        );
+      },
+    );
   }
 }

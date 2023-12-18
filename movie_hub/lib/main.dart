@@ -14,9 +14,11 @@ void main() async {
       SetUpLocators.init();
 
       await Setups.run();
+      FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
+
       FlutterError.onError =
           FirebaseCrashlytics.instance.recordFlutterFatalError;
-          
+
       PlatformDispatcher.instance.onError = (error, stack) {
         FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
         return true;
@@ -24,6 +26,7 @@ void main() async {
 
       runApp(const MyApp());
     },
+    
     (error, stackTrace) => FirebaseCrashlytics.instance
         .recordError(error, stackTrace, fatal: true),
   );

@@ -144,8 +144,6 @@ extension BuildContextNotifier on BuildContext {
       Provider.of<AddToWatchListNotifier>(this, listen: false);
   RemoveFromWatchListNotifier get removeFromWatchList =>
       Provider.of<RemoveFromWatchListNotifier>(this, listen: false);
-  WatchListNotifier get watchListNotifier =>
-      Provider.of<WatchListNotifier>(this, listen: false);
   GetWatchListMovieIdsNotifier get getWatchListNotifier =>
       Provider.of<GetWatchListMovieIdsNotifier>(this, listen: false);
   CheckMovieWatchListStatusNotifier get checkWatchListStatus =>
@@ -167,4 +165,9 @@ extension BuildContextNotifier on BuildContext {
   SimilarMoviesNotifier get similarMovies =>
       Provider.of<SimilarMoviesNotifier>(this, listen: false);
   ImageNotifier get images => Provider.of<ImageNotifier>(this, listen: false);
+  SearchNotifier get search => Provider.of<SearchNotifier>(this, listen: false);
+  FetchAvatarNotifier get fetchAvatar =>
+      Provider.of<FetchAvatarNotifier>(this, listen: false);
+  FetchProfileNotifier get fetchProfile =>
+      Provider.of<FetchProfileNotifier>(this, listen: false);
 }
