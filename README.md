@@ -19,7 +19,7 @@ https://github.com/fiki2002/MovieHub/assets/85044009/c767718c-25c7-48a7-b0ee-2ca
 <img width="611" alt="Screenshot 2023-12-21 at 15 18 57" src="https://github.com/fiki2002/MovieHub/assets/85044009/917d5834-8976-450f-a546-b98940a8bda5">
 <img width="608" alt="Screenshot 2023-12-21 at 15 20 03" src="https://github.com/fiki2002/MovieHub/assets/85044009/6f58a1a2-8587-4ba9-95e9-61a15ff58fd8">
 <img width="521" alt="Screenshot 2023-12-21 at 15 28 58" src="https://github.com/fiki2002/MovieHub/assets/85044009/d0163045-0884-4061-abe8-796708becc4c">
-<img width="611" alt="Screenshot 2023-12-21 at 15 18 57" src="https://github.com/fiki2002/MovieHub/assets/85044009/4be52c21-13a5-46d4-8ad3-f33dd359ac33"><img width="664" alt="Screenshot 2023-12-21 at 15 17 33" src="https://github.com/fiki2002/MovieHub/assets/85044009/36de12e9-6733-4a99-9e3e-51ed188bef87"><img width="648" alt="Screenshot 2023-12-21 at 15 17 44" src="https://github.com/fiki2002/MovieHub/assets/85044009/f0271510-e0e5-46d1-a4d8-d6da861ea22f"><img width="648" alt="Screenshot 2023-12-21 at 15 17 44" src="https://github.com/fiki2002/MovieHub/assets/85044009/a714adfd-e218-4dbf-898a-63bbe910fd96"><img width="577" alt="Screenshot 2023-12-21 at 15 18 06" src="https://github.com/fiki2002/MovieHub/assets/85044009/86f03e86-38e5-455c-8f6d-28070636dbc2">
+<img width="611" alt="Screenshot 2023-12-21 at 15 18 57" src="https://github.com/fiki2002/MovieHub/assets/85044009/4be52c21-13a5-46d4-8ad3-f33dd359ac33">
 
 
 ## Key Features
