@@ -14,16 +14,6 @@ class MovieDetailsHeader extends StatefulWidget {
 
 class _MovieDetailsHeaderState extends State<MovieDetailsHeader> {
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-
-    PreCacheImage.loadImages(
-      backDrop: widget.movies.movieResults?.backdropPath ?? '',
-      posterPath: widget.movies.movieResults?.posterPath ?? '',
-    );
-  }
-
-  @override
   Widget build(BuildContext context) {
     final String id =
         '${widget.movies.genreTitle}${widget.movies.movieResults?.name}${widget.movies.movieResults?.id}';

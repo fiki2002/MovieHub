@@ -17,12 +17,6 @@ class HomeImagePreview extends StatefulWidget {
 
 class _ImagePreviewState extends State<HomeImagePreview> {
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    PreCacheImage.loadImages(backDrop: widget.url);
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Stack(
       children: [

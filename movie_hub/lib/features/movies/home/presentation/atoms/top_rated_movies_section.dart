@@ -15,7 +15,7 @@ class TopRatedMoviesSection extends StatelessWidget {
             ? const SizedBox.shrink()
             : SizedBox(
                 child: switch (viewModel.topRatedMoviesState) {
-                  TopRatedMoviesState.isLoading => const LoadingWidget(),
+                  TopRatedMoviesState.isLoading => const SizedBox.shrink(),
                   TopRatedMoviesState.isError => const SizedBox.shrink(),
                   TopRatedMoviesState.isDone => GenreCardWidget(
                       title: 'TOP RATED',

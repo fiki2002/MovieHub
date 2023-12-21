@@ -7,6 +7,7 @@ import 'package:intl/intl.dart';
 import 'package:movie_hub/cores/constants/palette.dart';
 import 'package:movie_hub/features/auth/auth.dart';
 import 'package:movie_hub/features/movies/movie_dashboard.dart';
+import 'package:movie_hub/features/movies/watchlist/presentation/notifier/watchlist_movie_details_notifier.dart';
 import 'package:movie_hub/features/movies/watchlist/watchlist.dart';
 import 'package:movie_hub/features/profile/profile.dart';
 import 'package:provider/provider.dart';
@@ -170,4 +171,8 @@ extension BuildContextNotifier on BuildContext {
       Provider.of<FetchAvatarNotifier>(this, listen: false);
   FetchProfileNotifier get fetchProfile =>
       Provider.of<FetchProfileNotifier>(this, listen: false);
+  GetWatchListMovieIdsNotifier get getWatchListId =>
+      Provider.of<GetWatchListMovieIdsNotifier>(this, listen: false);
+  WatchListDetailsNotifier get watchList =>
+      Provider.of<WatchListDetailsNotifier>(this, listen: false);
 }

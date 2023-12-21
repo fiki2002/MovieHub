@@ -75,7 +75,7 @@ class AuthNotifier extends ChangeNotifier {
         (AuthResultEntity res) {
           _handleSuccess(res);
 
-          goReplace(NavBarView.route);
+          clearRoad(NavBarView.route);
 
           return Right(res);
         },
@@ -105,7 +105,7 @@ class AuthNotifier extends ChangeNotifier {
         (AuthResultEntity res) {
           _handleSuccess(res);
 
-          goReplace(NavBarView.route);
+          clearRoad(NavBarView.route);
 
           navigatorKey.currentContext!.trendingMovies
               .getTrendingMoviesForTheDay();
@@ -169,7 +169,7 @@ class AuthNotifier extends ChangeNotifier {
           );
 
           navigatorKey.currentContext!.getWatchListNotifier.allMovieIds.clear();
-          navigatorKey.currentContext!.getWatchListNotifier.allWatchList
+          navigatorKey.currentContext!.watchList.allWatchList
               ?.clear();
 
           notifyListeners();

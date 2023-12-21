@@ -25,12 +25,6 @@ class CachedNetworkImageWidget extends StatefulWidget {
 }
 
 class _CachedNetworkImageWidgetState extends State<CachedNetworkImageWidget> {
-   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    PreCacheImage.loadImages(backDrop: widget.url);
-  }
-
   @override
   Widget build(BuildContext context) {
     return ClipRRect(

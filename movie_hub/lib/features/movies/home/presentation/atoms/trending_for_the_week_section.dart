@@ -14,7 +14,7 @@ class TrendingForTheWeekSection extends StatelessWidget {
             ? const SizedBox.shrink()
             : SizedBox(
                 child: switch (viewModel.trendingForTheWeekState) {
-                  TrendingForTheWeekState.isLoading => const LoadingWidget(),
+                  TrendingForTheWeekState.isLoading => const SizedBox.shrink(),
                   TrendingForTheWeekState.isError => const SizedBox.shrink(),
                   TrendingForTheWeekState.isDone => GenreCardWidget(
                       title: 'TRENDING FOR THE WEEK',

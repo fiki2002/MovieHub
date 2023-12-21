@@ -48,7 +48,7 @@ dependencies:
   url_launcher: ^6.2.1
 
   # For loading movie page
-  webview_flutter: ^4.4.2
+  flutter_inappwebview: ^5.8.0
 
   #For nice animated assets
   lottie: ^2.7.0

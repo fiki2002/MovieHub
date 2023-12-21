@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movie_hub/cores/cores.dart';
+import 'package:movie_hub/features/movies/watchlist/presentation/notifier/watchlist_movie_details_notifier.dart';
 import 'package:movie_hub/features/movies/watchlist/watchlist.dart';
 import 'package:movie_hub/features/profile/profile.dart';
 import 'package:provider/provider.dart';
@@ -15,9 +16,15 @@ class _WatchListViewState extends State<WatchListView> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      context.read<GetWatchListMovieIdsNotifier>().init();
-    });
+    WidgetsBinding.instance.addPostFrameCallback(
+      (timeStamp) {
+        context.read<GetWatchListMovieIdsNotifier>().init().then(
+          (_) {
+            context.watchList.getWatchListMovieDetail();
+          },
+        );
+      },
+    );
   }
 
   @override
@@ -34,7 +41,7 @@ class _WatchListViewState extends State<WatchListView> {
           fontWeight: FontWeight.w600,
         ),
       ),
-      body: Consumer<GetWatchListMovieIdsNotifier>(
+      body: Consumer<WatchListDetailsNotifier>(
         builder: (context, val, _) {
           return Padding(
             padding: const EdgeInsets.fromLTRB(
@@ -44,14 +51,14 @@ class _WatchListViewState extends State<WatchListView> {
               0,
             ),
             child: switch (val.watchListState) {
-              GetWatchListState.loading => const LoadingWidget(),
-              GetWatchListState.error => CustomErrorWidget(
+              WatchListState.loading => const LoadingWidget(),
+              WatchListState.error => CustomErrorWidget(
                   errorMessage: 'Failed to fetch watchlist😓',
                   retryCallBack: () {
                     context.read<GetWatchListMovieIdsNotifier>().init();
                   },
                 ),
-              GetWatchListState.isDone => WatchListBodyWidget(
+              WatchListState.isDone => WatchListBodyWidget(
                   movies: val.allWatchList,
                 ),
             },

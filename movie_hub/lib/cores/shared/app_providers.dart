@@ -2,6 +2,7 @@ import 'package:get_it/get_it.dart';
 import 'package:movie_hub/app/app.dart';
 import 'package:movie_hub/features/auth/auth.dart';
 import 'package:movie_hub/features/movies/movie_dashboard.dart';
+import 'package:movie_hub/features/movies/watchlist/presentation/notifier/watchlist_movie_details_notifier.dart';
 import 'package:movie_hub/features/movies/watchlist/watchlist.dart';
 import 'package:movie_hub/features/profile/profile.dart';
 import 'package:provider/provider.dart';
@@ -28,6 +29,7 @@ List<SingleChildWidget> _providers = [
   ChangeNotifierProvider(create: (_) => getIt<MovieDetailsNotifier>()),
   ChangeNotifierProvider(create: (_) => getIt<ImageNotifier>()),
   ChangeNotifierProvider(create: (_) => getIt<SimilarMoviesNotifier>()),
+  ChangeNotifierProvider(create: (_) => getIt<WatchListDetailsNotifier>()),
   ChangeNotifierProvider(
     create: (_) => getIt<CheckMovieWatchListStatusNotifier>(),
   ),

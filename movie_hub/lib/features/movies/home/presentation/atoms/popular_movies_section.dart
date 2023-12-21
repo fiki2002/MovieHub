@@ -15,7 +15,7 @@ class PopularMoviesSection extends StatelessWidget {
             ? const SizedBox.shrink()
             : SizedBox(
                 child: switch (viewModel.popularMovieState) {
-                  PopularMovieState.isLoading => const LoadingWidget(),
+                  PopularMovieState.isLoading => const SizedBox.shrink(),
                   PopularMovieState.isError => const SizedBox.shrink(),
                   PopularMovieState.isDone => GenreCardWidget(
                       title: 'POPULAR MOVIES',

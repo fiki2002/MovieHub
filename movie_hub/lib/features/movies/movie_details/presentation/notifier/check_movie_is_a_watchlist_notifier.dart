@@ -32,23 +32,26 @@ class CheckMovieWatchListStatusNotifier extends ChangeNotifier {
   void watchListAction(String movieId) async {
     switch (isWatchListStatus) {
       case true:
-      
         isWatchListStatus = false;
         notifyListeners();
-       await _remove(movieId, isWatchListStatus);
-   
+        await _remove(movieId, isWatchListStatus);
+
         break;
 
       case false:
         isWatchListStatus = true;
         notifyListeners();
-       await _add(movieId, isWatchListStatus);
+        await _add(movieId, isWatchListStatus);
         break;
       default:
     }
     navigatorKey.currentContext!.getWatchListNotifier.allMovieIds.clear();
-    navigatorKey.currentContext!.getWatchListNotifier.allWatchList?.clear();
-    await navigatorKey.currentContext!.getWatchListNotifier.init();
+    navigatorKey.currentContext!.watchList.allWatchList?.clear();
+    await navigatorKey.currentContext!.getWatchListNotifier.init().then(
+      (_) {
+        navigatorKey.currentContext!.watchList.getWatchListMovieDetail();
+      },
+    );
   }
 
   Future<void> _remove(String movieId, bool? isWatchListStatus) async {

@@ -1,4 +1,6 @@
 import 'package:movie_hub/cores/cores.dart';
+import 'package:movie_hub/features/movies/movie_details/movie_details.dart';
+import 'package:movie_hub/features/movies/watchlist/presentation/notifier/watchlist_movie_details_notifier.dart';
 import 'package:movie_hub/features/movies/watchlist/watchlist.dart';
 
 void setUpWatchListLocator() {
@@ -44,9 +46,15 @@ void setUpWatchListLocator() {
     ),
   );
 
-   getIt.registerLazySingleton<RemoveFromWatchListNotifier>(
+  getIt.registerLazySingleton<RemoveFromWatchListNotifier>(
     () => RemoveFromWatchListNotifier(
       removeFromWatchListNotifier: getIt<RemoveFromWatchListUsecase>(),
+    ),
+  );
+
+  getIt.registerLazySingleton<WatchListDetailsNotifier>(
+    () => WatchListDetailsNotifier(
+      movieDetailUsecase: getIt<MovieDetailUsecase>(),
     ),
   );
 }

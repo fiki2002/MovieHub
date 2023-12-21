@@ -26,7 +26,6 @@ void main() async {
 
       runApp(const MyApp());
     },
-    
     (error, stackTrace) => FirebaseCrashlytics.instance
         .recordError(error, stackTrace, fatal: true),
   );

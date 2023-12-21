@@ -21,12 +21,6 @@ class MovieCardTile extends StatefulWidget {
 
 class _MovieCardTileState extends State<MovieCardTile> {
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    PreCacheImage.loadImages(backDrop: widget.imageUrl);
-  }
-
-  @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: widget.onTap,

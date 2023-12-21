@@ -14,7 +14,7 @@ class UpcomingMoviesSection extends StatelessWidget {
             ? const SizedBox.shrink()
             : SizedBox(
                 child: switch (viewModel.upcomingMoviesState) {
-                  UpcomingMoviesState.isLoading => const LoadingWidget(),
+                  UpcomingMoviesState.isLoading => const SizedBox.shrink(),
                   UpcomingMoviesState.isError => const SizedBox.shrink(),
                   UpcomingMoviesState.isDone => GenreCardWidget(
                       title: 'UPCOMING MOVIES',

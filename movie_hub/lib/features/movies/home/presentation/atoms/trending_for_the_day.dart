@@ -14,7 +14,7 @@ class TrendingForTheDaySection extends StatelessWidget {
             ? const SizedBox.shrink()
             : SizedBox(
                 child: switch (viewModel.trendingMoviesForTheDay) {
-                  TrendingForTheDayState.isLoading => const LoadingWidget(),
+                  TrendingForTheDayState.isLoading => const SizedBox.shrink(),
                   TrendingForTheDayState.isError => const SizedBox.shrink(),
                   TrendingForTheDayState.isDone => GenreCardWidget(
                       title: 'TRENDING FOR THE DAY',
