@@ -10,7 +10,6 @@ abstract class MovieDetailsRemoteDataSource {
 }
 
 class MovieDetailRemoteDataSourceImpl extends MovieDetailsRemoteDataSource {
-  
   final FirebaseHelper _firebaseHelper;
 
   MovieDetailRemoteDataSourceImpl({
@@ -27,7 +26,7 @@ class MovieDetailRemoteDataSourceImpl extends MovieDetailsRemoteDataSource {
         .count()
         .get(source: AggregateSource.server);
 
-    final int count = aggregateQuerySnapshot.count;
+    final int count = aggregateQuerySnapshot.count ?? 0;
 
     if (count > 0) {
       return true;

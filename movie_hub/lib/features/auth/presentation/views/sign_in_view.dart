@@ -41,6 +41,7 @@ class _SignInViewState extends State<SignInView> {
                   fontWeight: FontWeight.w300,
                 ),
                 vSpace(kGlobalPadding),
+              
                 CustomTextField(
                   textInputAction: TextInputAction.next,
                   title: 'Email',

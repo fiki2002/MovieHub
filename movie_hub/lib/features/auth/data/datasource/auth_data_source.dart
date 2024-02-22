@@ -80,9 +80,9 @@ class AuthDataSourceImpl extends AuthDataSource {
         .count()
         .get(source: AggregateSource.server);
 
-    final int count = aggregateQuerySnapshot.count;
+    final int? count = aggregateQuerySnapshot.count;
 
-    if (count > 0) {
+    if ((count ?? 0) > 0) {
       throw const BaseFailures(message: "Username already exist!");
     }
   }

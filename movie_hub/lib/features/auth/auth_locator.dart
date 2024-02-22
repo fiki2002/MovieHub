@@ -4,7 +4,7 @@ import 'package:movie_hub/cores/cores.dart';
 import 'package:movie_hub/features/auth/auth.dart';
 
 void setUpAuthLocator() {
-  final GetIt getIt = SetUpLocators.getIt;
+  // final GetIt getIt = SetUpLocators.getIt;
 
   /// Data source
   getIt.registerLazySingleton<AuthDataSource>(
